@@ -53,7 +53,11 @@ header{position:sticky;top:0;z-index:30;background:var(--canvas);
 .htop{display:flex;align-items:center;gap:12px;padding:14px 24px 13px}
 h1{margin:0;font-size:16px;font-weight:500;letter-spacing:0;color:var(--ink)}
 .step{margin-left:auto;font-size:12px;font-weight:500;color:var(--mute)}
-button.reset{margin-left:auto;border:none;background:var(--cloud);color:var(--ash);
+button.role{margin-left:auto;border:none;background:transparent;color:var(--mute);
+  font:inherit;font-size:13px;font-weight:500;padding:8px 6px;cursor:pointer;letter-spacing:-.02em}
+button.role:after{content:" ⌄";color:var(--stone)}
+button.role[hidden]{display:none}
+button.reset{margin-left:8px;border:none;background:var(--cloud);color:var(--ash);
   font:inherit;font-size:13px;font-weight:500;padding:8px 14px;border-radius:var(--r-full);
   cursor:pointer;letter-spacing:-.02em}
 button.reset:active{opacity:.6}
@@ -402,6 +406,7 @@ label.ck input:checked ~ .tx span{color:var(--stone)}
   <div class="htop">
     <h1 id="hTitle">사고 현장 대응 가이드</h1>
     <div class="step" id="hStep"></div>
+    <button class="role" id="hRole" hidden></button>
     <button class="reset" id="hReset" hidden>처음부터</button>
   </div>
   <div class="bar"><i id="hBar"></i></div>
@@ -412,14 +417,32 @@ label.ck input:checked ~ .tx span{color:var(--stone)}
 </div>
 
 <script>
+const ROLES={
+  pro:{t:"설치프로", next:"물류 담당자(현장대리인/대표)", to:"물류 담당자(현장대리인/대표)에게 알립니다."},
+  log:{t:"물류 담당자(현장대리인/대표)", next:"LM", to:"담당 LM에게 전달합니다."},
+  lm: {t:"LM", next:"LMD/설치품질팀", to:"LMD/설치품질팀에 공유합니다."}
+};
+let ROLE=null;
+try{ ROLE=localStorage.getItem('role')||null; }catch(e){}
+const setRole=v=>{ ROLE=v; try{ localStorage.setItem('role',v); }catch(e){} };
+
 const REV='2026.08.11';
 
 /* ══ 상태 ══ */
-const S = { type:null, injury:null, scale:null, when:null, fire119:null, svc:null, felapsed:null, hist:[], prod:null, work:null, ord:null, side:null, drill:null, spread:null, target:null, found:null, harm:null, elapsed:null, route:null, flags:[], org:[] };
-let stack = [], node = 'type';
+const S = { type:null, injury:null, scale:null, when:null, fprod:null, fire119:null, svc:null, felapsed:null, hist:[], prod:null, work:null, ord:null, side:null, drill:null, spread:null, target:null, found:null, harm:null, elapsed:null, route:null, flags:[], org:[] };
+let stack = [], node = ROLE ? 'type' : 'role';
 
 /* ══ 질문 ══ */
 const Q = {
+  role: {
+    q:"어느 쪽이신가요?", s:"선택하신 역할에 맞춰 다음 단계를 안내합니다.", key:"role",
+    opts:[
+      { v:"pro", t:"설치프로" },
+      { v:"log", t:"물류 담당자(현장대리인/대표)" },
+      { v:"lm",  t:"LM" },
+    ],
+    next: v => { setRole(v); return "type"; }
+  },
   type: {
     q:"사고 유형", s:"해당하는 사고유형을 선택해주세요.", key:"type",
     opts:[
@@ -428,10 +451,17 @@ const Q = {
       { v:"break", t:"파손" },
       { v:"body",  t:"대인" },
     ],
-    next: v => ({fire:"injury", water:"prod", break:"target", body:"harm"})[v] || "soon"
+    next: v => ({fire:"fprod", water:"prod", break:"target", body:"harm"})[v] || "soon"
   },
 
   /* ── 화재 ── */
+  fprod: {
+    q:"어떤 제품에서 났나요?", s:"", key:"fprod",
+    opts:[
+      { v:"ac",  t:"에어컨" },
+      { v:"etc", t:"에어컨 외", d:"세탁기 · 냉장고 · TV 등" },
+    ], next:()=>"injury"
+  },
   injury: {
     q:"인명피해가 있습니까", s:"경미해 보여도 다친 분이 있으면 있음으로 선택해주세요.", key:"injury",
     opts:[
@@ -543,7 +573,8 @@ const Q = {
     opts:[
       { v:"m1",  t:"1개월 이내" },
       { v:"y1",  t:"1개월 ~ 1년" },
-      { v:"y1p", t:"1년 초과" },
+      { v:"y3",  t:"1년 ~ 3년" },
+      { v:"y3p", t:"3년 초과", d:"PL보험 담보 기간(3년) 경과" },
       { v:"?",   t:"확인되지 않음", d:"설치일이 확인되지 않는 경우" },
     ], next:()=>"route"
   },
@@ -555,13 +586,20 @@ const Q = {
       { v:"down", t:"아랫집 · 관리사무소가 알림" },
     ], next:()=>"spread"
   },
+  winjury: {
+    q:"다친 사람이 있나요?", s:"경미해 보여도 다친 분이 있으면 있음으로 선택해주세요.", key:"injury",
+    opts:[
+      { v:"y", t:"있음" },
+      { v:"n", t:"없음" },
+    ], next: v => v==="y" ? "harm" : "flags"
+  },
   spread: {
     q:"피해 범위", s:"", key:"spread",
     opts:[
       { v:1, t:"제품 · 설치 주변에 한정" },
       { v:2, t:"세대 내 확산" },
       { v:3, t:"아랫집 · 인접 세대 확산" },
-    ], next:()=>"flags"
+    ], next:()=>"winjury"
   },
 
   target: {
@@ -577,7 +615,7 @@ const Q = {
     opts:[
       { v:"now",  t:"현장에서 즉시 확인" },
       { v:"late", t:"퇴거 이후 고객이 발견" },
-    ], next:()=>"flags"
+    ], next:()=>"winjury"
   },
   flags: {
     q:"해당하는 것이 있습니까", s:"해당하는 것을 모두 선택해주세요.", key:"flags", multi:true,
@@ -608,15 +646,37 @@ function order(){
   if(S.type==="fire") return ["type","injury"].concat(S.injury==="y"?["harm"]:[]).concat(["scale","when","svc","felapsed","hist","flags"]).concat((S.flags||[]).includes("third")?["org"]:[]);
   const ex=(S.flags||[]).includes("third")?["org"]:[];
   if(S.type==="body") return ["type","harm","flags"].concat(ex);
-  if(S.type==="break") return ["type","target","found","flags"].concat(ex);
+  if(S.type==="break") return ["type","target","found","winjury"].concat(S.injury==="y"?["harm"]:[]).concat(["flags"]).concat(ex);
   if(S.type==="water") return (S.prod==="work"
-    ? ["type","prod","work","ord","elapsed","route","spread","flags"]
+    ? ["type","prod","work","ord","elapsed","route","spread","winjury"]
     : ["type","prod","side"].concat(S.side==="hole"?["drill"]:[])
-        .concat(["elapsed","route","spread","flags"])).concat(ex);
+        .concat(["elapsed","route","spread","winjury"]))
+      .concat(S.injury==="y"?["harm"]:[]).concat(["flags"]).concat(ex);
   return ["type"];
 }
 
 /* ══ 화재 촬영 ══ */
+const SHOTS_ETC = [
+  { g:"먼저 찍어주세요", must:true, items:[
+    { t:"현장 전경", d:"제품 위치와 주변 공간이 함께 보이게. 여러 방향에서" },
+    { t:"탄 범위 전체", d:"어디까지 번졌는지 경계가 보이게" },
+    { t:"피해 부위별 전경 → 근접 순", d:"부위마다 전경을 먼저 찍고 가까이 들어가기" },
+    { t:"명판", d:"모델명 · 제조번호 · 제조연월" },
+  ]},
+  { g:"전원부", must:true, items:[
+    { t:"전원 연결부 · 플러그 상태", d:"제품과 콘센트 양쪽" },
+    { t:"콘센트 · 멀티탭 상태", d:"같은 콘센트에 꽂힌 다른 기기까지 함께" },
+    { t:"전선 눌림 · 꺾임 · 손상", d:"누르고 있는 가구 등이 함께 보이게" },
+    { t:"원인 확인용 증거물이 어디에 있는지", d:"소방 / 경찰 / 서비스 회수 / 현장에 있음 / 폐기" },
+  ]},
+  { g:"주변 · 사용 상태", items:[
+    { t:"제품 설치 위치 · 주변 여유 공간" },
+    { t:"먼지 쌓임 · 습기 · 녹" },
+    { t:"고객이 손댄 흔적", d:"배선 늘림, 콘센트 교체, 직접 분해" },
+    { t:"분전반 · 차단기 상태", d:"내려가 있는지, 그을음이 있는지" },
+  ]},
+];
+
 const SHOTS_F = [
   { g:"먼저 찍어주세요", must:true, items:[
     { t:"현장 전경", d:"제품 위치와 주변 공간이 함께 보이게. 여러 방향에서" },
@@ -1086,7 +1146,7 @@ function renderSoon(){
 const T_PROD={ac:"에어컨",dish:"식기세척기",water:"정수기 · 정수기냉장고",wash:"세탁기 · 워시타워",robot:"로봇청소기",tv:"TV",work:"기타 작업"};
 const T_WORK={clean:"배수구 클리닝",tank:"배수통 교체",room:"세탁실 클리닝",trap:"배수트랩"};
 const T_SIDE={in:"급수",out:"배수",both:"급수 · 배수",hole:"타공",seal:"마감 미흡",'?':"미확인"};
-const T_ELAPSED={m1:"1개월 이내",y1:"1개월 ~ 1년",y1p:"1년 초과","?":"설치일 미확인"};
+const T_ELAPSED={m1:"1개월 이내",y1:"1개월 ~ 1년",y3:"1년 ~ 3년",y3p:"3년 초과 · 담보 기간 경과","?":"설치일 미확인"};
 const T_ROUTE={cust:"고객 직접 알림",svc:"서비스 통보",down:"아랫집 · 관리사무소 알림"};
 const T_DRILL={yes:"도면 확인함",none:"도면 없었음",nog:"요청했으나 미수령",no:"요청하지 않음"};
 const T_SPREAD={1:"설치 주변 한정",2:"세대 내 확산",3:"아랫집 · 인접 세대 확산"};
@@ -1094,6 +1154,7 @@ const T_SCALE={1:"소규모",2:"세대 내 확산",3:"인접 세대 확산"};
 const T_WHEN={self:"미신고 · 고객 자체 진화",rep:"소방 · 경찰 신고 건"};
 const T_FEL={y1:"1년 이내",y3:"1년 ~ 3년",y3p:"3년 초과","?":"설치일 미확인"};
 const T_HIST={svc:"서비스 방문 · 수리",elec:"세대 전기공사 · 리모델링",move:"이전설치 · 재설치",none:"해당 없음","?":"확인되지 않음"};
+const T_FPROD={ac:"에어컨",etc:"에어컨 외"};
 const T_SVC={pre:"서비스 방문 전",post:"서비스 방문 후"};
 const T_HARM={none:"병원 이송 없음",hosp:"병원 이송",adm:"입원 · 수술 등 중상해"};
 const T_TARGET={bld:"건물",obj:"일반 대물",car:"차량"};
@@ -1160,11 +1221,24 @@ const FLAGNOTE={
   done:{t:"조치 완료 후 접수", d:"조치 전 사진과 조치 내역이 남아 있는지 먼저 확인해주세요."}
 };
 
+/* 화재 · 대인 — 정보보고 절차 */
+function addInfoReport(B){
+  const target = (S.type==='fire') || (S.type==='body') || (S.injury==='y');
+  if(!target) return;
+  if(ROLE!=='lm') return;
+  {
+    B.alerts.unshift({t:"정보보고 · 1시간 이내", hard:true,
+      steps:["피해 규모 확인 (대인 · 대물)","유선으로 보고","연결이 안 되면 SMS · 메신저"],
+      d:"소속 팀장 · 담당 · 사업부장, 안전보건팀, LMD/설치 Compliance팀에 사고 인지 후 ⟪1시간 이내⟫ 보고합니다. 인적 · 물적 피해 규모와 관계없이 예외 없이 보고 대상입니다."});
+  }
+}
+
 /* ── 유형별 구성 ── */
 function buildFire(){
   const f=S.flags||[], wh=S.when, sv=S.svc, inj=(S.injury==='y');
   const B={alerts:[], now:'', shots:[], shotNotes:[], says:[], report:[]};
 
+  addInfoReport(B);
   const hi=S.hist||[];
   if(hi.includes('svc')) B.alerts.push({t:"서비스 이력이 있는 건",
     d:"설치 이후 서비스가 제품을 취급한 건입니다. 방문 시기와 수리 내용을 고객에게 확인해 그대로 공유해주세요. 현장에서 원인을 판단하지 않습니다."});
@@ -1174,7 +1248,7 @@ function buildFire(){
     d:"당사 설치 건인지 전산 확인이 필요합니다. 이전설치 시기와 시공 주체를 고객에게 확인해 그대로 공유해주세요."});
   if(S.felapsed==='y3'||S.felapsed==='y3p'||S.felapsed==='?')
     B.alerts.push({t:"설치 후 시간이 지난 건",
-      d:"설치 시점과 화재 발생 사이에 간격이 있는 건입니다. 그 사이의 사용 환경과 이력을 함께 확인해주세요. 현장에서 설치 때문인지 아닌지를 단정하지 않습니다."});
+      d:"설치 시점과 화재 발생 사이에 간격이 있는 건입니다. 그 사이의 사용 환경과 이력을 함께 확인해주세요. 현장에서 설치 때문인지 아닌지를 단정하지 않습니다. 화재는 경과 기간과 관계없이 전건 공유 대상입니다."});
   if(inj) B.alerts.push({t:"인명피해 건", d:"즉시 유선상으로 물류담당자 · 담당 LM에게 사고 사항을 공유한 후 후속 조사를 진행해주세요.", hard:true});
 
   let n='';
@@ -1196,7 +1270,7 @@ function buildFire(){
   if(wh==='rep') B.shotNotes.push('소방 · 경찰이 원인 확인용 증거물을 가져갔을 수 있습니다. 결선부가 없으면 그 사실만 기록하고, 탄 흔적은 남아 있으므로 나머지는 그대로 확인해주세요.');
   if(wh==='self') B.shotNotes.push('신고되지 않은 건은 현장이 남아 있는 상태로, 이후 원인 확인의 유일한 자료가 됩니다. 규모와 무관하게 촬영 후 공유해주세요.');
   if(sv==='post') B.shotNotes.push('서비스가 다녀간 뒤라 현장이 정리되었을 수 있습니다. 확인되지 않는 항목은 SM 촬영 자료를 요청해 함께 공유해주세요.');
-  SHOTS_F.forEach(g=>{
+  (S.fprod==='etc' ? SHOTS_ETC : SHOTS_F).forEach(g=>{
     const soft = (wh==='rep' && g.g.indexOf('결선부')===0) || sv==='post';
     B.shots.push({g:g.g, must:g.must, n:soft?'확인 가능한 범위에서':'', items:g.items});
   });
@@ -1220,9 +1294,12 @@ function buildWater(){
   if((S.flags||[]).includes('voc') || (S.flags||[]).includes('third'))
     B.alerts.push({t:"대외 확산 예상 건",
       d:"외부기관 접촉 또는 소비자원 · 법적 대응이 언급된 건입니다. 피해 금액이 ⟪자기부담금 기준⟫ 이하로 예상되더라도 물류 자체 처리 대상이 아닙니다. Line팀을 경유해 LMD/설치품질팀까지 공유합니다."});
-  if(S.elapsed==='y1'||S.elapsed==='y1p'||S.elapsed==='?')
+  if(S.elapsed==='y1'||S.elapsed==='y3'||S.elapsed==='y3p'||S.elapsed==='?')
     B.alerts.push({t:"설치 후 시간이 지난 건",
       d:"설치 시점과 누수 발생 사이에 간격이 있는 건입니다. 그 사이 다른 작업이나 사용 변경이 있었는지 확인해 함께 공유해주세요. 현장에서 설치 때문인지 아닌지를 단정하지 않습니다."});
+  if(S.elapsed==='y3p')
+    B.alerts.push({t:"담보 기간이 지난 건",
+      d:"설치 후 3년이 지나 PL보험 담보 기간 밖일 수 있습니다. 처리 방향은 유관부서 확인 사항으로, 현장에서 보험 처리 가능 여부를 언급하지 않습니다."});
   if(S.route==='svc')
     B.alerts.push({t:"서비스 통보 건",
       d:"현장이 이미 정리되었을 수 있습니다. 서비스 점검 결과와 확인되지 않는 항목을 함께 공유해주세요."});
@@ -1232,6 +1309,7 @@ function buildWater(){
   if(!(S.flags||[]).includes('voc') && !(S.flags||[]).includes('third'))
     B.alerts.push({t:"규모 판단은 물류에서",
       d:"현장에서는 확인한 내용을 물류에 공유합니다. 피해 규모는 물류에서 1차 확인합니다. 피해 금액이 ⟪자기부담금 기준⟫을 넘을 것으로 예상되면 Line팀 이상으로 공유합니다. 규모 판단이 어려운 경우에도 Line팀을 경유해 유관부서로 공유합니다."});
+  addInfoReport(B);
   B.alerts.push({t:"조치 전에 남길 것",
     steps:["밸브 잠금","조치 전 촬영","재현","원인 확인","조치","조치 후 확인"],
     d:"조치하고 나면 원래 상태는 다시 만들 수 없습니다. 촬영 전 재체결 · 부품 교체는 하지 않습니다.", hard:true});
@@ -1244,7 +1322,7 @@ function buildWater(){
     row('1순위','제품 명판의 모델명 · 제조번호'),
     row('대조용','주문자 성명 · 연락처','배우자 명의 포함'),
     row('가능한 경우','설치 주문번호 · 작업일자','고객 보유 문자 · 영수증에서 확인되면 조회가 빠름'),
-    ((S.elapsed==='y1'||S.elapsed==='y1p'||S.elapsed==='?')?row('경과 건','그 사이 다른 작업 · 사용 변경 유무','고객 진술 그대로 기록'):''),
+    ((S.elapsed==='y1'||S.elapsed==='y3'||S.elapsed==='y3p'||S.elapsed==='?')?row('경과 건','그 사이 다른 작업 · 사용 변경 유무','고객 진술 그대로 기록'):''),
     (isWork?row('작업 접수 경로','주문 연계 여부 · 접수 경로','제품 설치 주문에 포함된 작업인지, 작업만 단독으로 접수된 건인지'):''),
     (sd==='hole'?row('타공 건','도면 확인 여부 · 관리사무소 담당자',(T_DRILL[S.drill]||'')+' · 성함과 연락처를 확보해주세요'):''),
     (S.spread===3?row('고객 측 담보','일상생활배상책임 담보 가입 여부','화재보험 · 주택종합보험 특약으로 가입된 경우가 많음. 가입 여부만 확인'):''),
@@ -1307,7 +1385,7 @@ function buildWater(){
     if(s.spread3) return S.spread===3;
     if(s.solo) return isWork && (S.ord==='n'||S.ord==='?');
     if(s.hole) return S.side==='hole';
-    if(s.late) return S.elapsed==='y1'||S.elapsed==='y1p'||S.elapsed==='?';
+    if(s.late) return S.elapsed==='y1'||S.elapsed==='y3'||S.elapsed==='y3p'||S.elapsed==='?';
     return true;
   });
   B.reportExtra=' · 조치 내역';
@@ -1318,13 +1396,17 @@ function buildBreak(){
   const f=S.flags||[], tg=S.target, late=(S.found==='late');
   const B={alerts:[], now:'', shots:[], shotNotes:[], says:[], report:[]};
 
+  addInfoReport(B);
   B.alerts.push({t:"금액은 현장에서 판단하지 않습니다", d:"피해 규모는 촬영본을 확인해 판단합니다. 판단이 가능한 사진을 남기는 것이 현장의 역할입니다. 전경 · 범위 · 근접 · 크기 비교물을 모두 촬영해주세요.", hard:true});
   if((S.flags||[]).includes('voc') || (S.flags||[]).includes('third'))
     B.alerts.push({t:"대외 확산 예상 건",
       d:"외부기관 접촉 또는 소비자원 · 법적 대응이 언급된 건입니다. 피해 금액이 ⟪자기부담금 기준⟫ 이하로 예상되더라도 물류 자체 처리 대상이 아닙니다. Line팀을 경유해 LMD/설치품질팀까지 공유합니다."});
-  if(S.elapsed==='y1'||S.elapsed==='y1p'||S.elapsed==='?')
+  if(S.elapsed==='y1'||S.elapsed==='y3'||S.elapsed==='y3p'||S.elapsed==='?')
     B.alerts.push({t:"설치 후 시간이 지난 건",
       d:"설치 시점과 누수 발생 사이에 간격이 있는 건입니다. 그 사이 다른 작업이나 사용 변경이 있었는지 확인해 함께 공유해주세요. 현장에서 설치 때문인지 아닌지를 단정하지 않습니다."});
+  if(S.elapsed==='y3p')
+    B.alerts.push({t:"담보 기간이 지난 건",
+      d:"설치 후 3년이 지나 PL보험 담보 기간 밖일 수 있습니다. 처리 방향은 유관부서 확인 사항으로, 현장에서 보험 처리 가능 여부를 언급하지 않습니다."});
   if(S.route==='svc')
     B.alerts.push({t:"서비스 통보 건",
       d:"현장이 이미 정리되었을 수 있습니다. 서비스 점검 결과와 확인되지 않는 항목을 함께 공유해주세요."});
@@ -1364,6 +1446,7 @@ function buildBody(){
   const f=S.flags||[];
   const B={alerts:[], now:'', shots:[], shotNotes:[], says:[], report:[]};
 
+  addInfoReport(B);
   B.alerts.push({t:"치료가 먼저",
     steps:["상태 확인","병원 안내","유선 공유","사실 확인 · 촬영"],
     d:"사진과 경위 확인을 병원 안내보다 먼저 하지 않습니다.", hard:true});
@@ -1419,8 +1502,8 @@ function denyRows(){
 
 function reportRows(lv, extra){
   return box([
-    row('경로','현장 방문자 → 물류 → Line팀 → 품질팀 · 제품담당자','각 단계에서 지체 없이 전달'),
-    row('공유 범위',scope().t,scope().d),
+    row('지금 알릴 곳', (ROLES[ROLE]||{}).next || '물류 담당자(현장대리인/대표)', (ROLES[ROLE]||{}).to || ''),
+    row('최종 공유 범위',scope().t,scope().d),
     row('시점',lv.t+(lv.h?' · '+lv.h:'')),
     row('함께 제출','촬영본 · 영상 전체'+(extra||'')),
     row('즉시 통보', S.type==='fire' ? '증거물 폐기 · 현장 정리 예정이 확인되는 경우'
@@ -1436,7 +1519,7 @@ function reportRows(lv, extra){
 function chips(){
   const c=[];
   if(S.type==='fire'){
-    c.push(['규모', T_SCALE[S.scale]]);
+    c.push(['제품', T_FPROD[S.fprod]], ['규모', T_SCALE[S.scale]]);
     c.push(['인명피해', S.injury==='y' ? (T_HARM[S.harm]||'있음') : '없음']);
     c.push(['신고 여부', T_WHEN[S.when]], ['서비스 방문', T_SVC[S.svc]],
       ['설치 후 경과', T_FEL[S.felapsed]],
@@ -1446,9 +1529,11 @@ function chips(){
     if(S.prod==='work') c.push(['주문 연계', {y:'주문 포함',n:'단독 작업','?':'미확인'}[S.ord]]);
     else { c.push(['누수 계통', T_SIDE[S.side]]);
       if(S.side==='hole') c.push(['도면 확인', T_DRILL[S.drill]]); }
-    c.push(['설치 후 경과', T_ELAPSED[S.elapsed]], ['접수 경로', T_ROUTE[S.route]], ['피해 범위', T_SPREAD[S.spread]]);
+    c.push(['설치 후 경과', T_ELAPSED[S.elapsed]], ['접수 경로', T_ROUTE[S.route]], ['피해 범위', T_SPREAD[S.spread]],
+      ['인명피해', S.injury==='y' ? (T_HARM[S.harm]||'있음') : '없음']);
   } else if(S.type==='break'){
-    c.push(['피해 대상', T_TARGET[S.target]], ['확인 시점', T_FOUND[S.found]]);
+    c.push(['피해 대상', T_TARGET[S.target]], ['확인 시점', T_FOUND[S.found]],
+      ['인명피해', S.injury==='y' ? (T_HARM[S.harm]||'있음') : '없음']);
   } else if(S.type==='body'){
     c.push(['피해 정도', T_HARM[S.harm]]);
   }
@@ -1474,9 +1559,8 @@ function renderResult(){
     '<div class="head"><span class="ic">'+(ICON[S.type]||'')+'</span>'+
       '<span class="tt"><b class="kind">'+esc(T_KIND[S.type]||'사고')+'</b></span></div>'+
     '<div class="d">'+lines(lv.d)+'</div>'+
-    '<div class="dept"><b>공유 대상</b>'+DEPT.slice(0,scope().n).map(x=>
-      '<span>'+esc(x)+'</span>').join('')+'</div>'+
-    ((S.type==='fire'||S.type==='body')?'<div class="cmpl">정보보고의 경우 이 내용과는 별도로 Compliance팀 가이드를 참고하여 주시기 바랍니다.</div>':'')+
+    '<div class="dept"><b>지금 알릴 곳</b><span>'+esc((ROLES[ROLE]||{}).next||'물류 담당자(현장대리인/대표)')+'</span></div>'+
+    ((S.type==='fire'||S.type==='body'||S.injury==='y')?'<div class="cmpl">'+((S.type==='fire'||S.type==='body')?'화재 · 대인 사고는':'다친 분이 있는 건은')+' 인적 · 물적 피해 규모와 관계없이 예외 없이 보고합니다.</div>':'')+
     '<dl class="facts">'+chips().map(([k,v])=>'<div><dt>'+esc(k)+'</dt><dd>'+esc(v)+'</dd></div>').join('')+'</dl>'+
   '</div>';
 
@@ -1739,6 +1823,7 @@ function buildPrint(){
     '<title>'+kind+' 대응 기록</title><meta name="viewport" content="width=device-width,initial-scale=1">'+
     link+'<style>'+doc+'</style></head><body><div class="pg">'+
     '<div class="dh"><h1>'+kind+' 현장 대응 기록</h1>'+
+    (ROLE?'<div class="lv">'+esc((ROLES[ROLE]||{}).t)+' 기준</div>':'')+
     '<div class="lv">'+esc(lv.t)+'</div>'+
     '<div class="st">출력 '+stamp+'</div></div>'+
     '<table class="ft">'+facts+'</table>'+
@@ -1768,6 +1853,14 @@ function buildPrint(){
 }
 
 /* 복사가 막힌 환경에서는 화면에 띄워 직접 복사 */
+function bindRole(){
+  const r=document.getElementById('hRole');
+  if(!r) return;
+  r.hidden = !(ROLE && node!=='role');
+  if(ROLE) r.textContent=(ROLES[ROLE]||{}).t||'';
+  r.onclick=()=>{ stack=[]; node='role'; render(); };
+}
+
 function bindReset(){
   const r=document.getElementById('hReset');
   if(!r) return;
@@ -1799,7 +1892,7 @@ function render(){
   document.getElementById('hTitle').textContent =
     node==='result' ? ({fire:'화재사고',water:'누수사고',break:'파손사고',body:'대인사고'}[S.type]||'사고')+' 대응'
                     : '사고 현장 대응 가이드';
-  progress(); bindReset();
+  progress(); bindRole(); bindReset();
   if(node==='result') renderResult();
   else if(node==='soon') renderSoon();
   else renderQ();
