@@ -50,13 +50,14 @@ header{position:sticky;top:0;z-index:30;background:var(--canvas);
   padding-top:env(safe-area-inset-top);
   box-shadow:inset 0 -1px 0 var(--hair-soft)}
 .hzbar{display:none}
-.htop{display:flex;align-items:center;gap:12px;padding:14px 24px 13px}
-h1{margin:0;font-size:16px;font-weight:500;letter-spacing:0;color:var(--ink)}
+.htop{display:flex;align-items:center;gap:8px;padding:14px 20px 13px}
+h1{margin:0;font-size:16px;font-weight:500;letter-spacing:-.01em;color:var(--ink);white-space:nowrap}
 .step{margin-left:auto;font-size:12px;font-weight:500;color:var(--mute)}
-button.role{margin-left:auto;border:none;background:var(--cloud);color:var(--ink);
-  font:inherit;font-size:13px;font-weight:500;padding:8px 14px;border-radius:var(--r-full);
-  cursor:pointer;letter-spacing:-.02em;display:inline-flex;align-items:center;gap:6px}
-button.role:after{content:"⌄";color:var(--stone);font-size:12px}
+button.role{margin-left:auto;flex:none;border:none;background:var(--cloud);color:var(--ink);
+  font:inherit;font-size:13px;font-weight:500;padding:8px 12px;border-radius:var(--r-full);
+  cursor:pointer;letter-spacing:-.02em;display:inline-flex;align-items:center;gap:5px;
+  max-width:44vw;white-space:nowrap;overflow:hidden}
+button.role:after{content:"⇄";color:var(--stone);font-size:12px;font-weight:500}
 button.role:active{opacity:.6}
 button.role[hidden]{display:none}
 button.reset{margin-left:8px;border:none;background:var(--cloud);color:var(--ash);
@@ -436,9 +437,9 @@ button.rl.on:after{content:"";position:absolute;right:20px;top:50%;margin-top:-5
 
 <script>
 const ROLES={
-  pro:{t:"설치프로", next:"물류 담당자(현장대리인/대표)", to:"물류 담당자(현장대리인/대표)에게 알립니다."},
-  log:{t:"물류 담당자(현장대리인/대표)", next:"LM", to:"담당 LM에게 전달합니다."},
-  lm: {t:"LM", next:"LMD/설치품질팀", to:"LMD/설치품질팀에 공유합니다."}
+  pro:{t:"설치프로", s:"설치프로", next:"물류 담당자(현장대리인/대표)", to:"물류 담당자(현장대리인/대표)에게 알립니다."},
+  log:{t:"물류 담당자(현장대리인/대표)", s:"물류 담당자", next:"LM", to:"담당 LM에게 전달합니다."},
+  lm: {t:"LM", s:"LM", next:"LMD/설치품질팀", to:"LMD/설치품질팀에 공유합니다."}
 };
 let ROLE=null;
 try{ ROLE=localStorage.getItem('role')||null; }catch(e){}
@@ -453,7 +454,7 @@ let stack = [], node = ROLE ? 'type' : 'role';
 /* ══ 질문 ══ */
 const Q = {
   role: {
-    q:"어떤 역할이신가요?", s:"아래 항목 중 해당사항을 선택해주세요. 한 번만 선택하면 다음부터는 묻지 않습니다.", key:"role",
+    q:"누가 보시나요?", s:"아래 항목 중 해당사항을 선택해주세요. 한 번만 선택하면 다음부터는 묻지 않습니다.", key:"role",
     opts:[
       { v:"pro", t:"설치프로" },
       { v:"log", t:"물류 담당자(현장대리인/대표)" },
@@ -1888,7 +1889,7 @@ function bindRole(){
   const r=document.getElementById('hRole');
   if(!r) return;
   r.hidden = !(ROLE && node!=='role');
-  if(ROLE) r.textContent=(ROLES[ROLE]||{}).t||'';
+  if(ROLE){ const R=ROLES[ROLE]||{}; r.textContent=R.s||R.t||''; }
   r.onclick=()=>askRole();
 }
 
@@ -1902,7 +1903,7 @@ function bindReset(){
 function askRole(){
   if(document.querySelector('.ask')) return;
   const w=document.createElement('div'); w.className='ask';
-  w.innerHTML='<div class="ask-in"><div class="ask-t">역할 바꾸기</div>'+
+  w.innerHTML='<div class="ask-in"><div class="ask-t">보는 사람 바꾸기</div>'+
     '<div class="ask-d">선택한 사고 내용은 그대로 두고 안내만 바뀝니다.</div>'+
     '<div class="rolelist">'+Object.keys(ROLES).map(k=>
       '<button class="rl'+(k===ROLE?' on':'')+'" data-r="'+k+'">'+esc(ROLES[k].t)+'</button>').join('')+
