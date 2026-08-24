@@ -124,6 +124,15 @@ em.hl{font-style:normal;font-weight:500;color:var(--c,var(--ink))}
 .dept b{font-size:13px;font-weight:500;color:var(--mute);margin-right:var(--s-xs)}
 .dept span{font-size:13px;font-weight:500;padding:7px 14px;border-radius:var(--r-full);
   background:var(--c,var(--ink));color:var(--on-ink);white-space:nowrap}
+.irbox{margin-top:var(--s-md);padding-top:var(--s-md);border-top:1px solid var(--hair)}
+.irh{display:flex;align-items:center;gap:var(--s-sm);margin-bottom:var(--s-sm)}
+.irh b{font-size:13px;font-weight:500;color:var(--mute)}
+.irh em{font-style:normal;font-size:12px;font-weight:500;color:var(--c,var(--ink));
+  border-radius:var(--r-full);padding:3px 9px;box-shadow:inset 0 0 0 1.5px var(--c,var(--ink))}
+.irpills{display:flex;flex-wrap:wrap;gap:var(--s-sm)}
+.irpills span{font-size:13px;font-weight:500;padding:7px 14px;border-radius:var(--r-full);
+  background:var(--canvas);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--hair)}
+.irnote{margin-top:var(--s-sm);font-size:12.5px;font-weight:500;color:var(--mute)}
 
 .cmpl{margin-top:var(--s-md);font-size:13px;font-weight:500;color:var(--mute);line-height:1.5}
 .facts{margin:var(--s-lg) 0 0;padding:0;border-top:1px solid var(--hair)}
@@ -435,7 +444,7 @@ let stack = [], node = ROLE ? 'type' : 'role';
 /* ══ 질문 ══ */
 const Q = {
   role: {
-    q:"어느 쪽이신가요?", s:"선택하신 역할에 맞춰 다음 단계를 안내합니다.", key:"role",
+    q:"어떤 역할이신가요?", s:"아래 항목 중 해당사항을 선택해주세요. 한 번만 선택하면 다음부터는 묻지 않습니다.", key:"role",
     opts:[
       { v:"pro", t:"설치프로" },
       { v:"log", t:"물류 담당자(현장대리인/대표)" },
@@ -1222,9 +1231,10 @@ const FLAGNOTE={
 };
 
 /* 화재 · 대인 — 정보보고 절차 */
+function infoTarget(){ return (S.type==='fire')||(S.type==='body')||(S.injury==='y'); }
+
 function addInfoReport(B){
-  const target = (S.type==='fire') || (S.type==='body') || (S.injury==='y');
-  if(!target) return;
+  if(!infoTarget()) return;
   if(ROLE!=='lm') return;
   {
     B.alerts.unshift({t:"정보보고 · 1시간 이내", hard:true,
@@ -1559,8 +1569,14 @@ function renderResult(){
     '<div class="head"><span class="ic">'+(ICON[S.type]||'')+'</span>'+
       '<span class="tt"><b class="kind">'+esc(T_KIND[S.type]||'사고')+'</b></span></div>'+
     '<div class="d">'+lines(lv.d)+'</div>'+
-    '<div class="dept"><b>지금 알릴 곳</b><span>'+esc((ROLES[ROLE]||{}).next||'물류 담당자(현장대리인/대표)')+'</span></div>'+
-    ((S.type==='fire'||S.type==='body'||S.injury==='y')?'<div class="cmpl">'+((S.type==='fire'||S.type==='body')?'화재 · 대인 사고는':'다친 분이 있는 건은')+' 인적 · 물적 피해 규모와 관계없이 예외 없이 보고합니다.</div>':'')+
+    '<div class="dept"><b>사고 처리</b><span>'+esc((ROLES[ROLE]||{}).next||'물류 담당자(현장대리인/대표)')+'</span></div>'+
+    (infoTarget() && ROLE==='lm'
+      ? '<div class="irbox"><div class="irh"><b>정보보고</b><em>1시간 이내</em></div>'+
+        '<div class="irpills"><span>소속 팀장 · 담당 · 사업부장</span><span>안전보건팀</span>'+
+        '<span>LMD/설치 Compliance팀</span></div>'+
+        '<div class="irnote">유선 우선 · 연결이 안 되면 SMS · 메신저</div></div>'
+      : '')+
+    ((infoTarget() && ROLE!=='lm')?'<div class="cmpl">'+((S.type==='fire'||S.type==='body')?'화재 · 대인 사고는':'다친 분이 있는 건은')+' 인적 · 물적 피해 규모와 관계없이 예외 없이 보고합니다.</div>':'')+
     '<dl class="facts">'+chips().map(([k,v])=>'<div><dt>'+esc(k)+'</dt><dd>'+esc(v)+'</dd></div>').join('')+'</dl>'+
   '</div>';
 
@@ -1805,6 +1821,11 @@ function buildPrint(){
   '.dept{display:flex;flex-wrap:wrap;align-items:center;gap:1.5mm;margin:2mm 0 0;padding:0;font-size:9pt}'+
   '.dept b{color:#707072;font-weight:400;margin-right:1mm}'+
   '.dept span{padding:.8mm 2mm;border:1px solid #111;color:#111;font-weight:500}'+
+  '.irbox{margin-top:2mm;padding-top:2mm;border-top:1px solid #e5e5e5}'+
+  '.irh{display:flex;gap:2mm;font-size:9pt;color:#707072;margin-bottom:1.5mm}'+
+  '.irpills{display:flex;flex-wrap:wrap;gap:1.5mm;font-size:9pt}'+
+  '.irpills span{padding:.8mm 2mm;border:1px solid #9e9ea0;color:#39393b}'+
+  '.irnote{margin-top:1mm;font-size:9pt;color:#707072}'+
   '.flow{list-style:none;margin:2mm 0;padding:0;border-top:1px solid #e5e5e5;font-size:10pt}'+
   '.flow li{display:flex;align-items:center;gap:2.5mm;padding:1.4mm 0;border-bottom:1px solid #e5e5e5}'+
   '.flow li em{font-style:normal;flex:none;color:#707072;font-size:8.5pt;background:none!important;'+
