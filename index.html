@@ -53,9 +53,11 @@ header{position:sticky;top:0;z-index:30;background:var(--canvas);
 .htop{display:flex;align-items:center;gap:12px;padding:14px 24px 13px}
 h1{margin:0;font-size:16px;font-weight:500;letter-spacing:0;color:var(--ink)}
 .step{margin-left:auto;font-size:12px;font-weight:500;color:var(--mute)}
-button.role{margin-left:auto;border:none;background:transparent;color:var(--mute);
-  font:inherit;font-size:13px;font-weight:500;padding:8px 6px;cursor:pointer;letter-spacing:-.02em}
-button.role:after{content:" ⌄";color:var(--stone)}
+button.role{margin-left:auto;border:none;background:var(--cloud);color:var(--ink);
+  font:inherit;font-size:13px;font-weight:500;padding:8px 14px;border-radius:var(--r-full);
+  cursor:pointer;letter-spacing:-.02em;display:inline-flex;align-items:center;gap:6px}
+button.role:after{content:"⌄";color:var(--stone);font-size:12px}
+button.role:active{opacity:.6}
 button.role[hidden]{display:none}
 button.reset{margin-left:8px;border:none;background:var(--cloud);color:var(--ash);
   font:inherit;font-size:13px;font-weight:500;padding:8px 14px;border-radius:var(--r-full);
@@ -328,6 +330,13 @@ label.ck input:checked ~ .tx span{color:var(--stone)}
   width:100%;max-width:340px}
 .ask-t{font-size:19px;font-weight:500;letter-spacing:-.03em;margin-bottom:var(--s-sm)}
 .ask-d{font-size:14px;font-weight:500;color:var(--mute);line-height:1.5;margin-bottom:var(--s-xl)}
+.rolelist{display:flex;flex-direction:column;gap:var(--s-xs);margin-bottom:var(--s-lg)}
+button.rl{width:100%;text-align:left;border:none;background:var(--cloud);color:var(--ink);
+  font:inherit;font-size:16px;font-weight:500;padding:15px 18px;border-radius:var(--r-md);
+  cursor:pointer;position:relative}
+button.rl.on{background:var(--ink);color:var(--on-ink)}
+button.rl.on:after{content:"";position:absolute;right:20px;top:50%;margin-top:-5px;
+  width:6px;height:11px;border:solid var(--on-ink);border-width:0 2px 2px 0;transform:rotate(45deg)}
 .ask-b{display:flex;gap:var(--s-sm)}
 .ask-b button{flex:1;height:48px;border:none;border-radius:var(--r-full);
   font:inherit;font-size:16px;font-weight:500;cursor:pointer}
@@ -1879,7 +1888,7 @@ function bindRole(){
   if(!r) return;
   r.hidden = !(ROLE && node!=='role');
   if(ROLE) r.textContent=(ROLES[ROLE]||{}).t||'';
-  r.onclick=()=>{ stack=[]; node='role'; render(); };
+  r.onclick=()=>askRole();
 }
 
 function bindReset(){
@@ -1887,6 +1896,23 @@ function bindReset(){
   if(!r) return;
   r.hidden = (node!=='result');
   r.onclick=()=>askReset();
+}
+
+function askRole(){
+  if(document.querySelector('.ask')) return;
+  const w=document.createElement('div'); w.className='ask';
+  w.innerHTML='<div class="ask-in"><div class="ask-t">역할 바꾸기</div>'+
+    '<div class="ask-d">선택한 사고 내용은 그대로 두고 안내만 바뀝니다.</div>'+
+    '<div class="rolelist">'+Object.keys(ROLES).map(k=>
+      '<button class="rl'+(k===ROLE?' on':'')+'" data-r="'+k+'">'+esc(ROLES[k].t)+'</button>').join('')+
+    '</div><div class="ask-b"><button class="ask-no">닫기</button></div></div>';
+  document.body.appendChild(w);
+  const close=()=>w.remove();
+  w.querySelector('.ask-no').onclick=close;
+  w.onclick=e=>{ if(e.target===w) close(); };
+  w.querySelectorAll('.rl').forEach(btn=>btn.onclick=()=>{
+    setRole(btn.dataset.r); close(); render();
+  });
 }
 
 function askReset(){
