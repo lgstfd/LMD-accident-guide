@@ -345,6 +345,77 @@ button.rl.on:after{content:"";position:absolute;right:20px;top:50%;margin-top:-5
 .ask-yes{background:var(--ink);color:var(--on-ink)}
 .ask-b button:active{opacity:.6}
 
+
+/* ── 보상 기준 ── */
+button.comp-btn{margin-left:auto;flex:none;border:none;background:var(--ink);color:var(--on-ink);
+  font:inherit;font-size:13px;font-weight:500;padding:8px 14px;border-radius:var(--r-full);
+  cursor:pointer;letter-spacing:-.02em;white-space:nowrap}
+button.comp-btn:active{opacity:.7}
+button.comp-btn[hidden]{display:none}
+button.comp-btn + button.role{margin-left:6px}
+
+.comp{position:fixed;inset:0;z-index:95;background:rgba(17,17,17,.45);
+  display:flex;align-items:flex-end;justify-content:center}
+.comp-in{background:var(--canvas);width:100%;max-width:680px;height:92vh;
+  border-radius:var(--r-lg) var(--r-lg) 0 0;display:flex;flex-direction:column;overflow:hidden}
+.comp-top{display:flex;align-items:flex-start;gap:var(--s-md);
+  padding:var(--s-xl) var(--s-xl) var(--s-lg);border-bottom:1px solid var(--hair)}
+.comp-t{font-size:22px;font-weight:500;letter-spacing:-.03em}
+.comp-s{font-size:13px;font-weight:500;color:var(--mute);margin-top:3px}
+.comp-x{margin-left:auto;flex:none;border:none;background:var(--cloud);color:var(--ink);
+  font:inherit;font-size:14px;font-weight:500;padding:9px 16px;border-radius:var(--r-full);cursor:pointer}
+.comp-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:var(--s-xl) var(--s-xl) calc(var(--s-xxl) + env(safe-area-inset-bottom))}
+
+/* 계산기 */
+.calc{background:var(--cloud);border-radius:var(--r-md);padding:var(--s-xl);margin-bottom:var(--s-xxl)}
+.calc-h{font-size:18px;font-weight:500;letter-spacing:-.02em;margin-bottom:4px}
+.calc-d{font-size:13px;font-weight:500;color:var(--mute);margin-bottom:var(--s-lg);line-height:1.5}
+.fld{display:block;margin-bottom:var(--s-md)}
+.fld span{display:block;font-size:12px;font-weight:500;color:var(--mute);margin-bottom:5px}
+.fld select,.fld input{width:100%;border:none;background:var(--canvas);border-radius:var(--r-sm);
+  padding:14px 14px;font:inherit;font-size:16px;font-weight:500;color:var(--ink);
+  -webkit-appearance:none;appearance:none;box-shadow:inset 0 0 0 1.5px var(--hair)}
+.fld select{background-image:none}
+.fld input::placeholder{color:var(--stone);font-weight:500}
+.fld2{display:flex;gap:var(--s-sm)}
+.fld2 .fld{flex:1}
+
+.calc-out{margin-top:var(--s-md);padding-top:var(--s-lg);border-top:1px solid var(--hair)}
+.co-empty{font-size:14px;font-weight:500;color:var(--stone)}
+.co-row{display:flex;align-items:baseline;font-size:14px;font-weight:500;color:var(--mute)}
+.co-row b{margin-left:auto;font-size:16px;font-weight:500;color:var(--ink)}
+.co-amt{font-size:34px;font-weight:500;letter-spacing:-.04em;margin:6px 0 8px}
+.co-f{font-size:13px;font-weight:500;color:var(--mute);line-height:1.6}
+.co-w{margin-top:var(--s-md);font-size:12.5px;font-weight:500;color:var(--sale);line-height:1.5}
+.cwarn{background:#FFF2F2;border-radius:var(--r-sm);padding:14px 16px;margin-bottom:var(--s-xl);
+  font-size:13.5px;font-weight:500;color:var(--sale);line-height:1.55}
+
+/* 유형별 기준 */
+.cstd{margin-bottom:var(--s-xxl)}
+.cstd-h{display:flex;align-items:baseline;gap:var(--s-md);flex-wrap:wrap;
+  padding-bottom:var(--s-sm);border-bottom:1.5px solid var(--ink);margin-bottom:var(--s-md)}
+.cstd-h em{font-style:normal;flex:none;font-size:11px;font-weight:500;color:var(--on-ink);
+  background:var(--ink);border-radius:var(--r-full);padding:4px 9px;line-height:1}
+.cstd-h b{font-size:18px;font-weight:500;letter-spacing:-.02em}
+.cstd-h span{font-size:13px;font-weight:500;color:var(--mute)}
+.cstd-k{font-size:12px;font-weight:500;color:var(--mute);margin:var(--s-md) 0 5px}
+.cstd-l{list-style:none;margin:0;padding:0}
+.cstd-l li{position:relative;padding:6px 0 6px 14px;font-size:14.5px;font-weight:500;line-height:1.55}
+.cstd-l li:before{content:"";position:absolute;left:0;top:14px;width:4px;height:4px;
+  border-radius:50%;background:var(--stone)}
+.cstd-l.muted li{color:var(--mute);font-size:13.5px}
+
+/* 감가율표 */
+.dg{font-size:13px;font-weight:500;color:var(--mute);margin:var(--s-lg) 0 4px}
+.dtbl{border-top:1px solid var(--hair-soft)}
+.dr{display:flex;align-items:baseline;gap:var(--s-sm);padding:9px 0;
+  border-bottom:1px solid var(--hair-soft);font-size:14px;font-weight:500}
+.dr span{flex:1;min-width:0}
+.dr b{flex:none;font-weight:500;color:var(--mute);font-size:13px}
+.dr i{flex:none;font-style:normal;width:58px;text-align:right;font-variant-numeric:tabular-nums}
+.cnote{margin-top:var(--s-lg);font-size:13px;font-weight:500;color:var(--mute);line-height:1.5}
+
 /* ── 첫 화면 원칙 ── */
 .intro{margin-top:var(--s-sec)}
 .ir{display:flex;gap:var(--s-lg);padding:var(--s-lg) 0;border-bottom:1px solid var(--hair-soft)}
@@ -425,6 +496,7 @@ button.rl.on:after{content:"";position:absolute;right:20px;top:50%;margin-top:-5
   <div class="htop">
     <h1 id="hTitle">사고 현장 대응 가이드</h1>
     <div class="step" id="hStep"></div>
+    <button class="comp-btn" id="hComp" hidden>보상 기준</button>
     <button class="role" id="hRole" hidden></button>
     <button class="reset" id="hReset" hidden>처음부터</button>
   </div>
@@ -446,6 +518,179 @@ try{ ROLE=localStorage.getItem('role')||null; }catch(e){}
 const setRole=v=>{ ROLE=v; try{ localStorage.setItem('role',v); }catch(e){} };
 
 const REV='2026.08.11';
+
+
+
+/* ══ 보상 기준 화면 ══ */
+let CALC={pick:null, price:'', years:''};
+
+function openComp(){
+  if(document.querySelector('.comp')) return;
+  const w=document.createElement('div');
+  w.className='comp';
+  w.innerHTML='<div class="comp-in">'+
+    '<div class="comp-top"><div><div class="comp-t">보상 산정 기준</div>'+
+    '<div class="comp-s">손해액 산정 시 참고 자료</div></div>'+
+    '<button class="comp-x" aria-label="닫기">닫기</button></div>'+
+    '<div class="comp-body" id="compBody"></div></div>';
+  document.body.appendChild(w);
+  w.querySelector('.comp-x').onclick=()=>w.remove();
+  w.onclick=e=>{ if(e.target===w) w.remove(); };
+  renderComp();
+}
+
+function renderComp(){
+  const el=document.getElementById('compBody');
+  if(!el) return;
+  let h='<div class="cwarn">단순 참고용 자료입니다. 실제 보상 금액은 증빙 자료와 협의에 따라 달라지며, '+
+    '현장에서 금액을 언급하거나 고객에게 안내하지 않습니다.</div>';
+
+  /* 계산기 */
+  h+='<div class="calc">'+
+     '<div class="calc-h">가재도구 감가 계산</div>'+
+     '<div class="calc-d">구입가와 경과 년수를 입력하면 잔가율과 손해액을 계산합니다.</div>'+
+     '<label class="fld"><span>품목</span><select id="cPick">'+
+       '<option value="">선택해주세요</option>'+
+       DEPREC.map(g=>'<optgroup label="'+esc(g.g)+'">'+
+         g.items.map(it=>'<option value="'+esc(it.t)+'"'+(CALC.pick===it.t?' selected':'')+'>'+
+           esc(it.t)+' · '+it.y+'년 · '+it.r.toFixed(2)+'%</option>').join('')+
+       '</optgroup>').join('')+
+     '</select></label>'+
+     '<div class="fld2">'+
+       '<label class="fld"><span>구입가</span><input id="cPrice" type="text" inputmode="numeric" placeholder="원" value="'+esc(CALC.price)+'"></label>'+
+       '<label class="fld"><span>경과 년수</span><input id="cYears" type="text" inputmode="decimal" placeholder="년" value="'+esc(CALC.years)+'"></label>'+
+     '</div>'+
+     '<div id="cOut" class="calc-out"></div>'+
+     '</div>';
+
+  /* 유형별 기준 */
+  COMP_STD.forEach(c=>{
+    h+='<div class="cstd"><div class="cstd-h"><em>'+c.n+'</em><b>'+esc(c.t)+'</b>'+
+       '<span>'+esc(c.sub)+'</span></div>'+
+       '<div class="cstd-k">산정 방법</div>'+
+       '<ul class="cstd-l">'+c.how.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>'+
+       '<div class="cstd-k">확인 사항</div>'+
+       '<ul class="cstd-l muted">'+c.note.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>'+
+       '</div>';
+  });
+
+  /* 감가율표 */
+  h+='<div class="cstd"><div class="cstd-h"><em>표</em><b>경년감가율표</b>'+
+     '<span>추정 내용년수 · 연 감가율</span></div>';
+  DEPREC.forEach(g=>{
+    h+='<div class="dg">'+esc(g.g)+'</div><div class="dtbl">'+
+       g.items.map(it=>'<div class="dr"><span>'+esc(it.t)+'</span>'+
+         '<b>'+it.y+'년</b><i>'+it.r.toFixed(2)+'%</i></div>').join('')+'</div>';
+  });
+  h+='<div class="cnote">추정 내용년수가 지난 물품은 최종잔가율 '+FINAL_RATE+'%를 적용합니다. (가재도구 및 집기비품)</div></div>';
+
+  el.innerHTML=h;
+
+  const pick=document.getElementById('cPick');
+  const price=document.getElementById('cPrice');
+  const years=document.getElementById('cYears');
+  const sync=()=>{ CALC.pick=pick.value; CALC.price=price.value; CALC.years=years.value; calcOut(); };
+  pick.onchange=sync; price.oninput=sync; years.oninput=sync;
+  calcOut();
+}
+
+function findItem(t){
+  for(const g of DEPREC) for(const it of g.items) if(it.t===t) return it;
+  return null;
+}
+
+function calcOut(){
+  const out=document.getElementById('cOut');
+  if(!out) return;
+  const it=findItem(CALC.pick);
+  const price=Number(String(CALC.price).replace(/[^0-9.]/g,''));
+  const yrs=Number(String(CALC.years).replace(/[^0-9.]/g,''));
+  if(!it || !price || CALC.years===''){ out.innerHTML='<div class="co-empty">품목 · 구입가 · 경과 년수를 입력해주세요.</div>'; return; }
+  const over = yrs >= it.y;
+  const rate = over ? FINAL_RATE : Math.max(FINAL_RATE, 100 - it.r*yrs);
+  const amt = Math.round(price * rate / 100);
+  const won = n => n.toLocaleString('ko-KR')+'원';
+  out.innerHTML=
+    '<div class="co-row"><span>잔가율</span><b>'+rate.toFixed(2)+'%</b></div>'+
+    '<div class="co-amt">'+won(amt)+'</div>'+
+    '<div class="co-f">'+
+      (over
+        ? '추정 내용년수 '+it.y+'년이 지나 최종잔가율 '+FINAL_RATE+'% 적용<br>'+won(price)+' × '+FINAL_RATE+'% = '+won(amt)
+        : won(price)+' × ( 100% − '+it.r.toFixed(2)+'% × '+yrs+'년 ) = '+won(amt))+
+    '</div>'+
+    '<div class="co-w">참고용 계산입니다. 최종 금액은 증빙과 협의에 따라 달라집니다.</div>';
+}
+
+/* ══ 보상 산정 기준 (LM 전용) ══ */
+const DEPREC=[
+ {g:"가구 · 가전 · 가정용품", items:[
+   {t:"가구류 — 주로 금속제", y:20, r:4.00},
+   {t:"가구류 — 그 외", y:10, r:8.00},
+   {t:"가전제품 (전자 · 전기 · 가스기기)", y:10, r:8.00},
+   {t:"침구 · 의류 · 섬유제품", y:6, r:13.33},
+   {t:"실내장식품 — 주로 금속제", y:30, r:2.67},
+   {t:"실내장식품 — 그 외", y:10, r:8.00},
+   {t:"식사 · 주방용품 — 도자기 · 유리제품", y:4, r:20.00},
+   {t:"식사 · 주방용품 — 그 외", y:10, r:8.00},
+   {t:"악기 — 주로 금속제", y:30, r:2.67},
+   {t:"악기 — 그 외", y:16, r:5.00},
+ ]},
+ {g:"사무기기 · 통신기기", items:[
+   {t:"개인용 컴퓨터 및 주변기기", y:6, r:13.33},
+   {t:"전화설비", y:12, r:6.67},
+   {t:"이동무선전화기", y:6, r:13.33},
+ ]},
+ {g:"시계 · 측정기 · 광학기기", items:[
+   {t:"시계", y:20, r:4.00},
+   {t:"도량형기", y:10, r:8.00},
+   {t:"광학기기", y:16, r:5.00},
+   {t:"용기", y:12, r:6.67},
+   {t:"내화용 금고", y:40, r:2.00},
+ ]},
+ {g:"오락 · 스포츠 기구", items:[
+   {t:"바둑 · 장기 등 유희구", y:10, r:8.00},
+   {t:"스포츠용구", y:6, r:13.33},
+   {t:"자전거", y:8, r:10.00},
+   {t:"완구", y:4, r:20.00},
+ ]},
+ {g:"기타", items:[
+   {t:"기타 — 주로 금속제", y:20, r:4.00},
+   {t:"기타 — 그 외", y:10, r:8.00},
+ ]},
+];
+const FINAL_RATE=20;   /* 최종잔가율 — 가재도구 및 집기비품 */
+
+const COMP_STD=[
+ {n:"1", t:"건물", sub:"마감재 · 배관 · 창호 · 청소비",
+  how:["면적당 공사단가(적산 · 물가자료)를 적용해 피해 범위만큼 물량을 산출하여 손해액 산정",
+       "청소비는 면적당 공사단가 적용이 가능하나, 시중 청소업체 공식 홈페이지에서 확인되는 가격 범위 내에서 협의"],
+  note:["손상 부분의 정확한 위치와 재질, 피해 범위 면적 확인 필요",
+        "공사 업체별 금액 편차가 크므로 요구 금액이 과도한 경우 추가 협의"]},
+ {n:"2", t:"기물 — 동산", sub:"의류 · 컴퓨터 · 가구 등",
+  how:["사고 시점 기준 시가 보상",
+       "물품별 내용년수와 경년감가율표를 적용해 구매일자부터 사고 시점까지 감가 적용",
+       "구매금액 확인이 어려우면 유사 사양 제품을 온라인에서 검색해 최저가 기준으로 감가 적용",
+       "구매금액 확인 불가 시 중고가 기준 보상"],
+  note:["파손 물품의 구입영수증 또는 온라인 구입 내역 확보, 없으면 제품 상세 정보 조사",
+        "전손 시 민법 제399조에 따라 잔존물 대위(회수) 가능"]},
+ {n:"3", t:"기물 — 자동차", sub:"수리비 · 대차료 · 격락손해",
+  how:["파손 부위 수리비용",
+       "수리 기간 대차료 — 렌터카 기준 동급 차량 요금의 65~70%",
+       "대체 차량 미이용 시 대차료의 30~35%에 해당하는 교통비",
+       "격락손해 — 출고 5년 이하 차량 중 수리비가 차량 가액의 20%를 초과할 때"],
+  note:["대차료는 실제 이용 후 청구하지 않으면 지급 불가",
+        "과다 수리 요구 시 확인 필요",
+        "대차료 · 교통비 · 취득 관련 취등록세는 간접손해에 해당"]},
+ {n:"4", t:"대인", sub:"치료비 · 교통비 · 휴업손해 · 위자료",
+  how:["치료비 — 의료비 세부내역에서 본인부담 급여 및 비급여 확인 후 실지출금액 인정",
+       "교통비 — 통원 1일당 8,000원",
+       "휴업손해 — 입원 일수에 비례하여 산정. 입원하지 않으면 인정 불가",
+       "휴업손해 산식 — (일소득 × 20일 × 12개월 ÷ 365일) × 입원일수",
+       "위자료 — 부상 정도 · 연령 · 직업 등을 고려. 진단서 기준 주당 20~30만원"],
+  note:["피해자의 성별 · 나이 · 의료비 영수증 등 증빙자료 필요",
+        "통상 근로자는 도시일용노임(약 15만원, 매년 변동) 적용. 고소득자는 별도 서류 요청",
+        "위자료는 판례에 따라 인정 금액이 달라 일률 산정이 어려움. 분쟁이 예상되면 보험 접수 진행 검토"]},
+];
 
 /* ══ 상태 ══ */
 const S = { type:null, injury:null, scale:null, when:null, fprod:null, fire119:null, svc:null, felapsed:null, hist:[], prod:null, work:null, ord:null, side:null, drill:null, spread:null, target:null, found:null, harm:null, elapsed:null, route:null, flags:[], org:[] };
@@ -1898,6 +2143,13 @@ function buildPrint(){
 }
 
 /* 복사가 막힌 환경에서는 화면에 띄워 직접 복사 */
+function bindComp(){
+  const b=document.getElementById('hComp');
+  if(!b) return;
+  b.hidden = !((ROLE==='lm'||ROLE==='log') && node!=='role');
+  b.onclick=()=>openComp();
+}
+
 function bindRole(){
   const r=document.getElementById('hRole');
   if(!r) return;
@@ -1954,7 +2206,7 @@ function render(){
   document.getElementById('hTitle').textContent =
     node==='result' ? ({fire:'화재사고',water:'누수사고',break:'파손사고',body:'대인사고'}[S.type]||'사고')+' 대응'
                     : '사고 현장 대응 가이드';
-  progress(); bindRole(); bindReset();
+  progress(); bindComp(); bindRole(); bindReset();
   if(node==='result') renderResult();
   else if(node==='soon') renderSoon();
   else renderQ();
