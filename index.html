@@ -377,6 +377,7 @@ button.comp-btn + button.role{margin-left:6px}
   padding:14px 14px;font:inherit;font-size:16px;font-weight:500;color:var(--ink);
   -webkit-appearance:none;appearance:none;box-shadow:inset 0 0 0 1.5px var(--hair)}
 .fld select{background-image:none}
+.fld input[type=month]{font-size:15px;min-height:52px}
 .fld input::placeholder{color:var(--stone);font-weight:500}
 .fld2{display:flex;gap:var(--s-sm)}
 .fld2 .fld{flex:1}
@@ -522,7 +523,7 @@ const REV='2026.08.11';
 
 
 /* ══ 보상 기준 화면 ══ */
-let CALC={pick:null, price:'', years:''};
+let CALC={pick:null, price:'', buy:'', acc:''};
 
 function openComp(){
   if(document.querySelector('.comp')) return;
@@ -548,7 +549,7 @@ function renderComp(){
   /* 계산기 */
   h+='<div class="calc">'+
      '<div class="calc-h">가재도구 감가 계산</div>'+
-     '<div class="calc-d">구입가와 경과 년수를 입력하면 잔가율과 손해액을 계산합니다.</div>'+
+     '<div class="calc-d">구입 년월과 사고 년월을 넣으면 경과 년수에 따른 잔가율과 손해액을 계산합니다.</div>'+
      '<label class="fld"><span>품목</span><select id="cPick">'+
        '<option value="">선택해주세요</option>'+
        DEPREC.map(g=>'<optgroup label="'+esc(g.g)+'">'+
@@ -556,9 +557,10 @@ function renderComp(){
            esc(it.t)+' · '+it.y+'년 · '+it.r.toFixed(2)+'%</option>').join('')+
        '</optgroup>').join('')+
      '</select></label>'+
+     '<label class="fld"><span>구입가</span><input id="cPrice" type="text" inputmode="numeric" placeholder="원" value="'+esc(CALC.price)+'"></label>'+
      '<div class="fld2">'+
-       '<label class="fld"><span>구입가</span><input id="cPrice" type="text" inputmode="numeric" placeholder="원" value="'+esc(CALC.price)+'"></label>'+
-       '<label class="fld"><span>경과 년수</span><input id="cYears" type="text" inputmode="decimal" placeholder="년" value="'+esc(CALC.years)+'"></label>'+
+       '<label class="fld"><span>구입 년월</span><input id="cBuy" type="month" value="'+esc(CALC.buy)+'"></label>'+
+       '<label class="fld"><span>사고 년월</span><input id="cAcc" type="month" value="'+esc(CALC.acc||thisMonth())+'"></label>'+
      '</div>'+
      '<div id="cOut" class="calc-out"></div>'+
      '</div>';
@@ -588,9 +590,11 @@ function renderComp(){
 
   const pick=document.getElementById('cPick');
   const price=document.getElementById('cPrice');
-  const years=document.getElementById('cYears');
-  const sync=()=>{ CALC.pick=pick.value; CALC.price=price.value; CALC.years=years.value; calcOut(); };
-  pick.onchange=sync; price.oninput=sync; years.oninput=sync;
+  const buy=document.getElementById('cBuy');
+  const acc=document.getElementById('cAcc');
+  const sync=()=>{ CALC.pick=pick.value; CALC.price=price.value; CALC.buy=buy.value; CALC.acc=acc.value; calcOut(); };
+  pick.onchange=sync; price.oninput=sync; buy.onchange=sync; acc.onchange=sync;
+  if(!CALC.acc) CALC.acc=acc.value;
   calcOut();
 }
 
@@ -599,24 +603,46 @@ function findItem(t){
   return null;
 }
 
+function thisMonth(){
+  const d=new Date();
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
+}
+
+/* 구입 년월 → 사고 년월 사이의 경과 개월수 */
+function elapsedMonths(buy, acc){
+  if(!buy || !acc) return null;
+  const [by,bm]=buy.split('-').map(Number);
+  const [ay,am]=acc.split('-').map(Number);
+  const months=(ay-by)*12+(am-bm);
+  return months<0 ? -1 : months;
+}
+const fmtSpan = m => {
+  const y=Math.floor(m/12), mm=m%12;
+  return (y?y+'년':'') + (y&&mm?' ':'') + (mm||!y?mm+'개월':'');
+};
+
 function calcOut(){
   const out=document.getElementById('cOut');
   if(!out) return;
   const it=findItem(CALC.pick);
   const price=Number(String(CALC.price).replace(/[^0-9.]/g,''));
-  const yrs=Number(String(CALC.years).replace(/[^0-9.]/g,''));
-  if(!it || !price || CALC.years===''){ out.innerHTML='<div class="co-empty">품목 · 구입가 · 경과 년수를 입력해주세요.</div>'; return; }
-  const over = yrs >= it.y;
+  const mon=elapsedMonths(CALC.buy, CALC.acc);
+  if(mon===-1){ out.innerHTML='<div class="co-empty">사고 년월이 구입 년월보다 빠릅니다. 날짜를 확인해주세요.</div>'; return; }
+  if(!it || !price || mon===null){ out.innerHTML='<div class="co-empty">품목 · 구입가 · 구입 년월을 입력해주세요.</div>'; return; }
+  const yrs = mon/12;                      /* 월할 — 개월수를 12로 나눠 소수 적용 */
+  const over = mon >= it.y*12;
   const rate = over ? FINAL_RATE : Math.max(FINAL_RATE, 100 - it.r*yrs);
   const amt = Math.round(price * rate / 100);
   const won = n => n.toLocaleString('ko-KR')+'원';
   out.innerHTML=
+    '<div class="co-row"><span>경과</span><b>'+fmtSpan(mon)+'</b></div>'+
     '<div class="co-row"><span>잔가율</span><b>'+rate.toFixed(2)+'%</b></div>'+
     '<div class="co-amt">'+won(amt)+'</div>'+
     '<div class="co-f">'+
       (over
         ? '추정 내용년수 '+it.y+'년이 지나 최종잔가율 '+FINAL_RATE+'% 적용<br>'+won(price)+' × '+FINAL_RATE+'% = '+won(amt)
-        : won(price)+' × ( 100% − '+it.r.toFixed(2)+'% × '+yrs+'년 ) = '+won(amt))+
+        : '경과 '+mon+'개월 ÷ 12 = '+yrs.toFixed(2)+'년<br>'+
+          won(price)+' × ( 100% − '+it.r.toFixed(2)+'% × '+yrs.toFixed(2)+' ) = '+won(amt))+
     '</div>'+
     '<div class="co-w">참고용 계산입니다. 최종 금액은 증빙과 협의에 따라 달라집니다.</div>';
 }
@@ -675,7 +701,7 @@ const COMP_STD=[
         "전손 시 민법 제399조에 따라 잔존물 대위(회수) 가능"]},
  {n:"3", t:"기물 — 자동차", sub:"수리비 · 대차료 · 격락손해",
   how:["파손 부위 수리비용",
-       "수리 기간 대차료 — 렌터카 기준 동급 차량 요금의 65~70%",
+       "수리 기간 대차료 — 롯데렌터카 기준 동급 차량 요금의 65~70%",
        "대체 차량 미이용 시 대차료의 30~35%에 해당하는 교통비",
        "격락손해 — 출고 5년 이하 차량 중 수리비가 차량 가액의 20%를 초과할 때"],
   note:["대차료는 실제 이용 후 청구하지 않으면 지급 불가",
