@@ -50,19 +50,20 @@ header{position:sticky;top:0;z-index:30;background:var(--canvas);
   padding-top:env(safe-area-inset-top);
   box-shadow:inset 0 -1px 0 var(--hair-soft)}
 .hzbar{display:none}
-.htop{display:flex;align-items:center;gap:8px;padding:14px 20px 13px}
-h1{margin:0;font-size:16px;font-weight:500;letter-spacing:-.01em;color:var(--ink);white-space:nowrap}
+.htop{display:flex;align-items:center;gap:6px;padding:14px 16px 13px;min-width:0}
+.htop h1{margin:0;font-size:15px;font-weight:500;letter-spacing:-.02em;color:var(--ink);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:0 1 auto}
 .step{margin-left:auto;font-size:12px;font-weight:500;color:var(--mute)}
 button.role{margin-left:auto;flex:none;border:none;background:var(--cloud);color:var(--ink);
-  font:inherit;font-size:13px;font-weight:500;padding:8px 12px;border-radius:var(--r-full);
-  cursor:pointer;letter-spacing:-.02em;display:inline-flex;align-items:center;gap:5px;
-  max-width:44vw;white-space:nowrap;overflow:hidden}
+  font:inherit;font-size:12px;font-weight:500;padding:7px 10px;border-radius:var(--r-full);
+  cursor:pointer;letter-spacing:-.02em;display:inline-flex;align-items:center;gap:4px;
+  max-width:32vw;white-space:nowrap;overflow:hidden}
 button.role:after{content:"⇄";color:var(--stone);font-size:12px;font-weight:500}
 button.role:active{opacity:.6}
 button.role[hidden]{display:none}
-button.reset{margin-left:8px;border:none;background:var(--cloud);color:var(--ash);
-  font:inherit;font-size:13px;font-weight:500;padding:8px 14px;border-radius:var(--r-full);
-  cursor:pointer;letter-spacing:-.02em}
+button.reset{margin-left:0;flex:none;border:none;background:var(--cloud);color:var(--ash);
+  font:inherit;font-size:12px;font-weight:500;padding:7px 10px;border-radius:var(--r-full);
+  cursor:pointer;letter-spacing:-.02em;white-space:nowrap}
 button.reset:active{opacity:.6}
 button.reset[hidden]{display:none}
 .bar{height:2px;background:var(--hair-soft)}
@@ -338,6 +339,9 @@ button.rl{width:100%;text-align:left;border:none;background:var(--cloud);color:v
 button.rl.on{background:var(--ink);color:var(--on-ink)}
 button.rl.on:after{content:"";position:absolute;right:20px;top:50%;margin-top:-5px;
   width:6px;height:11px;border:solid var(--on-ink);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.shbox{width:100%;height:34vh;border:none;background:var(--cloud);border-radius:var(--r-sm);
+  padding:var(--s-lg);font:inherit;font-size:14px;line-height:1.6;color:var(--ink);
+  resize:none;margin-bottom:var(--s-lg)}
 .ask-b{display:flex;gap:var(--s-sm)}
 .ask-b button{flex:1;height:48px;border:none;border-radius:var(--r-full);
   font:inherit;font-size:16px;font-weight:500;cursor:pointer}
@@ -348,7 +352,7 @@ button.rl.on:after{content:"";position:absolute;right:20px;top:50%;margin-top:-5
 
 /* ── 보상 기준 ── */
 button.comp-btn{margin-left:auto;flex:none;border:none;background:var(--ink);color:var(--on-ink);
-  font:inherit;font-size:13px;font-weight:500;padding:8px 14px;border-radius:var(--r-full);
+  font:inherit;font-size:12px;font-weight:500;padding:7px 11px;border-radius:var(--r-full);
   cursor:pointer;letter-spacing:-.02em;white-space:nowrap}
 button.comp-btn:active{opacity:.7}
 button.comp-btn[hidden]{display:none}
@@ -1848,7 +1852,7 @@ function chips(){
 }
 
 /* ── 결과 렌더 ── */
-let TAB='now', BUILT=null, CK={}, MORE=false;
+let TAB='now', BUILT=null, CK={};
 const CKKEY='shot-check';
 try{ const raw=localStorage.getItem(CKKEY); if(raw) CK=JSON.parse(raw)||{}; }catch(e){}
 const saveCK=()=>{ try{ localStorage.setItem(CKKEY, JSON.stringify(CK)); }catch(e){} };
@@ -1965,12 +1969,8 @@ function panelBody(){
     };
     must.forEach(g=>{ h+=render1(g); });
     if(more.length){
-      const mn=more.reduce((a,g)=>a+g.items.length,0);
-      h+=note('사진 촬영은 화재사고 조사 시 중요한 증거자료로 활용될 수 있습니다. 아래 사항은 필수 촬영사항은 아니며 객관적 원인 파악을 위한 내용으로 확인해 주시기 바랍니다.');
-      h+='<details class="more"'+(MORE?' open':'')+'><summary>'+
-        ('추가 확인 항목 · '+mn+'개')+'</summary><div>';
+      h+=note('사진 촬영은 사고 조사 시 중요한 증거자료로 활용될 수 있습니다. 아래 사항은 필수 촬영사항은 아니며, 객관적 원인 파악을 위한 내용으로 확인해 주시기 바랍니다.');
       more.forEach(g=>{ h+=render1(g); });
-      h+='</div></details>';
     }
     h+=note('목록에 없더라도 특이한 부분은 모두 촬영해주세요. 판단은 하지 않습니다.');
     return h;
@@ -1992,7 +1992,8 @@ function panelBody(){
     return h;
   }
   let h=sub('공유 절차')+reportRows(lv, B.reportExtra);
-  h+='<div class="tools"><button class="primary" id="bPrint">인쇄 · PDF 저장</button></div>';
+  h+='<div class="tools"><button class="primary" id="bShare">공유하기</button>'+
+     '<button id="bPrint">인쇄 · PDF 저장</button></div>';
   h+='<div class="foot"><span>초기 대응 기준. 개별 건의 처리 방향은 도급사 및 보험사 확인 사항.</span>'+
      '<span>개정 '+REV+(ROLE==='pro'?'':' · LMD/설치품질팀')+'</span></div>';
   return h;
@@ -2007,8 +2008,6 @@ function bindTabs(){
   });
 }
 function bindPanel(){
-  const dt=document.querySelector('details.more');
-  if(dt) dt.ontoggle=()=>{ MORE=dt.open; };
   document.querySelectorAll('.ck input').forEach(inp=>inp.onchange=()=>{
     CK[inp.dataset.id]=inp.checked; saveCK();
     const n=BUILT.shots.reduce((a,g)=>a+g.items.length,0);
@@ -2023,8 +2022,54 @@ function bindPanel(){
     });
   });
 
+  const sh=document.getElementById('bShare');
+  if(sh) sh.onclick=()=>doShare();
   const p=document.getElementById('bPrint');
   if(p) p.onclick=()=>buildPrint();
+}
+
+/* 확인 내용 공유 — 카카오톡 · 문자 등으로 전송 */
+function shareText(){
+  const kind=(T_KIND[S.type]||'사고');
+  const lv=level();
+  const lines=[];
+  lines.push('['+kind+' 현장 확인]');
+  chips().forEach(([k,v])=>{ if(v) lines.push('· '+k+' : '+v); });
+  lines.push('· 공유 시점 : '+lv.t);
+  const done=Object.keys(CK).filter(k=>CK[k]).length;
+  const total=(BUILT&&BUILT.shots)?BUILT.shots.reduce((a,g)=>a+g.items.length,0):0;
+  if(total) lines.push('· 촬영 : '+done+' / '+total);
+  lines.push('');
+  lines.push('사고 현장 대응 가이드');
+  lines.push(location.href.split('#')[0]);
+  return lines.join('\n');
+}
+
+function doShare(){
+  const txt=shareText();
+  const kind=(T_KIND[S.type]||'사고');
+  if(navigator.share){
+    navigator.share({title:kind+' 현장 확인', text:txt}).catch(()=>{});
+    return;
+  }
+  const done=()=>{ const b=document.getElementById('bShare');
+    if(b){ b.textContent='복사되었습니다'; setTimeout(()=>b.textContent='공유하기',1800); } };
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(txt).then(done, ()=>showShare(txt));
+  } else showShare(txt);
+}
+
+function showShare(t){
+  const w=document.createElement('div'); w.className='ask';
+  w.innerHTML='<div class="ask-in"><div class="ask-t">확인 내용</div>'+
+    '<div class="ask-d">길게 눌러 전체 선택 후 복사해주세요.</div>'+
+    '<textarea class="shbox" readonly>'+esc(t)+'</textarea>'+
+    '<div class="ask-b"><button class="ask-no">닫기</button></div></div>';
+  document.body.appendChild(w);
+  const ta=w.querySelector('textarea'); ta.focus(); ta.select();
+  const close=()=>w.remove();
+  w.querySelector('.ask-no').onclick=close;
+  w.onclick=e=>{ if(e.target===w) close(); };
 }
 
 /* 인쇄 · PDF — 전체 탭을 한 문서로 묶어 새 창에서 출력 */
@@ -2172,7 +2217,7 @@ function buildPrint(){
 function bindComp(){
   const b=document.getElementById('hComp');
   if(!b) return;
-  b.hidden = !((ROLE==='lm'||ROLE==='log') && node!=='role');
+  b.hidden = !(ROLE && node!=='role');
   b.onclick=()=>openComp();
 }
 
