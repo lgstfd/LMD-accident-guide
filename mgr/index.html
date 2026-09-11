@@ -513,9 +513,9 @@ button.comp-btn + button.role{margin-left:6px}
 
 <script>
 const ROLES={
-  pro:{t:"설치프로", s:"설치프로", next:"협력사 담당자(현장대리인/대표)", to:"협력사 담당자(현장대리인/대표)에게 알립니다."}
+  log:{t:"협력사 담당자(현장대리인/대표)", s:"협력사 담당자", next:"LM", to:"담당 LM에게 전달합니다."}
 };
-const ROLE='pro';
+const ROLE='log';
 
 const REV='2026.08.11';
 
@@ -1407,7 +1407,7 @@ function renderQ(){
       '<div class="ir"><em>2</em><div><b>조치 전 원래 상태를 남기는 것이 중요합니다</b><span>정리하거나 조치한 뒤에는 당시 상태를 다시 확인할 수 없습니다. 촬영이 먼저입니다.</span></div></div>'+
       '<div class="ir"><em>3</em><div><b>현장에서는 책임 · 보상과 관련한 언급을 피해주세요</b><span>보상 · 기한 · 처리 방향은 도급사 및 보험사 확인 후에 정해지는 부분입니다. 현장에서는 언급을 피해주시고, 최대한 빠르게 검토 후 다시 연락드리겠다고 전달해주세요.</span></div></div>'+
       '</div>'+
-      '<div class="rev">개정 '+REV+'</div>');
+      '<div class="rev">개정 '+REV+(false?'':' · LMD/설치품질팀')+'</div>');
   }
 }
 
@@ -1463,16 +1463,16 @@ function level(){
   return {h:"오늘 안에 공유", t:"당일 공유", d:"조치 완료 여부와 무관하게 ⟪오늘 안에⟫ 전건 공유합니다."};
 }
 
-const DEPT=["협력사 담당자(현장대리인/대표)"];
+const DEPT=["협력사 담당자(현장대리인/대표)","LM","LMD/설치품질팀"];
 function scope(){
   const f=S.flags||[];
   const esc1=f.includes('voc')||f.includes('third');
-  if(esc1) return {n:3, t: true ? "전건 공유 · 상향 대상" : "전건 공유 · 상향 대상",
-    d: true ? "대외 확산이 예상되는 건입니다. 피해 금액과 관계없이 공유 대상입니다." : "대외 확산이 예상되는 건입니다. 피해 금액과 관계없이 공유 대상입니다."};
-  if(S.type==='fire'||S.type==='body') return {n:3, t: true ? "규모 무관 전건 공유" : "규모 무관 전건 공유",
-    d: false ? "화재 · 대인 사고는 규모와 무관하게 전건 공유 대상입니다." : "화재 · 대인 사고는 규모와 무관하게 전건 공유 대상입니다."};
+  if(esc1) return {n:3, t: false ? "전건 공유 · 상향 대상" : "LMD/설치품질팀까지 상향",
+    d: false ? "대외 확산이 예상되는 건입니다. 피해 금액과 관계없이 공유 대상입니다." : "대외 확산이 예상되는 건입니다. 피해 금액과 관계없이 LMD/설치품질팀까지 공유합니다."};
+  if(S.type==='fire'||S.type==='body') return {n:3, t: false ? "규모 무관 전건 공유" : "LMD/설치품질팀까지 전건",
+    d: false ? "화재 · 대인 사고는 규모와 무관하게 전건 공유 대상입니다. LMD/설치품질팀까지 공유합니다." : "화재 · 대인 사고는 규모와 무관하게 전건 공유 대상입니다."};
   return {n:1, t:"협력사 1차 확인",
-    d: true ? "피해 규모는 확인한 내용을 바탕으로 이후 단계에서 판단합니다." : "피해 규모는 협력사에서 1차 확인하며, 자기부담금 기준을 넘을 것으로 예상되거나 판단이 어려운 경우 이후 단계로 공유합니다."};
+    d: false ? "피해 규모는 확인한 내용을 바탕으로 이후 단계에서 판단합니다." : "피해 규모는 협력사에서 1차 확인하며, 자기부담금 기준을 넘을 것으로 예상되거나 판단이 어려운 경우 이후 단계로 공유합니다."};
 }
 
 const box = rows => '<div class="box">'+rows.filter(Boolean).join('')+'</div>';
@@ -1501,17 +1501,25 @@ const sub = (t,n) => '<div class="subh">'+NUM+esc(t)+(n?'<span>'+esc(n)+'</span>
 const FLAGNOTE={
   third:{t:"외부기관 접촉", d:"소속 · 성명 · 요구사항 · 회신 기한만 확인해 공유해주세요. 현장 답변은 피해주세요."},
   sign:{t:"서면 서명 요구", d:"현장에서 서명할 권한이 없습니다. 받으셨다면 촬영 후 공유해주세요."},
-  voc:{t:"소비자원 · 법적 대응 언급", d:"확인과 조치는 그대로 진행하되 공유해주세요."},
+  voc:{t:"소비자원 · 법적 대응 언급", d:"확인과 조치는 그대로 진행하되 LMD/설치품질팀까지 공유해주세요."},
   deny:{t:"촬영 거부", d:"강행하지 말고 거부 사실과 사유를 기재해 공유해주세요."},
   done:{t:"조치 완료 후 접수", d:"조치 전 사진과 조치 내역이 남아 있는지 먼저 확인해주세요."}
 };
 
-/* 공유 절차 */
+/* 화재 · 대인 — 정보보고 절차 */
 function nextName(){ return (ROLES[ROLE]||{}).next || '협력사 담당자(현장대리인/대표)'; }
 
 function infoTarget(){ return (S.type==='fire')||(S.type==='body')||(S.injury==='y'); }
 
-function addInfoReport(B){ return; }
+function addInfoReport(B){
+  if(!infoTarget()) return;
+  if(true) return;
+  {
+    B.alerts.unshift({t:"정보보고 · 1시간 이내", hard:true,
+      steps:["피해 규모 확인 (대인 · 대물)","유선으로 보고","연결이 안 되면 SMS · 메신저"],
+      d:"소속 팀장 · 담당 · 사업부장, 안전보건팀, LMD/설치 Compliance팀에 사고 인지 후 ⟪1시간 이내⟫ 보고합니다. 인적 · 물적 피해 규모와 관계없이 예외 없이 보고 대상입니다."});
+  }
+}
 
 /* ── 유형별 구성 ── */
 function buildFire(){
@@ -1525,7 +1533,7 @@ function buildFire(){
   if(hi.includes('elec')) B.alerts.push({t:"전기공사 이력이 있는 건",
     d:"세대 전기공사 · 리모델링이 있었던 건입니다. 시기와 범위를 확인하고 분전반 · 배선 상태를 함께 촬영해주세요."});
   if(hi.includes('move')) B.alerts.push({t:"이전설치 · 재설치 이력이 있는 건",
-    d:(false?"설치 이력 확인이 필요합니다. ":"설치 이력 확인이 필요합니다. ")+"이전설치 시기와 시공 주체를 고객에게 확인해 그대로 공유해주세요."});
+    d:(false?"당사 설치 건인지 전산 확인이 필요합니다. ":"설치 이력 확인이 필요합니다. ")+"이전설치 시기와 시공 주체를 고객에게 확인해 그대로 공유해주세요."});
   if(S.felapsed==='y3'||S.felapsed==='y3p'||S.felapsed==='?')
     B.alerts.push({t:"설치 후 시간이 지난 건",
       d:"설치 시점과 화재 발생 사이에 간격이 있는 건입니다. 그 사이의 사용 환경과 이력을 함께 확인해주세요. 현장에서 설치 때문인지 아닌지를 단정하지 않습니다. 화재는 경과 기간과 관계없이 전건 공유 대상입니다."});
@@ -1547,7 +1555,7 @@ function buildFire(){
     row('가능한 경우','설치 주문번호','고객 보유 문자 · 영수증에서 확인되면 조회가 빠름'),
     row('확보 불가 시','해당 사실을 그대로 공유')])+
     note(false
-      ? '제품에 설치 스티커가 부착되어 있더라도 설치 여부는 전산 확인이 필요합니다. 설치 이력과 귀책 여부는 도급사 및 보험사 확인 사항입니다.'
+      ? '제품에 설치 스티커가 부착되어 있더라도 당사 설치 여부는 전산 확인이 필요합니다. 설치 이력과 귀책 여부는 도급사 및 보험사 확인 사항입니다.'
       : '제품에 설치 스티커가 부착되어 있더라도 설치 여부는 전산 확인이 필요합니다. 설치 이력과 귀책 여부는 도급사 및 보험사 확인 사항입니다.');
   B.now=n;
 
@@ -1588,10 +1596,10 @@ function buildWater(){
     B.alerts.push({t:"아랫집 · 관리사무소 통보 건",
       d:"알린 쪽과 설치 세대가 다릅니다. 설치 세대 방문 동의를 먼저 확인하고, 알린 쪽 담당자 성함 · 연락처를 확보해주세요."});
   if(!(S.flags||[]).includes('voc') && !(S.flags||[]).includes('third'))
-    B.alerts.push({t: false ? "규모 1차 확인" : false ? "규모 검토" : "규모 판단은 협력사에서",
-      d: (true ? "확인한 내용을 협력사 담당자(현장대리인/대표)에게 공유합니다. 피해 규모는 협력사에서 1차 확인합니다. 현장에서 금액을 가늠하지 않습니다."
-        : false
-        ? "피해 규모를 1차 확인합니다. 피해 금액이 ⟪자기부담금 기준⟫을 넘을 것으로 예상되거나 판단이 어려운 경우 LM에게 전달합니다."
+    B.alerts.push({t: ROLE==="log" ? "규모 1차 확인" : false ? "규모 검토" : "규모 판단은 협력사에서",
+      d: (false
+        ? "확인한 내용을 협력사 담당자(현장대리인/대표)에게 공유합니다. 피해 규모는 협력사에서 1차 확인합니다. 현장에서 금액을 가늠하지 않습니다."
+        : true ? "피해 규모를 1차 확인합니다. 피해 금액이 ⟪자기부담금 기준⟫을 넘을 것으로 예상되거나 판단이 어려운 경우 LM에게 전달합니다."
         : "협력사에서 1차 확인한 규모를 검토합니다. 자기부담금 기준을 넘을 것으로 예상되거나 판단이 어려운 경우 LMD/설치품질팀으로 공유합니다.")});
   addInfoReport(B);
   B.alerts.push({t:"조치 전에 남길 것",
@@ -1695,10 +1703,10 @@ function buildBreak(){
     B.alerts.push({t:"아랫집 · 관리사무소 통보 건",
       d:"알린 쪽과 설치 세대가 다릅니다. 설치 세대 방문 동의를 먼저 확인하고, 알린 쪽 담당자 성함 · 연락처를 확보해주세요."});
   if(!(S.flags||[]).includes('voc') && !(S.flags||[]).includes('third'))
-    B.alerts.push({t: false ? "규모 1차 확인" : false ? "규모 검토" : "규모 판단은 협력사에서",
-      d: (true ? "확인한 내용을 협력사 담당자(현장대리인/대표)에게 공유합니다. 피해 규모는 협력사에서 1차 확인합니다. 현장에서 금액을 가늠하지 않습니다."
-        : false
-        ? "피해 규모를 1차 확인합니다. 피해 금액이 ⟪자기부담금 기준⟫을 넘을 것으로 예상되거나 판단이 어려운 경우 LM에게 전달합니다."
+    B.alerts.push({t: ROLE==="log" ? "규모 1차 확인" : false ? "규모 검토" : "규모 판단은 협력사에서",
+      d: (false
+        ? "확인한 내용을 협력사 담당자(현장대리인/대표)에게 공유합니다. 피해 규모는 협력사에서 1차 확인합니다. 현장에서 금액을 가늠하지 않습니다."
+        : true ? "피해 규모를 1차 확인합니다. 피해 금액이 ⟪자기부담금 기준⟫을 넘을 것으로 예상되거나 판단이 어려운 경우 LM에게 전달합니다."
         : "협력사에서 1차 확인한 규모를 검토합니다. 자기부담금 기준을 넘을 것으로 예상되거나 판단이 어려운 경우 LMD/설치품질팀으로 공유합니다.")});
   if(late) B.alerts.push({t:"퇴거 이후 발견된 건", d:"설치 과정(하차 → 설치 → 퇴거) 중 발생 여부가 쟁점입니다. 파손 부위가 진입 · 이동 경로상에 있는지, 발견 시점과 그 사이 다른 작업이 있었는지, 설치 시점 품질사진에 해당 부위가 포함되는지(별도 조회)를 확인해 공유해주세요."});
 
@@ -1764,7 +1772,7 @@ function buildBody(){
 function denyRows(){
   const base=[["원인 단정","확인 · 조사 결과에 따르는 사항"],
     ["시공 방식 · 시공 기준 설명","원인 추정의 근거로 인용됨"],
-    [(false?"설치 이력 확인":"설치 이력 확인"),"전산 조회 사항"],
+    [(false?"당사 설치 건 여부":"설치 이력 확인"),"전산 조회 사항"],
     ["처리 방향 · 보상 · 기한","도급사 및 보험사 확인 사항"],
     ["확인서 · 각서 등 서면 서명","현장에서 서명할 권한이 없습니다"]];
   if(S.type==='fire'){ base[0]=["원인 추정","소방 · 경찰 등 관계기관 조사 사항"];
@@ -1844,7 +1852,12 @@ function renderResult(){
       '<span class="tt"><b class="kind">'+esc(T_KIND[S.type]||'사고')+'</b></span></div>'+
     '<div class="d">'+lines(lv.d)+'</div>'+
     '<div class="dept"><b>사고 처리</b><span>'+esc((ROLES[ROLE]||{}).next||'협력사 담당자(현장대리인/대표)')+'</span></div>'+
-    
+    (infoTarget() && false
+      ? '<div class="irbox"><div class="irh"><b>정보보고</b><em>1시간 이내</em></div>'+
+        '<div class="irpills"><span>소속 팀장 · 담당 · 사업부장</span><span>안전보건팀</span>'+
+        '<span>LMD/설치 Compliance팀</span></div>'+
+        '<div class="irnote">유선 우선 · 연결이 안 되면 SMS · 메신저</div></div>'
+      : '')+
     ((infoTarget() && true)?'<div class="cmpl">'+((S.type==='fire'||S.type==='body')?'화재 · 대인 사고는':'다친 분이 있는 건은')+' 인적 · 물적 피해 규모와 관계없이 예외 없이 공유합니다.</div>':'')+
     '<dl class="facts">'+chips().map(([k,v])=>'<div><dt>'+esc(k)+'</dt><dd>'+esc(v)+'</dd></div>').join('')+'</dl>'+
   '</div>';
@@ -1966,7 +1979,7 @@ function panelBody(){
   h+='<div class="tools"><button class="primary" id="bShare">공유하기</button>'+
      '<button id="bPrint">인쇄 · PDF 저장</button></div>';
   h+='<div class="foot"><span>초기 대응 기준. 개별 건의 처리 방향은 도급사 및 보험사 확인 사항.</span>'+
-     '<span>개정 '+REV+'</span></div>';
+     '<span>개정 '+REV+(false?'':' · LMD/설치품질팀')+'</span></div>';
   return h;
 }
 
@@ -2161,7 +2174,7 @@ function buildPrint(){
     '<table class="ft">'+facts+'</table>'+
     body+
     '<div class="dfoot"><span>초기 대응 기준. 개별 건의 처리 방향은 도급사 및 보험사 확인 사항.</span>'+
-    '<span>개정 '+REV+'</span></div>'+
+    '<span>개정 '+REV+(false?'':' · LMD/설치품질팀')+'</span></div>'+
     '</div>'+
     '<script>window.onload=function(){setTimeout(function(){window.print();},400);};<\/script>'+
     '</body></html>';

@@ -2,7 +2,7 @@
    가이드를 수정해 다시 올릴 때는 아래 VERSION 숫자를 올려주세요.
    그래야 사용자 기기에서 새 버전으로 갱신됩니다. */
 const VERSION = 'v4';
-const CACHE = 'accident-guide-pro-' + VERSION;
+const CACHE = 'accident-guide-lm-' + VERSION;
 const ASSETS = ['./', './index.html'];
 
 self.addEventListener('install', e => {
