@@ -128,6 +128,17 @@ em.hl{font-style:normal;font-weight:500;color:var(--c,var(--ink))}
 .dept b{font-size:13px;font-weight:500;color:var(--mute);margin-right:var(--s-xs)}
 .dept span{font-size:13px;font-weight:500;padding:7px 14px;border-radius:var(--r-full);
   background:var(--c,var(--ink));color:var(--on-ink);white-space:nowrap}
+.tels{display:flex;flex-direction:column;gap:6px;margin-top:var(--s-md);
+  padding-top:var(--s-md);border-top:1px solid var(--hair)}
+a.tel{display:flex;align-items:baseline;gap:var(--s-sm);text-decoration:none;
+  background:var(--canvas);border-radius:var(--r-sm);padding:11px 14px;
+  box-shadow:inset 0 0 0 1.5px var(--hair)}
+a.tel b{font-size:12px;font-weight:500;color:var(--mute);flex:none}
+a.tel i{font-style:normal;font-size:13px;font-weight:500;color:var(--ash);flex:none}
+a.tel span{margin-left:auto;font-size:15px;font-weight:500;color:var(--c,var(--ink));
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+a.tel:active{opacity:.6}
+
 .irbox{margin-top:var(--s-md);padding-top:var(--s-md);border-top:1px solid var(--hair)}
 .irh{display:flex;align-items:center;gap:var(--s-sm);margin-bottom:var(--s-sm)}
 .irh b{font-size:13px;font-weight:500;color:var(--mute)}
@@ -516,6 +527,23 @@ const ROLES={
   log:{t:"협력사 담당자(현장대리인/대표)", s:"협력사 담당자", next:"LM", to:"담당 LM에게 전달합니다."}
 };
 const ROLE='log';
+
+/* 배포 정보 — 주소의 c · t 값 */
+const QS=(()=>{ try{ return new URLSearchParams(location.search); }catch(e){ return new URLSearchParams(''); } })();
+const PARTNER=(QS.get('c')||'').slice(0,24);
+/* t = 대표|담당자1|담당자2 (이름:번호 형식) */
+const CONTACTS=(()=>{
+  const raw=(QS.get('t')||'').slice(0,140);
+  if(!raw) return [];
+  const LABEL=['대표','사고처리 담당','사고처리 담당'];
+  return raw.split('|').slice(0,3).map((x,i)=>{
+    const p=x.split(':');
+    const nm=(p.length>1?p[0]:'').trim().slice(0,12);
+    const tel=(p.length>1?p.slice(1).join(':'):p[0]).replace(/[^0-9+\-]/g,'').slice(0,20);
+    if(!tel) return null;
+    return {label:LABEL[i]+(i===2?' 2':(i===1?' 1':'')), name:nm, tel};
+  }).filter(Boolean);
+})();
 
 const REV='2026.08.11';
 
@@ -1407,7 +1435,7 @@ function renderQ(){
       '<div class="ir"><em>2</em><div><b>조치 전 원래 상태를 남기는 것이 중요합니다</b><span>정리하거나 조치한 뒤에는 당시 상태를 다시 확인할 수 없습니다. 촬영이 먼저입니다.</span></div></div>'+
       '<div class="ir"><em>3</em><div><b>현장에서는 책임 · 보상과 관련한 언급을 피해주세요</b><span>보상 · 기한 · 처리 방향은 도급사 및 보험사 확인 후에 정해지는 부분입니다. 현장에서는 언급을 피해주시고, 최대한 빠르게 검토 후 다시 연락드리겠다고 전달해주세요.</span></div></div>'+
       '</div>'+
-      '<div class="rev">개정 '+REV+(false?'':' · LMD/설치품질팀')+'</div>');
+      '<div class="rev">'+(PARTNER?esc(PARTNER)+' 배포 · ':'')+'개정 '+REV+(false?'':' · LMD/설치품질팀')+'</div>');
   }
 }
 
@@ -1852,6 +1880,11 @@ function renderResult(){
       '<span class="tt"><b class="kind">'+esc(T_KIND[S.type]||'사고')+'</b></span></div>'+
     '<div class="d">'+lines(lv.d)+'</div>'+
     '<div class="dept"><b>사고 처리</b><span>'+esc((ROLES[ROLE]||{}).next||'협력사 담당자(현장대리인/대표)')+'</span></div>'+
+    (CONTACTS.length
+      ? '<div class="tels">'+CONTACTS.map(c=>
+          '<a class="tel" href="tel:'+esc(c.tel)+'"><b>'+esc(c.label)+'</b>'+
+          (c.name?'<i>'+esc(c.name)+'</i>':'')+'<span>'+esc(c.tel)+'</span></a>').join('')+'</div>'
+      : '')+
     (infoTarget() && false
       ? '<div class="irbox"><div class="irh"><b>정보보고</b><em>1시간 이내</em></div>'+
         '<div class="irpills"><span>소속 팀장 · 담당 · 사업부장</span><span>안전보건팀</span>'+
@@ -1979,7 +2012,7 @@ function panelBody(){
   h+='<div class="tools"><button class="primary" id="bShare">공유하기</button>'+
      '<button id="bPrint">인쇄 · PDF 저장</button></div>';
   h+='<div class="foot"><span>초기 대응 기준. 개별 건의 처리 방향은 도급사 및 보험사 확인 사항.</span>'+
-     '<span>개정 '+REV+(false?'':' · LMD/설치품질팀')+'</span></div>';
+     '<span>'+(PARTNER?esc(PARTNER)+' 배포 · ':'')+'개정 '+REV+(false?'':' · LMD/설치품질팀')+'</span></div>';
   return h;
 }
 
@@ -2145,6 +2178,10 @@ function buildPrint(){
   '.dept{display:flex;flex-wrap:wrap;align-items:center;gap:1.5mm;margin:2mm 0 0;padding:0;font-size:9pt}'+
   '.dept b{color:#707072;font-weight:400;margin-right:1mm}'+
   '.dept span{padding:.8mm 2mm;border:1px solid #111;color:#111;font-weight:500}'+
+  '.tels{margin-top:2mm;padding-top:2mm;border-top:1px solid #e5e5e5}'+
+  '.tels a{display:flex;gap:2mm;text-decoration:none;color:#111;font-size:9.5pt;padding:.6mm 0}'+
+  '.tels a b{color:#707072;font-weight:400}'+
+  '.tels a span{margin-left:auto;font-weight:500}'+
   '.irbox{margin-top:2mm;padding-top:2mm;border-top:1px solid #e5e5e5}'+
   '.irh{display:flex;gap:2mm;font-size:9pt;color:#707072;margin-bottom:1.5mm}'+
   '.irpills{display:flex;flex-wrap:wrap;gap:1.5mm;font-size:9pt}'+
@@ -2174,7 +2211,7 @@ function buildPrint(){
     '<table class="ft">'+facts+'</table>'+
     body+
     '<div class="dfoot"><span>초기 대응 기준. 개별 건의 처리 방향은 도급사 및 보험사 확인 사항.</span>'+
-    '<span>개정 '+REV+(false?'':' · LMD/설치품질팀')+'</span></div>'+
+    '<span>'+(PARTNER?esc(PARTNER)+' 배포 · ':'')+'개정 '+REV+(false?'':' · LMD/설치품질팀')+'</span></div>'+
     '</div>'+
     '<script>window.onload=function(){setTimeout(function(){window.print();},400);};<\/script>'+
     '</body></html>';
