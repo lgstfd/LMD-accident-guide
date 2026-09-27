@@ -46,21 +46,6 @@ body{
 header .htop,main{max-width:680px;margin-left:auto;margin-right:auto}
 
 /* ── 상단: utility bar + 진행 ── */
-.notice{background:var(--ink);color:var(--on-ink);font-size:12.5px;font-weight:500;
-  line-height:1.5;padding:9px 20px;letter-spacing:-.01em;word-break:keep-all}
-.why{margin-top:var(--s-xxl)}
-.why .wh{font-size:17px;font-weight:500;letter-spacing:-.025em;color:var(--ink);
-  padding-bottom:var(--s-sm);border-bottom:2px solid var(--ink);margin:var(--s-xl) 0 var(--s-md)}
-.why .wh:first-child{margin-top:0}
-.why p{font-size:14.5px;font-weight:500;color:var(--ash);line-height:1.6;margin:0 0 var(--s-sm)}
-.why .wl{list-style:none;margin:0;padding:0}
-.why .wl li{display:flex;gap:var(--s-md);align-items:baseline;padding:11px 0;
-  border-bottom:1px solid var(--hair-soft)}
-.why .wl li:last-child{border-bottom:none}
-.why .wl b{flex:none;width:76px;font-size:14.5px;font-weight:500;color:var(--ink)}
-.why .wl span{font-size:14px;font-weight:500;color:var(--mute);line-height:1.5}
-.why .wn{margin-top:var(--s-lg);padding-top:var(--s-md);border-top:1px solid var(--hair);
-  font-size:13.5px;color:var(--mute)}
 header{position:sticky;top:0;z-index:30;background:var(--canvas);
   padding-top:env(safe-area-inset-top);
   box-shadow:inset 0 -1px 0 var(--hair-soft)}
@@ -154,7 +139,6 @@ a.tel span{margin-left:auto;font-size:15px;font-weight:500;color:var(--c,var(--i
   font-variant-numeric:tabular-nums;white-space:nowrap}
 a.tel:active{opacity:.6}
 
-a.lk{color:var(--info);text-decoration:none;word-break:break-all;font-size:13px}
 .irbox{margin-top:var(--s-md);padding-top:var(--s-md);border-top:1px solid var(--hair)}
 .irh{display:flex;align-items:center;gap:var(--s-sm);margin-bottom:var(--s-sm)}
 .irh b{font-size:13px;font-weight:500;color:var(--mute)}
@@ -166,10 +150,6 @@ a.lk{color:var(--info);text-decoration:none;word-break:break-all;font-size:13px}
 .irnote{margin-top:var(--s-sm);font-size:12.5px;font-weight:500;color:var(--mute)}
 
 .cmpl{margin-top:var(--s-md);font-size:13px;font-weight:500;color:var(--mute);line-height:1.5}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:var(--s-lg)}
-.chips span{font-size:13px;font-weight:500;color:var(--ash);background:var(--canvas);
-  border-radius:var(--r-full);padding:6px 12px}
-
 .facts{margin:var(--s-lg) 0 0;padding:0;border-top:1px solid var(--hair)}
 .facts>div{display:flex;gap:var(--s-md);align-items:baseline;
   padding:10px 0;border-bottom:1px solid var(--hair-soft)}
@@ -245,9 +225,9 @@ button.tab.on i{color:rgba(255,255,255,.6)}
 .flow li span{color:var(--ink)}
 
 /* ── 제목 ── */
-.subh{margin:var(--s-xxl) 0 var(--s-lg);font-size:18px;font-weight:500;color:var(--ink);
-  letter-spacing:-.025em;padding-bottom:var(--s-sm);border-bottom:2px solid var(--ink);
-  display:flex;align-items:center;gap:var(--s-md)}
+.subh{margin:var(--s-xxl) 0 var(--s-md);font-size:16px;font-weight:500;color:var(--ink);
+  padding-bottom:var(--s-sm);border-bottom:1px solid var(--ink);display:flex;
+  align-items:center;gap:var(--s-md)}
 .subh em.n,.grp em.n,.alert .t em.n,.denywrap .dh em.n{font-style:normal;flex:none;
   font-size:11px;font-weight:500;line-height:1;color:var(--on-ink);
   background:var(--c,var(--ink));border-radius:var(--r-full);padding:4px 8px}
@@ -270,7 +250,7 @@ button.tab.on i{color:rgba(255,255,255,.6)}
 .row .k{font-size:12px;font-weight:500;color:var(--mute);margin-bottom:var(--s-xs)}
 .row .own{font-size:14px;font-weight:500;color:var(--mute);margin-top:var(--s-xs)}
 
-.note{border-left:2px solid var(--hair);padding:2px 0 2px var(--s-lg);
+.note{background:var(--cloud);border-radius:var(--r-sm);padding:var(--s-lg) var(--s-xl);
   font-size:14px;font-weight:500;color:var(--ash);line-height:1.5;margin:var(--s-md) 0}
 
 /* ── 체크: swatch-dot 동심원 ── */
@@ -294,34 +274,31 @@ label.ck input:checked ~ .tx span{color:var(--stone)}
   color:var(--c,var(--ink));background:transparent;border-radius:var(--r-full);
   width:28px;height:28px;display:flex;align-items:center;justify-content:center;
   box-shadow:inset 0 0 0 1.5px var(--c,var(--ink))}
-.say .stp b{font-size:19px;font-weight:500;letter-spacing:-.03em;line-height:1.3;color:var(--ink)}
-.say .eyebrow{font-size:11.5px;font-weight:500;color:var(--stone);letter-spacing:.02em;
-  margin-bottom:5px}
+.say .stp b{font-size:17px;font-weight:500;letter-spacing:-.025em;line-height:1.35}
+.say .when.sm{font-size:12px;color:var(--stone);margin:0 0 var(--s-md)}
 .box.flow{position:relative}
 .box.flow .say{padding-left:0}
 
-.say{padding:var(--s-xxl) 0;border-bottom:1px solid var(--hair-soft)}
+.say{padding:var(--s-xl) 0;border-bottom:1px solid var(--hair-soft)}
 .say:last-child{border-bottom:none}
-.say .stp{margin-bottom:var(--s-md)}
-.say .line{position:relative;font-size:15px;font-weight:500;line-height:1.55;
-  padding:5px 0 5px 15px;color:var(--ash)}
-.say .line:before{content:"";position:absolute;left:0;top:13px;width:4px;height:4px;
-  border-radius:50%;background:var(--hair)}
+.say .when{font-size:12px;font-weight:500;color:var(--mute);margin-bottom:var(--s-md)}
+.say .line{font-size:16px;font-weight:500;line-height:1.5;background:var(--cloud);
+  border-radius:var(--r-sm);padding:var(--s-lg) var(--s-xl);margin-bottom:var(--s-sm);color:var(--ink)}
 .say .line:last-of-type{margin-bottom:0}
-.say .no{font-size:13px;font-weight:500;color:var(--mute);line-height:1.55;text-wrap:pretty;
-  margin-top:var(--s-lg);padding-left:var(--s-lg);border-left:2px solid var(--hair)}
+.say .no{font-size:14px;font-weight:500;color:var(--mute);margin-top:var(--s-md);line-height:1.5;text-wrap:pretty}
 
 /* 하면 안 되는 말 — 맨 위 */
 .denywrap{margin-bottom:var(--s-xxl)}
-.denywrap .dlead{font-size:14px;font-weight:500;color:var(--mute);line-height:1.55;margin:0 0 var(--s-sm)}
-.deny .row .d, .deny .row small{line-height:1.55}
-.denywrap .dh{font-size:18px;font-weight:500;letter-spacing:-.025em;color:var(--ink);
-  margin-bottom:var(--s-lg);padding-bottom:var(--s-sm);border-bottom:2px solid var(--ink);
-  display:flex;align-items:center;gap:var(--s-md)}
+.denywrap .dh{font-size:20px;font-weight:500;letter-spacing:-.03em;color:var(--sale);
+  margin-bottom:var(--s-md);display:flex;align-items:center;gap:var(--s-md)}
 .denywrap .row{padding-top:var(--s-md);padding-bottom:var(--s-md)}
 
 /* 답변 대상 아님 */
-.deny{--c:var(--ash)}
+.deny .row{padding-left:32px;position:relative}
+.deny .row:before{content:"";position:absolute;left:0;top:15px;width:16px;height:16px;
+  border-radius:var(--r-full);box-shadow:inset 0 0 0 1.5px var(--c,var(--ink));
+  background:linear-gradient(to bottom right,transparent 43%,var(--c,var(--ink)) 43%,var(--c,var(--ink)) 57%,transparent 57%)}
+.deny{--c:var(--sale)}
 
 /* ── 도구 ── */
 .tools{display:flex;flex-direction:column;gap:var(--s-sm);margin-top:var(--s-xxl)}
@@ -331,9 +308,8 @@ label.ck input:checked ~ .tx span{color:var(--stone)}
 .tools button:active{opacity:.5;transform:scale(.98)}
 
 .foot{margin-top:var(--s-xl);padding-top:var(--s-md);border-top:1px solid var(--hair);
-  font-size:12px;font-weight:500;line-height:1.6;color:var(--mute);
+  font-size:11px;font-weight:500;line-height:1.6;color:var(--mute);
   display:flex;flex-wrap:wrap;justify-content:flex-end;text-align:right;gap:2px var(--s-md)}
-.foot span:last-child{font-size:15px;color:var(--ash);letter-spacing:-.02em}
 .soon{text-align:center;padding:var(--s-sec) 16px;color:var(--mute);font-size:16px;line-height:1.5}
 
 .a2hs{position:fixed;inset:0;z-index:90;background:rgba(17,17,17,.4);
@@ -465,17 +441,8 @@ button.comp-btn + button.role{margin-left:6px}
   flex:none;width:16px;padding-top:3px}
 .ir b{display:block;font-size:16px;font-weight:500;line-height:1.5}
 .ir span{display:block;font-size:14px;font-weight:500;color:var(--mute);line-height:1.5}
-.refbig{margin-top:var(--s-xxl);padding:var(--s-xl);background:var(--ink);
-  border-radius:var(--r-md);color:var(--on-ink)}
-.refbig b{display:inline-block;font-size:11px;font-weight:500;color:var(--ink);
-  background:var(--on-ink);border-radius:var(--r-full);padding:4px 10px;margin-bottom:10px}
-.refbig span{display:block;font-size:16px;font-weight:500;color:var(--on-ink);
-  line-height:1.5;letter-spacing:-.02em}
-
-.ref{margin-top:var(--s-xl);padding:13px 16px;background:var(--cloud);border-radius:var(--r-sm);
-  font-size:13px;font-weight:500;color:var(--mute);line-height:1.55}
 .rev{margin-top:var(--s-lg);padding-top:var(--s-md);border-top:1px solid var(--hair-soft);
-  font-size:15px;font-weight:500;color:var(--ash);text-align:right;letter-spacing:-.02em}
+  font-size:12px;font-weight:500;color:var(--stone);text-align:right}
 
 /* ── 넓은 화면: 좌측 고정 락업 + 세로 탭, 우측 본문 ── */
 @media (min-width:1000px){
@@ -526,7 +493,7 @@ button.comp-btn + button.role{margin-left:6px}
   body.printing main{padding:0}
   body.printing .wrap{min-height:0}
   body.printing .side{position:static}
-  .say .line{padding:1mm 0 1mm 4mm;background:none}
+  .say .line{padding:3mm 4mm}
   label.ck,.row{padding-top:2.5mm;padding-bottom:2.5mm}
   .subh,.grp{margin-top:5mm;margin-bottom:2mm}
   .note,.alert{padding:3mm 4mm;margin:2mm 0}
@@ -549,7 +516,6 @@ button.comp-btn + button.role{margin-left:6px}
     <button class="reset" id="hReset" hidden>처음부터</button>
   </div>
   <div class="bar"><i id="hBar"></i></div>
-  <div class="notice">이 가이드는 의무적인 준수사항이 아닌 사고 기록 및 응대 편의성을 돕고자 만든 참고 자료입니다.</div>
 </header>
 
 <main id="app"></main>
@@ -558,7 +524,7 @@ button.comp-btn + button.role{margin-left:6px}
 
 <script>
 const ROLES={
-  log:{t:"협력사 담당자(현장대리인/대표)", s:"협력사 담당자", next:"LM", to:"담당 LM에게 전달하는 것이 좋습니다."}
+  log:{t:"협력사 담당자(현장대리인/대표)", s:"협력사 담당자", next:"LM", to:"담당 LM에게 전달합니다."}
 };
 const ROLE='log';
 
@@ -605,7 +571,7 @@ function renderComp(){
   const el=document.getElementById('compBody');
   if(!el) return;
   let h='<div class="cwarn">단순 참고용 자료입니다. 실제 보상 금액은 증빙 자료와 협의에 따라 달라지며, '+
-    '현장에서 금액을 언급하거나 고객에게 안내하지 않는 것이 좋습니다.</div>';
+    '현장에서 금액을 언급하거나 고객에게 안내하지 않습니다.</div>';
 
   /* 계산기 */
   h+='<div class="calc">'+
@@ -805,14 +771,14 @@ const Q = {
     ], next:()=>"injury"
   },
   injury: {
-    q:"인명피해가 있습니까", s:"경미해 보여도 다친 분이 있으면 있음에 해당합니다.", key:"injury",
+    q:"인명피해가 있습니까", s:"경미해 보여도 다친 분이 있으면 있음으로 선택해주세요.", key:"injury",
     opts:[
       { v:"y", t:"있음" },
       { v:"n", t:"없음" },
     ], next: v => v==="y" ? "harm" : "scale"
   },
   harm: {
-    q:"인명피해 정도", s:"확인된 사실을 기준으로 선택합니다. 이후 상태가 달라지면 변경 내용이 별도로 전달되어야 합니다.", key:"harm",
+    q:"인명피해 정도", s:"확인된 사실만을 바탕으로 선택해주세요. 이후 상태가 달라지면 다시 전달해주세요.", key:"harm",
     opts:[
       { v:"none", t:"병원 이송 없음", d:"현장에서 확인된 부상" },
       { v:"hosp", t:"병원 이송" },
@@ -820,7 +786,7 @@ const Q = {
     ], next:()=> S.type==="fire" ? "scale" : "flags"
   },
   scale: {
-    q:"화재 규모", s:"애매한 경우 더 큰 구분에 해당합니다.", key:"scale",
+    q:"화재 규모", s:"애매한 경우에는 더 큰 구분으로 선택해주세요.", key:"scale",
     opts:[
       { v:1, t:"소규모", d:"제품만 탄 경우 · 제품 주변 일부만 그을린 경우" },
       { v:2, t:"세대 내 확산", d:"벽면 · 천장 · 바닥 · 가재도구까지 번진 경우. 연기 · 그을음 · 물에 젖은 피해가 있으면 포함" },
@@ -835,7 +801,7 @@ const Q = {
     ], next:()=>"svc"
   },
   svc: {
-    q:"서비스센터 방문 후 연락받았나요?", s:"서비스와 동행 예정인 경우 방문 전에 해당합니다.", key:"svc",
+    q:"서비스센터 방문 후 연락받았나요?", s:"서비스와 동행 예정인 경우 방문 전으로 선택해주세요.", key:"svc",
     opts:[
       { v:"pre",  t:"서비스 방문 전" },
       { v:"post", t:"서비스 방문 후" },
@@ -851,7 +817,7 @@ const Q = {
     ], next:()=>"hist"
   },
   hist: {
-    q:"설치 후 이런 일이 있었나요?", s:"고객에게 확인한 내용을 기준으로 합니다.", key:"hist", multi:true,
+    q:"설치 후 이런 일이 있었나요?", s:"고객에게 확인한 대로 선택해주세요.", key:"hist", multi:true,
     opts:[
       { v:"svc",  t:"서비스 방문 · 수리" },
       { v:"elec", t:"세대 전기공사 · 리모델링" },
@@ -891,7 +857,7 @@ const Q = {
     ], next:()=>"elapsed"
   },
   side: {
-    q:"누수 계통", s:"현장에서 확인된 내용을 기준으로 합니다.", key:"side",
+    q:"누수 계통", s:"현장에서 확인되는 대로 선택해주세요.", key:"side",
     opts:[
       { v:"in",   t:"급수", only:["dish","water","wash","robot"] },
       { v:"out",  t:"배수", only:["ac","dish","water","wash","robot"] },
@@ -929,7 +895,7 @@ const Q = {
     ], next:()=>"spread"
   },
   winjury: {
-    q:"다친 사람이 있나요?", s:"경미해 보여도 다친 분이 있으면 있음에 해당합니다.", key:"injury",
+    q:"다친 사람이 있나요?", s:"경미해 보여도 다친 분이 있으면 있음으로 선택해주세요.", key:"injury",
     opts:[
       { v:"y", t:"있음" },
       { v:"n", t:"없음" },
@@ -1150,174 +1116,174 @@ const WORK_SHOTS = [
 /* ══ 응대 문안 ══ */
 const SAY_F = [
   { id:"intro", when:"첫 대면", lines:[
-    "소속과 성함, 방문 사유를 밝히는 것이 좋습니다.",
-    "확인한 내용이 이후 검토 절차로 전달된다는 점을 안내하는 것이 좋습니다.",
-  ], no:"\"죄송합니다\"만 단독으로 쓰면 귀책 인정으로 읽힐 수 있습니다. \"불편을 드려 죄송합니다\"처럼 대상 한정이 안전합니다.", show:["self","rep"] },
+    "안녕하십니까. 해당 지역의 설치작업을 맡고 있는 LG전자 설치 협력사 ○○물류 ○○○입니다. 사고 접수되어 현장 확인차 방문했습니다.",
+    "관계 문의 시 — 확인한 내용은 검토 절차를 거쳐 확인될 예정입니다.",
+  ], no:"\"죄송합니다\"만 단독으로 쓰면 귀책을 인정한 것으로 읽힐 수 있습니다. \"불편을 드려 죄송합니다\"처럼 대상을 한정해주세요.", show:["self","rep"] },
   { id:"injury", when:"인명피해 발생 건 첫 응대", lines:[
-    "절차 안내보다 현재 상태와 병원 이송 여부를 먼저 확인하시기를 권장드립니다.",
-  ], no:"상태 확인이 우선입니다. 절차 · 보험 · 조사 안내는 그 이후 사항입니다.", inj:true },
+    "지금 상태는 어떠신지요. 병원은 어디로 가셨습니까.",
+  ], no:"상태 확인이 우선입니다. 절차 · 보험 · 조사 안내를 먼저 꺼내지 말아주세요.", inj:true },
   { id:"p_inv", when:"방문 목적 — 관계기관 조사 개입 건", lines:[
-    "방문 목적이 현장 확인과 기록임을 밝히고, 원인은 관계기관 조사로 확인되는 사항임을 안내하는 것이 좋습니다.",
-  ], no:"'조사'만 말하면 자체 조사로 오해될 수 있습니다. 어디서 하는 조사인지 함께 밝히는 것이 안전합니다.", show:["rep"] },
+    "오늘은 현장 상태를 확인하고 기록하기 위해 방문했습니다. 원인은 소방서 · 경찰 등 관계기관 조사 결과로 확인되는 부분입니다.",
+  ], no:"'조사'만 말하면 자체 조사로 오해될 수 있습니다. 어디서 하는 조사인지 함께 말씀해주세요.", show:["rep"] },
   { id:"p_self", when:"방문 목적 — 소방 미출동 건", lines:[
-    "방문 목적이 현장 확인과 기록임을 밝히고, 서비스 점검 결과와 함께 확인이 진행된다는 점을 안내하는 것이 좋습니다.",
-  ], no:"방문 목적은 확인과 기록까지로 안내하는 것이 좋습니다.", show:["self"] },
+    "오늘은 현장 상태를 확인하고 기록하기 위해 방문했습니다. 서비스 점검 결과와 현장 확인 결과를 종합해 확인이 진행됩니다.",
+  ], no:"방문 목적은 확인과 기록까지만 말씀해주세요.", show:["self"] },
   { id:"photo", when:"사진 촬영 양해", lines:[
-    "사진이 필요한 이유를 설명하는 것이 좋습니다. 정리 전 상태가 이후 확인 자료가 된다는 점을 함께 안내하는 것이 좋습니다.",
-    "피해 범위 확인을 위해 주변까지 함께 촬영한다는 점을 안내하는 것이 좋습니다.",
-    "거부 시 — 확인에 필요한 범위로 한정하고 다른 용도로 사용하지 않음을 안내하는 것이 좋습니다.",
-  ], no:"근접만으로는 위치와 범위가 확인되지 않습니다. 전경 촬영본이 함께 필요합니다. 거부하시면 강행하지 말고 사유를 기재해 공유하시기를 권장드립니다." },
+    "확인한 내용을 회사에 정확히 전달하려면 사진이 필요합니다. 현장을 정리하기 전에 남겨두는 것이 고객님께도 필요한 자료가 됩니다.",
+    "피해 범위를 확인하려면 주변까지 함께 나와야 해서 전체가 보이게 찍겠습니다.",
+    "거부하실 경우 — 확인에 필요한 범위에서만 촬영하고 다른 용도로는 사용하지 않습니다.",
+  ], no:"근접만으로는 위치와 범위가 확인되지 않습니다. 전경을 먼저 촬영해주세요. 거부하시면 강행하지 말고 사유를 기재해 공유합니다." },
   { id:"no", when:"제품 번호 · 주문번호 · 연락처 요청", lines:[
-    "설치 이력 조회 목적임을 밝히고 제품 번호를 확인하시기를 권장드립니다.",
-    "주문번호 확인이 가능한 자료(문자 · 영수증)가 있는지 확인하시기를 권장드립니다.",
-    "제품 번호 확인이 어려운 경우 주문자 성함 · 연락처로도 조회가 가능함을 안내하는 것이 좋습니다.",
-  ], no:"설치 이력 조회 목적에 한정됩니다." },
+    "설치 이력을 조회해야 해서 제품 번호를 확인하겠습니다.",
+    "설치하실 때 받으신 문자나 영수증이 남아 있으면 주문번호도 함께 알려주시겠습니까.",
+    "제품 번호가 확인되지 않으면 주문하신 분 성함과 연락처로도 조회가 가능합니다.",
+  ], no:"설치 이력 조회 목적으로만 말씀해주세요." },
   { id:"fhist", when:"설치 후 이력 청취", lines:[
-    "설치 이후 서비스 방문 · 수리 이력이 있었는지 확인하시기를 권장드립니다.",
-    "전기공사 · 인테리어 공사 여부와 시기를 확인하시기를 권장드립니다.",
-  ], no:"들은 내용 그대로 기록 대상입니다. 원인과 연결한 설명은 하지 않는 것이 좋습니다.", fhist:true },
+    "설치하신 뒤에 서비스를 부르시거나 수리를 받으신 적이 있으신지요.",
+    "전기공사나 인테리어 공사를 하신 적이 있으시면 시기도 알려주시겠습니까.",
+  ], no:"들은 내용만 그대로 기록해주세요. 원인과 연결한 설명은 하지 않습니다.", fhist:true },
   { id:"remain", when:"원인 확인용 증거물 확인", lines:[
-    "타거나 남은 전선 · 부품의 소재를 확인하시기를 권장드립니다. (소방 · 경찰 수거 / 서비스 회수 / 현장 잔류 등)",
-  ], no:"소재 확인 대상입니다." },
+    "타거나 남은 전선 · 부품이 어디에 있는지 확인하고 싶습니다. 소방에서 가져갔는지, 서비스 쪽에서 회수해 갔는지 알고 계신지요.",
+  ], no:"어디에 있는지만 확인해주세요." },
   { id:"f_inv", when:"\"누구 잘못이냐\" — 관계기관 조사 개입 건", lines:[
-    "원인은 관계기관 조사로 확인되는 사항이며 답변할 수 있는 내용이 아님을 안내하고, 확인한 내용은 그대로 전달됨을 전달하는 것이 좋습니다.",
-  ], no:"인정 · 부인 모두 현장 판단에 해당합니다. \"그럴 리 없다\", \"저희 쪽은 아닐 겁니다\"도 원인 단정입니다.", show:["rep"] },
+    "원인은 소방서 · 경찰 등 관계기관 조사 결과로 확인되는 부분이라 제가 말씀드릴 수 있는 내용이 아닙니다. 오늘 확인한 내용은 그대로 전달하겠습니다.",
+  ], no:"인정도 부인도 하지 말아주세요. \"그럴 리 없다\", \"저희 쪽은 아닐 겁니다\"도 원인을 단정하는 말입니다.", show:["rep"] },
   { id:"f_self", when:"\"누구 잘못이냐\" — 소방 미출동 건", lines:[
-    "서비스 점검 결과와 현장 확인 결과를 종합해 확인 후 안내된다는 점을 전달하는 것이 좋습니다.",
-  ], no:"인정 · 부인 모두 현장 판단에 해당합니다.", show:["self"] },
+    "서비스 점검 결과와 현장 확인 결과를 종합해 확인한 후 다시 안내드리겠습니다.",
+  ], no:"인정도 부인도 하지 말아주세요.", show:["self"] },
   { id:"ours", when:"\"당신들이 설치한 거 맞지 않느냐\"", lines:[
-    "설치 이력은 제품 번호 조회로 확인되는 사항임을 안내하고, 확인 후 회신을 약속하는 것이 좋습니다.",
-  ], no:"설치 스티커만으로는 설치 이력 확인 불가. 설치 연도 · 시공 기준도 확인 후 정해지는 사항" },
+    "설치 이력은 제품 번호로 조회해야 확인됩니다. 확인한 후 다시 안내드리겠습니다.",
+  ], no:"설치 스티커만으로는 설치 이력이 확인되지 않습니다. 설치 연도나 시공 기준에 대해서도 답변을 피해주세요." },
   { id:"when", when:"\"언제까지 처리되냐 · 얼마나 나오냐\"", lines:[
-    "일정과 금액은 조사 결과에 따라 정해지는 사항이라 현장 답변이 어렵다는 점을 안내하는 것이 좋습니다.",
-    "확인 후 다시 안내하겠다고 전달하는 것이 좋습니다.",
-  ], no:"\"빠르게\", \"최대한 신속히\" 등 기한 암시 표현도 동일합니다." },
+    "일정과 금액은 조사 결과에 따라 정해집니다. 제가 지금 말씀드리면 지켜지지 않을 수 있어 말씀드리기 어렵습니다.",
+    "확인한 후 다시 안내드리겠습니다.",
+  ], no:"\"빠르게\", \"최대한 신속히\"처럼 기한을 암시하는 표현도 피해주세요." },
   { id:"sign", when:"확인서 · 각서 서명 요구", lines:[
-    "법적 검토를 거치지 않은 서면은 이후 불리하게 작용할 수 있다는 점을 밝히고, 전달 후 안내를 약속하는 것이 좋습니다.",
-  ], no:"수령 서면 촬영본 — 내용 확인에 필요", flag:"sign" },
+    "제가 서명할 수 있는 권한이 없습니다. 전달한 후 다시 안내드리겠습니다.",
+  ], no:"서면 수령 시 촬영 후 공유해주세요.", flag:"sign" },
   { id:"third", when:"외부기관 접촉", lines:[
-    "답변할 수 있는 사안이 아님을 밝히고, 확인 후 연락처 안내를 약속하는 것이 좋습니다.",
-  ], no:"사실관계 확인 요청 — 현장 답변이 이후 절차에서 인용될 수 있음. 소속 · 성명 · 요구사항 · 회신 기한 확인 대상", flag:"third" },
+    "제가 답변드릴 수 있는 사안이 아닙니다. 확인 후 연락처를 안내드리겠습니다.",
+  ], no:"사실관계 확인 요청에도 답변을 피해주세요. 소속 · 성명 · 요구사항 · 회신 기한만 확인해 공유해주세요.", flag:"third" },
   { id:"ins", when:"화재보험 안내", lines:[
-    "관계기관 조사와 별개로 화재보험 청구가 가능함을 안내하는 것이 좋습니다. (아파트 단체보험 · 개인 가입 화재보험)",
-    "접수는 고객이 직접 진행하며, 단체보험은 관리사무소를 통한다는 점을 안내하는 것이 좋습니다.",
-  ], no:"청구를 권하는 것이 아니라 절차를 안내드리는 것입니다. 화재보험은 피보험자인 고객이 직접 접수하는 절차로(아파트 단체보험은 관리사무소를 통해), 대신 접수할 수는 없습니다.", noInj:true },
+    "관계기관 조사와 별개로, 화재보험은 지금 청구가 가능합니다. 아파트는 관리비에 단체 화재보험이 포함된 경우가 많고, 개인적으로 가입하신 화재보험이 있으면 그것도 해당됩니다.",
+    "접수는 고객님께서 직접 하셔야 하고, 단체보험은 관리사무소를 통해 접수하시면 됩니다.",
+  ], no:"권유가 아니라 절차 안내입니다. 대신 접수하지 말아주세요.", noInj:true },
   { id:"why", when:"\"왜 내 보험을 쓰라는 거냐\"", lines:[
-    "화재보험 청구는 손해 회복을 위한 절차이며, 원인 조사와 책임 판단은 별개로 진행됨을 안내하는 것이 좋습니다.",
-    "설치상 문제가 확인되면 보험사 간 정산으로 진행되어 권리를 포기하는 것이 아님을 안내하는 것이 좋습니다.",
-  ], no:"할증 · 자기부담금 — \"가입하신 보험사에서 확인하셔야 정확합니다\" 선에서 마무리", noInj:true },
+    "화재보험 청구는 손해를 먼저 회복하기 위한 절차이고, 관계기관의 원인 조사와 책임 판단은 그와 별개로 진행됩니다.",
+    "조사에서 설치상의 문제가 확인되면 고객님이 다시 청구하시는 것이 아니라 보험사끼리 정산하게 됩니다. 권리를 포기하시는 것이 아닙니다.",
+  ], no:"할증이나 자기부담금은 \"가입하신 보험사에서 확인하셔야 정확합니다\"로 마무리해주세요.", noInj:true },
   { id:"stuck", when:"즉답을 요구받아 막힐 때", lines:[
-    "판단할 수 있는 사안이 아니며 확인 후 안내하겠다는 선에서 마무리하는 것이 좋습니다.",
-  ], no:"이 선에서 마무리하는 것이 좋습니다." },
+    "제가 판단할 수 있는 사안이 아니라 확인 후 다시 안내드리겠습니다.",
+  ], no:"이 문장으로 마무리해주세요." },
   { id:"end", when:"마무리", lines:[
-    "확인한 내용을 그대로 전달하고, 확인되는 대로 회신하겠다고 안내하는 것이 좋습니다.",
-  ], no:"회신 기한 특정은 이후 기준으로 남을 수 있습니다." },
+    "오늘 확인한 내용은 그대로 전달하겠습니다. 확인되는 대로 제가 다시 연락드리겠습니다.",
+  ], no:"회신 기한은 특정하지 말아주세요." },
 ];
 
 const SAY_W = [
   { id:"intro", when:"첫 대면", lines:[
-    "소속과 성함, 방문 사유를 밝히는 것이 좋습니다.",
-  ], no:"\"죄송합니다\"만 단독으로 쓰면 귀책 인정으로 읽힐 수 있습니다. \"불편을 드려 죄송합니다\"처럼 대상 한정이 안전합니다." },
+    "안녕하십니까. 해당 지역의 설치작업을 맡고 있는 LG전자 설치 협력사 ○○물류 ○○○입니다. 사고 접수되어 현장 확인차 방문했습니다.",
+  ], no:"\"죄송합니다\"만 단독으로 쓰면 귀책을 인정한 것으로 읽힐 수 있습니다. \"불편을 드려 죄송합니다\"처럼 대상을 한정해주세요." },
   { id:"stop", when:"도착 직후 — 조치 전 촬영 양해", lines:[
-    "우선 급수를 차단하는 것이 좋습니다.",
-    "손대기 전 촬영이 필요함을 설명하고, 촬영 후 바로 조치하는 것이 좋습니다.",
-  ], no:"조치 이후 당시 상태 확인 불가. 밸브 잠금 · 촬영 · 조치 시점별 기록 — 체결부 근접 / 실내 전경" },
+    "우선 물부터 잠그겠습니다.",
+    "원인 확인에 필요해서, 손대기 전에 몇 장만 찍고 바로 조치하겠습니다.",
+  ], no:"조치 전 상태는 다시 만들 수 없습니다. 밸브 잠금 → 촬영 → 조치 순서를 지켜주시고, 체결부 근접과 실내 전경을 함께 촬영해주세요." },
   { id:"repro", when:"재현 양해", lines:[
-    "누수 지점 확인을 위해 재현이 필요함을 설명하고 양해를 구하는 것이 좋습니다.",
+    "어디서 새는지 확인하려면 물을 한 번 흘려봐야 합니다. 잠깐 틀어보겠습니다.",
   ], no:"재현 중에는 영상으로 남겨주세요. 정지 사진만으로는 누수 경로가 확인되지 않습니다." },
   { id:"fix", when:"조치할 때", lines:[
-    "추가 누수를 막기 위한 응급 조치를 먼저 진행하는 것이 좋습니다.",
-    "원인과 처리 방향은 확인 후 안내되는 사항임을 전달하는 것이 좋습니다.",
-  ], no:"응급 조치임을 함께 밝히지 않으면 귀책 인정으로 읽힐 수 있습니다. 조치 내역은 기록 · 공유 대상입니다." },
+    "우선 더 새지 않도록 응급 조치를 하겠습니다.",
+    "원인과 처리 방향은 확인 후에 안내드리는 부분입니다.",
+  ], no:"조치가 귀책 인정으로 읽히지 않도록 응급 조치임을 함께 말씀해주세요. 조치 내역은 꼭 기록, 공유해주세요." },
   { id:"back", when:"매립배수관 역류가 확인된 경우", lines:[
-    "배관 상태도 함께 확인했다는 점을 안내하는 것이 좋습니다.",
-    "확인한 내용을 그대로 전달하고, 확인되는 대로 회신하겠다고 안내하는 것이 좋습니다.",
-  ], no:"\"배관이 막혀서 그렇다\", \"저희 문제가 아니다\" — 모두 원인 단정에 해당합니다." },
+    "배수가 원활하지 않아 배관 쪽 상태도 함께 확인했습니다.",
+    "확인한 내용은 그대로 전달하고, 확인되는 대로 다시 안내드리겠습니다.",
+  ], no:"\"배관이 막혀서 그렇다\", \"저희 문제가 아니다\"는 말은 피해주세요. 확인된 사실만 전달합니다." },
   { id:"photo", when:"\"왜 사진을 찍느냐\"", lines:[
-    "사진이 필요한 이유를 설명하는 것이 좋습니다. 조치 후에는 당시 상태가 남지 않는다는 점을 함께 안내하는 것이 좋습니다.",
-    "피해 범위 확인을 위해 주변까지 함께 촬영한다는 점을 안내하는 것이 좋습니다.",
-    "거부 시 — 확인에 필요한 범위로 한정하고 다른 용도로 사용하지 않음을 안내하는 것이 좋습니다.",
-  ], no:"젖은 자국 경계와 확산 범위는 전경에서만 확인됩니다. 거부하시면 강행하지 말고 사유를 기재해 공유하시기를 권장드립니다." },
+    "확인한 내용을 회사에 정확히 전달하려면 사진이 필요합니다. 조치하고 나면 원래 상태가 남지 않아 지금 남겨두는 것이 고객님께도 필요한 자료가 됩니다.",
+    "피해 범위를 확인하려면 주변까지 함께 나와야 해서 전체가 보이게 찍겠습니다.",
+    "거부하실 경우 — 확인에 필요한 범위에서만 촬영하고 다른 용도로는 사용하지 않습니다.",
+  ], no:"젖은 자국 경계와 확산 범위는 전경에서만 확인됩니다. 거부하시면 강행하지 말고 사유를 기재해 공유합니다." },
   { id:"no", when:"제품 번호 · 주문번호 · 연락처 요청", lines:[
-    "설치 이력 조회 목적임을 밝히고 제품 번호를 확인하시기를 권장드립니다.",
-    "주문번호 확인이 가능한 자료(문자 · 영수증)가 있는지 확인하시기를 권장드립니다.",
-  ], no:"설치 이력 조회 목적에 한정됩니다." },
+    "설치 이력을 조회해야 해서 제품 번호를 확인하겠습니다.",
+    "설치하실 때 받으신 문자나 영수증이 남아 있으면 주문번호도 함께 알려주시겠습니까.",
+  ], no:"설치 이력 조회 목적으로만 말씀해주세요." },
   { id:"hist", when:"설치 후 시간이 지난 건 — 이력 청취", lines:[
-    "설치 이후 해당 부위를 손보거나 다른 작업이 있었는지 확인하시기를 권장드립니다.",
-    "누수를 인지한 시점을 확인하시기를 권장드립니다.",
-  ], no:"설치 원인 여부는 단정하기보다 확인된 내용을 남기는 것이 좋습니다. 들은 내용만 그대로 기록하시기를 권장드립니다.", late:true },
+    "설치하신 뒤에 이쪽을 손보거나 다른 작업을 하신 적이 있으신지요.",
+    "언제부터 물이 보이셨는지도 알려주시면 함께 전달하겠습니다.",
+  ], no:"설치 때문이 아니라고 현장에서 단정하지 말아주세요. 들은 내용만 그대로 기록합니다.", late:true },
   { id:"fault", when:"\"누구 잘못이냐 · 설치 잘못 아니냐\"", lines:[
-    "현재는 누수 지점을 확인하는 단계임을 안내하고, 확인 후 회신을 약속하는 것이 좋습니다.",
-  ], no:"인정 · 부인 모두 현장 판단에 해당합니다. 조치 사실이 귀책 인정은 아닙니다." },
+    "지금은 어디서 물이 나왔는지 확인하는 단계입니다. 확인한 내용을 전달하고, 확인되는 대로 다시 안내드리겠습니다.",
+  ], no:"인정도 부인도 하지 말아주세요. 조치했다고 해서 귀책을 인정한 것은 아닙니다." },
   { id:"liab", when:"아랫집 피해 · 귀책이 불분명한 경우", lines:[
-    "일상생활배상책임 특약 가입 여부를 확인하시기를 권장드립니다.",
-    "아래층 피해가 해당 담보로 먼저 처리되는 경우가 있음을 안내하는 것이 좋습니다.",
-  ], no:"가입 여부 확인 대상. 청구 권유 · 처리 방법 단정은 하지 않는 것이 좋습니다. 귀책 확인 시 별도 진행", spread3:true },
+    "혹시 가입하신 화재보험이나 주택종합보험에 일상생활배상책임 특약이 있는지 확인해 주시겠습니까.",
+    "아래층 피해는 그 담보로 먼저 처리되는 경우가 있어서, 확인해 두시면 도움이 됩니다.",
+  ], no:"가입 여부만 확인해주세요. 청구를 권유하거나 처리 방법을 단정하지 않습니다. 귀책이 확인되면 별도로 진행된다는 점을 함께 안내합니다.", spread3:true },
   { id:"mgmt", when:"관리사무소가 나온 경우", lines:[
-    "소속과 성함, 방문 사유를 밝히는 것이 좋습니다.",
-    "확인된 내용이 전달되며 처리 방향은 확인 후 안내된다는 점을 전달하는 것이 좋습니다.",
-    "담당자 성함과 연락처를 확보하시기를 권장드립니다.",
-  ], no:"복구 방법 · 비용 · 일정 — 확인 후 정해지는 사항. 공용배관은 관리사무소가 별도 권리로 청구. 법적 검토 전 서면 서명은 이후 불리하게 작용할 수 있음. 담당자 성함 · 연락처 확인 대상", hole:true },
+    "안녕하십니까. 해당 세대 설치작업을 맡은 LG전자 설치 협력사 ○○물류 ○○○입니다.",
+    "확인된 내용은 그대로 전달하고, 처리 방향은 확인되는 대로 다시 안내드리겠습니다.",
+    "담당자분 성함과 연락처를 알려주시면 확인 후 연락드리겠습니다.",
+  ], no:"복구 방법 · 비용 · 일정은 약속하지 말아주세요. 공용배관은 관리사무소가 별도 권리로 청구합니다. 서면 서명은 현장 권한이 없습니다. 담당자 성함 · 연락처는 가능한 확보해주세요.", hole:true },
   { id:"fix2", when:"관리사무소가 즉시 조치를 요구하는 경우", lines:[
-    "세대 내 응급 조치는 즉시 진행 가능함을 안내하는 것이 좋습니다.",
-    "공용배관은 관리사무소 지정 업체 진행 여부를 확인하시기를 권장드립니다.",
-  ], no:"공용부 직접 조치 시 — 조치 전 상태 / 조치 후 상태 각각 촬영, 조치 내역 기록. 지정 업체 진행 시 — 업체명 · 연락처", hole:true },
+    "세대 내에서 할 수 있는 응급 조치는 바로 하겠습니다.",
+    "공용배관 쪽은 관리사무소에서 지정하시는 업체로 진행하시는 것이 맞는지 확인 부탁드립니다.",
+  ], no:"공용부를 직접 조치한 경우 조치 전후를 촬영하고 조치 내역을 기록해주세요. 관리사무소 지정 업체가 진행한 경우 업체명과 연락처를 확보해주세요.", hole:true },
   { id:"down", when:"아랫집 피해가 발생한 경우", lines:[
-    "아래층 피해 범위 확인이 필요함을 안내하고 연락처를 확보하시기를 권장드립니다.",
-  ], no:"상대 세대 보상 · 처리 약속 — 확인 후 정해지는 사항. 접촉 사실 · 요구사항 확인 대상", spread3:true },
+    "아래층 피해 범위도 확인이 필요합니다. 연락처를 알려주시면 확인 절차를 안내드리겠습니다.",
+  ], no:"상대 세대에 보상이나 처리를 약속하지 말아주세요. 접촉 사실과 요구사항만 확인해 공유해주세요.", spread3:true },
   { id:"when", when:"\"언제까지 처리되냐 · 얼마나 나오냐\"", lines:[
-    "일정과 금액은 확인 후 정해지는 사항이라 현장 답변이 어렵다는 점을 안내하는 것이 좋습니다.",
-    "확인 후 다시 안내하겠다고 전달하는 것이 좋습니다.",
-  ], no:"\"빠르게\", \"이번 주 안에\" 등 기한 암시 표현도 동일합니다." },
+    "일정과 금액은 확인 후에 정해지는 부분이라 제가 지금 말씀드리기 어렵습니다.",
+    "확인한 후 다시 안내드리겠습니다.",
+  ], no:"\"빠르게\", \"이번 주 안에\"처럼 기한을 암시하는 표현도 피해주세요." },
   { id:"solo", when:"단독 작업 건 — 처리 방법을 물을 때", lines:[
-    "확인한 내용을 전달하고, 처리 방향은 확인 후 안내됨을 전달하는 것이 좋습니다.",
-  ], no:"보험 처리 가능 여부 — 담보 범위는 보험사 확인 사항. 도급사 협의가 필요한 경우 담당 LM과 협의", solo:true },
+    "확인한 내용을 전달하고, 처리 방향은 확인되는 대로 다시 안내드리겠습니다.",
+  ], no:"보험 처리 가능 여부는 답변을 피해주세요. 담보 범위는 협력사와 도급사 · 보험사 확인 사항이라 현장에서 가능 · 불가를 단정하지 않습니다.", solo:true },
   { id:"sign", when:"확인서 · 각서 서명 요구", lines:[
-    "법적 검토를 거치지 않은 서면은 이후 불리하게 작용할 수 있다는 점을 밝히고, 전달 후 안내를 약속하는 것이 좋습니다.",
-  ], no:"수령 서면 촬영본 — 내용 확인에 필요", flag:"sign" },
+    "제가 서명할 수 있는 권한이 없습니다. 전달한 후 다시 안내드리겠습니다.",
+  ], no:"서면 수령 시 촬영 후 공유해주세요.", flag:"sign" },
   { id:"third", when:"외부기관 접촉", lines:[
-    "답변할 수 있는 사안이 아님을 밝히고, 확인 후 연락처 안내를 약속하는 것이 좋습니다.",
-  ], no:"소속 · 성명 · 요구사항 · 회신 기한 확인 대상", flag:"third" },
+    "제가 답변드릴 수 있는 사안이 아닙니다. 확인 후 연락처를 안내드리겠습니다.",
+  ], no:"소속 · 성명 · 요구사항 · 회신 기한만 확인해 공유해주세요.", flag:"third" },
   { id:"stuck", when:"즉답을 요구받아 막힐 때", lines:[
-    "판단할 수 있는 사안이 아니며 확인 후 안내하겠다는 선에서 마무리하는 것이 좋습니다.",
-  ], no:"이 선에서 마무리하는 것이 좋습니다." },
+    "제가 판단할 수 있는 사안이 아니라 확인 후 다시 안내드리겠습니다.",
+  ], no:"이 문장으로 마무리해주세요." },
   { id:"end", when:"마무리", lines:[
-    "확인하고 조치한 내용을 그대로 전달하고, 확인되는 대로 회신하겠다고 안내하는 것이 좋습니다.",
-  ], no:"회신 기한 특정은 이후 기준으로 남을 수 있습니다." },
+    "오늘 확인하고 조치한 내용은 그대로 전달하겠습니다. 확인되는 대로 제가 다시 연락드리겠습니다.",
+  ], no:"회신 기한은 특정하지 말아주세요." },
 ];
 
 const SAY_B = [
   { id:"intro", when:"첫 대면 · 파손 확인 시", lines:[
-    "불편에 대한 양해를 구하고, 파손 부위 확인과 기록 목적을 밝히는 것이 좋습니다.",
-  ], no:"\"저희 잘못으로\", \"저희 때문에\" 등 원인 전제 표현도 동일합니다." },
+    "불편을 드려 죄송합니다. 파손된 부분을 확인하고 기록하겠습니다.",
+  ], no:"\"저희 잘못으로\", \"저희 때문에\"처럼 원인을 전제하는 표현은 피해주세요." },
   { id:"photo", when:"촬영 양해", lines:[
-    "복구 방법 판단을 위해 파손 부위와 주변 상태 촬영이 필요함을 설명하는 것이 좋습니다.",
-    "크기 확인을 위해 자를 함께 놓고 촬영하시기를 권장드립니다.",
-    "꺼리실 경우 — 확인에 필요한 범위로 한정하고 다른 용도로 사용하지 않음을 안내하는 것이 좋습니다.",
-  ], no:"전경 · 범위 · 근접 · 크기 비교물 — 근접만으로는 규모 확인 불가" },
+    "복구 방법을 정하려면 파손된 부분과 주변 상태를 함께 확인해야 해서 사진을 찍겠습니다.",
+    "크기를 알 수 있게 자를 대고 찍겠습니다.",
+    "꺼리실 경우 — 확인에 필요한 범위에서만 찍고 다른 용도로는 사용하지 않습니다.",
+  ], no:"근접만으로는 규모를 판단할 수 없습니다. 전경 · 범위 · 근접 · 크기 비교물을 모두 촬영해주세요." },
   { id:"cost", when:"\"얼마나 물어주냐 · 언제 고쳐주냐\"", lines:[
-    "금액과 방법은 확인 후 정해지는 사항이라 현장 답변이 어렵다는 점을 안내하는 것이 좋습니다.",
-    "확인한 내용을 전달하고, 확인되는 대로 회신하겠다고 안내하는 것이 좋습니다.",
-  ], no:"금액대 · 처리 방식(보험 · 자체) — 사고 내용 확인 후 정해지는 사항. 도급사 협의가 필요한 경우 담당 LM과 협의" },
+    "금액과 방법은 확인 후에 정해지는 부분이라 제가 지금 말씀드리기 어렵습니다.",
+    "확인한 내용을 전달하고, 확인되는 대로 다시 안내드리겠습니다.",
+  ], no:"금액대나 처리 방식(보험 · 자체)은 언급을 피해주세요. 판단은 협력사와 도급사 · 보험사 확인 사항입니다." },
   { id:"late", when:"퇴거 이후 접수된 건", lines:[
-    "발견 시점과 그 사이 다른 작업 여부를 확인하시기를 권장드립니다.",
-    "설치 당시 기록과 함께 확인 후 안내됨을 전달하는 것이 좋습니다.",
-  ], no:"설치 중 발생 여부 — 단정하기보다 확인된 내용만 기록하는 것이 좋습니다", late:true },
+    "언제 발견하셨는지, 그 사이에 다른 작업이 있었는지 확인해 주시겠습니까.",
+    "설치 당시 기록도 함께 확인해서 안내드리겠습니다.",
+  ], no:"설치 중 발생이 아니라고 현장에서 단정하지 말아주세요. 확인한 내용만 듣고 공유해주세요.", late:true },
   { id:"fix", when:"복구 방법을 물을 때", lines:[
-    "부분 보수 · 전체 교체 여부는 확인 후 안내되는 사항임을 전달하는 것이 좋습니다.",
-  ], no:"복구 범위는 확인 후 정해지는 사항입니다." },
+    "부분 보수가 가능한지, 전체 교체가 필요한지는 확인 후에 안내드리는 부분입니다.",
+  ], no:"현장에서 복구 범위를 약속하지 말아주세요." },
   { id:"sign", when:"확인서 · 각서 서명 요구", lines:[
-    "법적 검토를 거치지 않은 서면은 이후 불리하게 작용할 수 있다는 점을 밝히고, 전달 후 안내를 약속하는 것이 좋습니다.",
-  ], no:"수령 서면 촬영본 — 내용 확인에 필요", flag:"sign" },
+    "제가 서명할 수 있는 권한이 없습니다. 전달한 후 다시 안내드리겠습니다.",
+  ], no:"서면 수령 시 촬영 후 공유해주세요.", flag:"sign" },
   { id:"third", when:"외부기관 접촉", lines:[
-    "답변할 수 있는 사안이 아님을 밝히고, 확인 후 연락처 안내를 약속하는 것이 좋습니다.",
-  ], no:"소속 · 성명 · 요구사항 · 회신 기한 확인 대상", flag:"third" },
+    "제가 답변드릴 수 있는 사안이 아닙니다. 확인 후 연락처를 안내드리겠습니다.",
+  ], no:"소속 · 성명 · 요구사항 · 회신 기한만 확인해 공유해주세요.", flag:"third" },
   { id:"stuck", when:"즉답을 요구받아 막힐 때", lines:[
-    "판단할 수 있는 사안이 아니며 확인 후 안내하겠다는 선에서 마무리하는 것이 좋습니다.",
-  ], no:"이 선에서 마무리하는 것이 좋습니다." },
+    "제가 판단할 수 있는 사안이 아니라 확인 후 다시 안내드리겠습니다.",
+  ], no:"이 문장으로 마무리해주세요." },
   { id:"end", when:"마무리", lines:[
-    "확인한 내용을 그대로 전달하고, 확인되는 대로 회신하겠다고 안내하는 것이 좋습니다.",
-  ], no:"회신 기한 특정은 이후 기준으로 남을 수 있습니다." },
+    "확인한 내용은 그대로 전달하겠습니다. 확인되는 대로 제가 다시 연락드리겠습니다.",
+  ], no:"회신 기한은 특정하지 말아주세요." },
 ];
 
 const SHOTS_B = {
@@ -1343,37 +1309,37 @@ const SAY_D = [
     "많이 다치셨습니까. 어디가 아프신지요.",
     "위급한 경우 — 움직이지 마시고 계십시오. 지금 119를 부르겠습니다.",
     "그 외 — 그냥 두지 마시고 병원에서 진료를 받아보시는 것이 좋겠습니다.",
-  ], no:"상태 확인이 우선입니다. 사진과 사실 확인은 그 이후이며, 무리한 이동은 위험할 수 있습니다." },
+  ], no:"상태 확인이 우선입니다. 사진과 사실 확인은 그다음이고, 무리하게 움직이게 하지 말아주세요." },
   { id:"move", when:"이송 요청이 있는 경우", lines:[
     "원하시면 병원까지 모셔다드리겠습니다.",
     "진료 받으신 결과는 알려주시면 그대로 전달하겠습니다.",
-  ], no:"이송은 요청이 있는 경우에만 하는 것이 좋습니다. 접수나 비용 결제는 하지 않는 것이 좋습니다. 이송하지 않은 경우 진료 결과 회신이 확인 대상입니다." },
+  ], no:"이송은 요청이 있을 때만 해주세요. 접수나 비용 결제는 하지 않습니다. 이송하지 않은 경우 진료 결과를 회신받아 공유해주세요." },
   { id:"nopay", when:"\"치료비는 어떻게 되냐\"", lines:[
     "우선 치료부터 받으시고, 처리 방법은 확인 후에 안내드리겠습니다.",
     "제가 지금 말씀드리면 오히려 정확하지 않은 안내가 됩니다.",
-  ], no:"치료비 부담 · 보상 — 확인 후 정해지는 사항. 초기 발언이 기준으로 남을 수 있어 대납은 하지 않는 것이 좋습니다" },
+  ], no:"치료비 부담이나 보상은 답변을 피해주세요. 치료 경과에 따라 달라지는데 초기에 한 말이 그대로 기준이 됩니다. 현장에서 비용을 대신 결제하지 않습니다." },
   { id:"fault", when:"\"누구 책임이냐\"", lines:[
-    "우선 치료가 먼저입니다. 확인한 내용을 전달하고, 확인되는 대로 회신하겠다고 안내하는 것이 좋습니다.",
-  ], no:"인정 · 부인 모두 현장 판단에 해당합니다." },
+    "우선 치료가 먼저입니다. 확인한 내용을 전달하고, 확인되는 대로 다시 안내드리겠습니다.",
+  ], no:"인정도 부인도 하지 말아주세요." },
   { id:"info", when:"인적사항 · 경위 확인", lines:[
     "확인 절차를 위해 성함과 연락처를 알려주시겠습니까.",
     "어떻게 다치셨는지 그대로 말씀해 주시면 그대로 전달하겠습니다.",
-  ], no:"진술 내용 그대로 기록 — 요약 · 되물음 시 내용이 달라질 수 있음" },
+  ], no:"들은 그대로 기록해주세요. 요약 · 유도는 하지 않는 것이 좋습니다." },
   { id:"photo", when:"촬영 양해", lines:[
     "확인 절차에 필요해서 사고가 난 자리와 주변을 찍겠습니다.",
-  ], no:"부상 부위 — 본인 동의가 있는 경우에만. 동의 없으면 현장 상태만" },
+  ], no:"부상 부위는 본인 동의가 있을 때만 촬영해주세요. 동의가 없으면 현장 상태만 촬영합니다." },
   { id:"wit", when:"목격자가 있는 경우", lines:[
     "혹시 보신 분이 계시면 성함과 연락처를 알려주실 수 있겠습니까.",
-  ], no:"강요는 이후 분쟁의 소지가 됩니다. 확보되지 않으면 그 사실을 기록하시기를 권장드립니다." },
+  ], no:"강요하지 말아주세요. 확보되지 않으면 그 사실을 기록합니다." },
   { id:"sign", when:"확인서 · 각서 서명 요구", lines:[
-    "법적 검토를 거치지 않은 서면은 이후 불리하게 작용할 수 있다는 점을 밝히고, 전달 후 안내를 약속하는 것이 좋습니다.",
-  ], no:"수령 서면 촬영본 — 내용 확인에 필요", flag:"sign" },
+    "제가 서명할 수 있는 권한이 없습니다. 전달한 후 다시 안내드리겠습니다.",
+  ], no:"서면 수령 시 촬영 후 공유해주세요.", flag:"sign" },
   { id:"third", when:"외부기관 접촉", lines:[
-    "답변할 수 있는 사안이 아님을 밝히고, 확인 후 연락처 안내를 약속하는 것이 좋습니다.",
-  ], no:"소속 · 성명 · 요구사항 · 회신 기한 확인 대상", flag:"third" },
+    "제가 답변드릴 수 있는 사안이 아닙니다. 확인 후 연락처를 안내드리겠습니다.",
+  ], no:"소속 · 성명 · 요구사항 · 회신 기한만 확인해 공유해주세요.", flag:"third" },
   { id:"end", when:"마무리", lines:[
-    "확인한 내용을 그대로 전달하고, 확인되는 대로 회신하겠다고 안내하는 것이 좋습니다.",
-  ], no:"회신 기한 특정은 이후 기준으로 남을 수 있습니다." },
+    "확인한 내용은 그대로 전달하겠습니다. 확인되는 대로 제가 다시 연락드리겠습니다.",
+  ], no:"회신 기한은 특정하지 말아주세요." },
 ];
 
 function resultBody(){
@@ -1382,18 +1348,18 @@ function resultBody(){
 
   h+='<div class="alert"><div class="t">치료가 먼저</div><div class="d">'+
      '상태 확인 → 병원 안내 → 유선 공유 → 사실 확인 · 촬영<br>'+
-     '병원 안내가 우선이며, 사진 · 경위 확인은 그 이후 사항입니다.</div></div>';
+     '사진 · 경위 확인을 병원 안내보다 먼저 하지 않습니다.</div></div>';
   h+='<div class="alert mute"><div class="t" style="font-size:14px">병원 안내 기준</div><div class="d">'+
      '· 위급한 경우 — 119 신고. 무리하게 이동시키지 않음<br>'+
      '· 그 외 — 병원 내방을 안내. 고객 요청이 있는 경우에만 이송<br>'+
      '· 이송하지 않은 경우 — 진료 결과를 회신받아 공유<br>'+
-     '이송 여부와 무관하게 접수 · 비용 결제는 하지 않는 것이 좋습니다.</div></div>';
+     '이송 여부와 무관하게 접수 · 비용 결제는 피해주세요.</div></div>';
 
   if(f.length) h+=flagBox(f);
 
   h+='<div class="sec">유선으로 먼저 확인<span>공유 시</span></div>'+box([
     row('','부상자 인원 · 고객과의 관계'),
-    row('','부상 부위 · 병원 안내 여부 · 이송 여부 · 병원명','상해 정도는 단정하기보다 확인된 사실만 전달하는 것이 좋습니다'),
+    row('','부상 부위 · 병원 안내 여부 · 이송 여부 · 병원명','상해 정도는 판단 피해주세요. 사실만 전달'),
     row('','사고 경위','제품 걸림 · 낙하 · 전도 등 들은 그대로'),
     row('','고객 인적사항 · 모델명 · 제조번호')]);
 
@@ -1401,7 +1367,7 @@ function resultBody(){
     row('부상자','성명 · 연락처','고객이 아닌 경우 특히 누락되기 쉬움'),
     row('목격자','성명 · 연락처','확보되지 않으면 그 사실을 기록'),
     row('제품','모델명 · 제조번호 · 설치 주문번호'),
-    row('진술','부상자 · 목격자 진술','진술 내용 그대로 — 요약 · 되물음 없이')]);
+    row('진술','부상자 · 목격자 진술','들은 그대로. 요약 · 유도는 하지 않는 것이 좋습니다')]);
 
   h+='<div class="sec">촬영<span>이송 후</span></div>';
   h+=grp('현장')+ckList([
@@ -1411,7 +1377,7 @@ function resultBody(){
     { t:"제품 적재 · 고정 상태", d:"작업 중이던 경우 당시 상태" },
     { t:"부상 부위", d:"본인 동의가 있는 경우에만. 동의가 없으면 촬영하지 않고 그 사실을 기록" },
   ]);
-  h+='<div class="note">정리 이후에는 당시 상태 확인이 불가능합니다. 다만 부상자 이송과 추가 위험 제거가 우선입니다.</div>';
+  h+='<div class="note">현장을 정리하기 전에 촬영해주세요. 다만 부상자 이송과 추가 위험 제거가 우선입니다.</div>';
 
   const says=SAY_D.filter(s=>{ if(s.flag) return f.includes(s.flag); return true; });
   h+=sayBox(says)+denyBox()+reportBox(lv, ' · 진술 기록');
@@ -1464,20 +1430,10 @@ function renderQ(){
   const bb=document.getElementById('bBack'); if(bb) bb.onclick=()=>{ node=stack.pop(); render(); };
   if(node==='type'){
     app.insertAdjacentHTML('beforeend',
-      
-      '<div class="why">'+
-      '<div class="wh">현장 확인이 중요한 이유</div>'+
-      '<p>귀책 여부가 명확하지 않은 사고는 이후 관계기관 조사 등 확인 과정을 거쳐 판단됩니다. '+
-      '그 과정에서 현장 사진과 기록이 사실관계를 설명하는 근거가 되며, 조치 이후에는 당시 상태를 다시 확인할 수 없습니다.</p>'+
-      '<p>현장에서 원인을 단정하기보다, 확인된 내용을 그대로 남겨두는 것이 좋습니다.</p>'+
-      '<div class="wh">현장에서 주로 확인하는 것</div>'+
-      '<ul class="wl">'+
-      '<li><b>전체 모습</b><span>제품 위치와 주변이 함께 보이게</span></li>'+
-      '<li><b>피해 범위</b><span>어디까지 번졌는지 경계</span></li>'+
-      '<li><b>제품 정보</b><span>명판의 모델명 · 제조번호</span></li>'+
-      '<li><b>고객 진술</b><span>들은 내용 그대로</span></li>'+
-      '</ul>'+
-      '<p class="wn">보상 · 처리 관련 문의 중 도급사와 협의가 필요한 사항은 담당 LM과 협의 후 안내하시기를 권장드립니다.</p>'+
+      '<div class="intro">'+
+      '<div class="ir"><em>1</em><div><b>판단보다 사실 확인이 먼저입니다</b><span>원인과 귀책은 관계기관 조사와 협력사 · 도급사 · 보험사 확인으로 정해집니다. 현장에서는 확인된 사실과 증빙 자료를 확보하는 것이 중요합니다.</span></div></div>'+
+      '<div class="ir"><em>2</em><div><b>조치 전 원래 상태를 남기는 것이 중요합니다</b><span>정리하거나 조치한 뒤에는 당시 상태를 다시 확인할 수 없습니다. 촬영이 먼저입니다.</span></div></div>'+
+      '<div class="ir"><em>3</em><div><b>현장에서는 책임 · 보상과 관련한 언급을 피해주세요</b><span>보상 · 기한 · 처리 방향은 협력사와 도급사 · 보험사 확인 후에 정해지는 부분입니다. 현장에서는 언급을 피해주시고, 최대한 빠르게 검토 후 다시 연락드리겠다고 전달해주세요.</span></div></div>'+
       '</div>'+
       '<div class="rev">'+(PARTNER?esc(PARTNER)+' 배포 · ':'')+'개정 '+REV+(false?'':' · LMD/설치품질팀')+'</div>');
   }
@@ -1495,7 +1451,7 @@ function fitQ(){
 }
 
 function renderSoon(){
-  app.innerHTML='<div class="soon">해당 사고 유형은 준비 중입니다.<br>기존 절차에 따라 공유하시기를 권장드립니다.</div>'+
+  app.innerHTML='<div class="soon">해당 사고 유형은 준비 중입니다.<br>기존 절차에 따라 공유해주세요.</div>'+
     '<div class="actions"><button class="back" id="bBack">이전</button></div>';
   document.getElementById('bBack').onclick=()=>{ node=stack.pop(); render(); };
 }
@@ -1521,18 +1477,18 @@ const T_FLAG={third:"외부기관 접촉",sign:"서면 서명 요구",voc:"소�
 
 function level(){
   if (S.type==='fire'){
-    if (S.injury==='y') return {h:"지금 바로 전화로 공유", t:"즉시 유선 공유", d:"인명피해 건은 ⟪지금 바로 전화로⟫ 공유한 후 추가 사항 조사를 진행하는 것이 좋습니다."};
+    if (S.injury==='y') return {h:"지금 바로 전화로 공유", t:"즉시 유선 공유", d:"인명피해 건은 ⟪지금 바로 전화로⟫ 공유한 후 추가 사항 조사를 진행합니다."};
     if (S.scale===3) return {h:"지금 바로 전화로 공유", t:"즉시 유선 공유", d:"인접 세대로 확산된 건입니다. ⟪지금 바로 전화로⟫ 공유해주세요. 보험사 접촉이 발생할 수 있습니다."};
-    return {h:"오늘 안에 공유", t:"당일 공유", d:"화재는 규모와 무관하게 ⟪오늘 안에⟫ 전건 공유하시기를 권장드립니다."};
+    return {h:"오늘 안에 공유", t:"당일 공유", d:"화재는 규모와 무관하게 ⟪오늘 안에⟫ 전건 공유합니다."};
   }
   if (S.type==='body')
-    return {h:"지금 바로 전화로 공유", t:"즉시 유선 공유", d:"부상 정도와 무관하게 상태 확인 후 ⟪지금 바로 전화로⟫ 공유하시기를 권장드립니다."};
+    return {h:"지금 바로 전화로 공유", t:"즉시 유선 공유", d:"부상 정도와 무관하게 상태 확인 후 ⟪지금 바로 전화로⟫ 공유합니다."};
   if (S.type==='break'){
-    if (S.found==='late') return {h:"오늘 안에 공유", t:"당일 공유", d:"설치 과정 중 발생 여부가 쟁점입니다. 확인 자료를 확보해 ⟪오늘 안에⟫ 공유하시기를 권장드립니다."};
-    return {h:"오늘 안에 공유", t:"당일 공유", d:"피해 규모는 촬영본으로 판단합니다. 확인한 내용을 ⟪오늘 안에⟫ 공유하시기를 권장드립니다."};
+    if (S.found==='late') return {h:"오늘 안에 공유", t:"당일 공유", d:"설치 과정 중 발생 여부가 쟁점입니다. 확인 자료를 확보해 ⟪오늘 안에⟫ 공유합니다."};
+    return {h:"오늘 안에 공유", t:"당일 공유", d:"피해 규모는 촬영본으로 판단합니다. 확인한 내용을 ⟪오늘 안에⟫ 공유합니다."};
   }
   if (S.spread===3) return {h:"지금 바로 전화로 공유", t:"즉시 유선 공유", d:"아랫집 · 인접 세대로 확산된 건입니다. ⟪지금 바로 전화로⟫ 공유해주세요. 보험사 접촉이 발생할 수 있습니다."};
-  return {h:"오늘 안에 공유", t:"당일 공유", d:"조치 완료 여부와 무관하게 ⟪오늘 안에⟫ 전건 공유하시기를 권장드립니다."};
+  return {h:"오늘 안에 공유", t:"당일 공유", d:"조치 완료 여부와 무관하게 ⟪오늘 안에⟫ 전건 공유합니다."};
 }
 
 const DEPT=["협력사 담당자(현장대리인/대표)","LM","LMD/설치품질팀"];
@@ -1540,11 +1496,11 @@ function scope(){
   const f=S.flags||[];
   const esc1=f.includes('voc')||f.includes('third');
   if(esc1) return {n:3, t: false ? "전건 공유 · 상향 대상" : "LMD/설치품질팀까지 상향",
-    d: false ? "대외 확산이 예상되는 건입니다. 피해 금액과 관계없이 공유 대상입니다." : "대외 확산이 예상되는 건입니다. 피해 금액과 관계없이 LMD/설치품질팀까지 공유하시기를 권장드립니다."};
+    d: false ? "대외 확산이 예상되는 건입니다. 피해 금액과 관계없이 공유 대상입니다." : "대외 확산이 예상되는 건입니다. 피해 금액과 관계없이 LMD/설치품질팀까지 공유합니다."};
   if(S.type==='fire'||S.type==='body') return {n:3, t: false ? "규모 무관 전건 공유" : "LMD/설치품질팀까지 전건",
-    d: false ? "화재 · 대인 사고는 규모와 무관하게 전건 공유 대상입니다. LMD/설치품질팀까지 공유하시기를 권장드립니다." : "화재 · 대인 사고는 규모와 무관하게 전건 공유 대상입니다."};
+    d: false ? "화재 · 대인 사고는 규모와 무관하게 전건 공유 대상입니다. LMD/설치품질팀까지 공유합니다." : "화재 · 대인 사고는 규모와 무관하게 전건 공유 대상입니다."};
   return {n:1, t:"협력사 1차 확인",
-    d: false ? "피해 규모는 확인한 내용을 바탕으로 이후 단계에서 판단합니다." : "피해 규모는 협력사에서 1차 확인하며, 자기부담금 기준을 넘을 것으로 예상되거나 판단이 어려운 경우 이후 단계로 공유하시기를 권장드립니다."};
+    d: false ? "피해 규모는 확인한 내용을 바탕으로 이후 단계에서 판단합니다." : "피해 규모는 협력사에서 1차 확인하며, 자기부담금 기준을 넘을 것으로 예상되거나 판단이 어려운 경우 이후 단계로 공유합니다."};
 }
 
 const box = rows => '<div class="box">'+rows.filter(Boolean).join('')+'</div>';
@@ -1566,15 +1522,16 @@ const ICON={
 };
 const T_KIND={fire:'화재사고',water:'누수사고',break:'파손사고',body:'대인사고'};
 const NUM='<em class="n"></em>';
-const numbered = h => h.split(NUM).join('');
+const numbered = h => { let i=0; return h.split(NUM).join('\u0000').split('\u0000')
+  .reduce((a,part,idx,arr)=>a+part+(idx<arr.length-1?'<em class="n">'+String(++i).padStart(2,'0')+'</em>':''),''); };
 const sub = (t,n) => '<div class="subh">'+NUM+esc(t)+(n?'<span>'+esc(n)+'</span>':'')+'</div>';
 
 const FLAGNOTE={
-  third:{t:"외부기관 접촉", d:"소속 · 성명 · 요구사항 · 회신 기한 확인 대상. 현장 답변은 이후 절차에서 인용될 수 있습니다."},
-  sign:{t:"서면 서명 요구", d:"법적 검토를 거치지 않은 서면은 이후 불리하게 작용할 수 있습니다. 수령한 서면은 촬영본이 필요합니다."},
-  voc:{t:"소비자원 · 법적 대응 언급", d:"확인과 조치는 그대로 진행하며, LMD/설치품질팀까지 공유 대상입니다."},
-  deny:{t:"촬영 거부", d:"강행 시 분쟁 소지가 있습니다. 거부 사실과 사유를 기록으로 남기는 것이 좋습니다."},
-  done:{t:"조치 완료 후 접수", d:"조치 전 사진과 조치 내역 확인 대상입니다."}
+  third:{t:"외부기관 접촉", d:"소속 · 성명 · 요구사항 · 회신 기한만 확인해 공유해주세요. 현장 답변은 피해주세요."},
+  sign:{t:"서면 서명 요구", d:"현장에서 서명할 권한이 없습니다. 받으셨다면 촬영 후 공유해주세요."},
+  voc:{t:"소비자원 · 법적 대응 언급", d:"확인과 조치는 그대로 진행하되 LMD/설치품질팀까지 공유해주세요."},
+  deny:{t:"촬영 거부", d:"강행하지 말고 거부 사실과 사유를 기재해 공유해주세요."},
+  done:{t:"조치 완료 후 접수", d:"조치 전 사진과 조치 내역이 남아 있는지 먼저 확인해주세요."}
 };
 
 /* 화재 · 대인 — 정보보고 절차 */
@@ -1586,8 +1543,9 @@ function addInfoReport(B){
   if(!infoTarget()) return;
   if(true) return;
   {
-    B.alerts.unshift({t:"정보보고 대상", hard:true,
-      d:"화재 · 대인 사고 및 인명피해 발생 건은 인적 · 물적 피해 규모와 관계없이 정보보고 대상입니다. 보고 절차는 Compliance팀 정보보고 가이드를 참고하시기 바랍니다."});
+    B.alerts.unshift({t:"정보보고 · 1시간 이내", hard:true,
+      steps:["피해 규모 확인 (대인 · 대물)","유선으로 보고","연결이 안 되면 SMS · 메신저"],
+      d:"소속 팀장 · 담당 · 사업부장, 안전보건팀, LMD/설치 Compliance팀에 사고 인지 후 ⟪1시간 이내⟫ 보고합니다. 인적 · 물적 피해 규모와 관계없이 예외 없이 보고 대상입니다."});
   }
 }
 
@@ -1599,16 +1557,16 @@ function buildFire(){
   addInfoReport(B);
   const hi=S.hist||[];
   if(hi.includes('svc')) B.alerts.push({t:"서비스 이력이 있는 건",
-    d:"설치 이후 서비스가 제품을 취급한 건 — 방문 시기 · 수리 내용 확인 대상. 원인은 단정하기보다 확인된 내용을 남기는 것이 좋습니다."});
+    d:"설치 이후 서비스가 제품을 취급한 건입니다. 방문 시기와 수리 내용을 고객에게 확인해 그대로 공유해주세요. 현장에서 원인을 판단하지 않습니다."});
   if(hi.includes('elec')) B.alerts.push({t:"전기공사 이력이 있는 건",
-    d:"세대 전기공사 · 리모델링 이력이 있는 건 — 시기 · 범위 확인, 분전반 · 배선 상태 촬영 대상"});
+    d:"세대 전기공사 · 리모델링이 있었던 건입니다. 시기와 범위를 확인하고 분전반 · 배선 상태를 함께 촬영해주세요."});
   if(hi.includes('move')) B.alerts.push({t:"이전설치 · 재설치 이력이 있는 건",
-    d:(false?"당사 설치 건인지 전산 확인이 필요합니다. ":"설치 이력 확인이 필요합니다. ")+"이전설치 시기 · 시공 주체 확인 대상"});
+    d:(false?"당사 설치 건인지 전산 확인이 필요합니다. ":"설치 이력 확인이 필요합니다. ")+"이전설치 시기와 시공 주체를 고객에게 확인해 그대로 공유해주세요."});
   if(S.felapsed==='y3'||S.felapsed==='y3p'||S.felapsed==='?')
     B.alerts.push({t:"설치 후 시간이 지난 건",
-      d:"설치 시점과 화재 발생 사이에 간격이 있는 건 — 그 사이 사용 환경 · 이력 확인 대상. 설치 원인 여부는 단정하기보다 확인된 내용을 남기는 것이 좋으며, 화재는 경과 기간과 무관하게 전건 공유 대상입니다."});
+      d:"설치 시점과 화재 발생 사이에 간격이 있는 건입니다. 그 사이의 사용 환경과 이력을 함께 확인해주세요. 현장에서 설치 때문인지 아닌지를 단정하지 않습니다. 화재는 경과 기간과 관계없이 전건 공유 대상입니다."});
   if(inj) B.alerts.push({t:"인명피해 건",
-    d:"즉시 유선으로 "+nextName()+"에게 사고 사항 공유 후 후속 확인이 진행됩니다.", hard:true});
+    d:"즉시 유선으로 "+nextName()+"에게 사고 사항을 공유한 후 후속 조사를 진행해주세요.", hard:true});
 
   let n='';
   if(inj) n+=sub('유선으로 먼저 확인')+box([
@@ -1620,18 +1578,18 @@ function buildFire(){
         S.fprod==='etc' ? '' : '실외기는 타서 없어졌을 수 있음'),
     (hi.includes('svc')?row('서비스 이력','방문 시기 · 수리 내용','고객 진술 그대로 기록'):''),
     (hi.includes('elec')?row('전기공사 이력','시기 · 범위 · 시공 주체','고객 진술 그대로 기록'):''),
-    (sv==='post'?row('서비스 방문 후 건','SM 촬영 자료 요청','현장이 정리되었을 수 있습니다. 통보 시점의 사진과 제조번호가 확인 대상입니다'):''),
+    (sv==='post'?row('서비스 방문 후 건','SM 촬영 자료 요청','현장이 정리되었을 수 있습니다. 통보 시점에 사진과 제조번호를 함께 요청해주세요'):''),
     row('대조용','주문자 성명 · 연락처','배우자 명의 포함'),
     row('가능한 경우','설치 주문번호','고객 보유 문자 · 영수증에서 확인되면 조회가 빠름'),
     row('확보 불가 시','해당 사실을 그대로 공유')])+
     note(false
-      ? '제품에 설치 스티커가 부착되어 있더라도 당사 설치 여부는 전산 확인이 필요합니다. 설치 이력과 귀책 여부는 확인 과정에서 정해지는 사항입니다.'
-      : '제품에 설치 스티커가 부착되어 있더라도 설치 여부는 전산 확인이 필요합니다. 설치 이력과 귀책 여부는 확인 과정에서 정해지는 사항입니다.');
+      ? '제품에 설치 스티커가 부착되어 있더라도 당사 설치 여부는 전산 확인이 필요합니다. 설치 이력과 귀책 여부는 협력사와 도급사 · 보험사 확인 사항입니다.'
+      : '제품에 설치 스티커가 부착되어 있더라도 설치 여부는 전산 확인이 필요합니다. 설치 이력과 귀책 여부는 협력사와 도급사 · 보험사 확인 사항입니다.');
   B.now=n;
 
-  if(wh==='rep') B.shotNotes.push('소방 · 경찰이 원인 확인용 증거물을 가져갔을 수 있습니다. 결선부가 없으면 그 사실이 기록으로 남고, 탄 흔적은 남아 있어 나머지는 확인이 가능합니다.');
-  if(wh==='self') B.shotNotes.push('신고되지 않은 건은 현장이 남아 있는 상태로, 이후 원인 확인의 유일한 자료가 됩니다. 규모와 무관하게 촬영본이 필요합니다.');
-  if(sv==='post') B.shotNotes.push('서비스가 다녀간 뒤라 현장이 정리되었을 수 있습니다. 확인되지 않는 항목은 SM 촬영 자료 요청 대상입니다.');
+  if(wh==='rep') B.shotNotes.push('소방 · 경찰이 원인 확인용 증거물을 가져갔을 수 있습니다. 결선부가 없으면 그 사실만 기록하고, 탄 흔적은 남아 있으므로 나머지는 그대로 확인해주세요.');
+  if(wh==='self') B.shotNotes.push('신고되지 않은 건은 현장이 남아 있는 상태로, 이후 원인 확인의 유일한 자료가 됩니다. 규모와 무관하게 촬영 후 공유해주세요.');
+  if(sv==='post') B.shotNotes.push('서비스가 다녀간 뒤라 현장이 정리되었을 수 있습니다. 확인되지 않는 항목은 SM 촬영 자료를 요청해 함께 공유해주세요.');
   (S.fprod==='etc' ? SHOTS_ETC : SHOTS_F).forEach(g=>{
     const soft = (wh==='rep' && g.g.indexOf('결선부')===0) || sv==='post';
     B.shots.push({g:g.g, must:g.must, n:soft?'확인 가능한 범위에서':'', items:g.items});
@@ -1655,30 +1613,30 @@ function buildWater(){
 
   if((S.flags||[]).includes('voc') || (S.flags||[]).includes('third'))
     B.alerts.push({t:"대외 확산 예상 건",
-      d:"외부기관 접촉 또는 소비자원 · 법적 대응이 언급된 건입니다. 피해 금액이 ⟪자기부담금 기준⟫ 이하로 예상되더라도 공유하시기를 권장드립니다."});
+      d:"외부기관 접촉 또는 소비자원 · 법적 대응이 언급된 건입니다. 피해 금액이 ⟪자기부담금 기준⟫ 이하로 예상되더라도 자체 처리 대상이 아닙니다."});
   if(S.elapsed==='y1'||S.elapsed==='y3'||S.elapsed==='y3p'||S.elapsed==='?')
     B.alerts.push({t:"설치 후 시간이 지난 건",
-      d:"설치 시점과 누수 발생 사이에 간격이 있는 건 — 그 사이 다른 작업 · 사용 변경 여부 확인 대상. 설치 원인 여부는 단정하기보다 확인된 내용을 남기는 것이 좋습니다."});
+      d:"설치 시점과 누수 발생 사이에 간격이 있는 건입니다. 그 사이 다른 작업이나 사용 변경이 있었는지 확인해 함께 공유해주세요. 현장에서 설치 때문인지 아닌지를 단정하지 않습니다."});
   if(S.route==='svc')
     B.alerts.push({t:"서비스 통보 건",
-      d:"현장이 이미 정리되었을 수 있는 건 — 서비스 점검 결과 / 확인되지 않는 항목 기록 대상"});
+      d:"현장이 이미 정리되었을 수 있습니다. 서비스 점검 결과와 확인되지 않는 항목을 함께 공유해주세요."});
   if(S.route==='down')
     B.alerts.push({t:"아랫집 · 관리사무소 통보 건",
-      d:"알린 쪽과 설치 세대가 다른 건 — 설치 세대 방문 동의 확인 후 진행. 알린 쪽 담당자 성함 · 연락처 확인 대상"});
+      d:"알린 쪽과 설치 세대가 다릅니다. 설치 세대 방문 동의를 먼저 확인하고, 알린 쪽 담당자 성함 · 연락처를 확보해주세요."});
   if(!(S.flags||[]).includes('voc') && !(S.flags||[]).includes('third'))
     B.alerts.push({t: ROLE==="log" ? "규모 1차 확인" : false ? "규모 검토" : "규모 판단은 협력사에서",
       d: (false
-        ? "확인한 내용은 협력사 담당자(현장대리인/대표)에게 공유됩니다. 피해 규모는 협력사에서 1차 확인하며, 금액은 이후 확인 과정에서 정해집니다."
-        : true ? "피해 규모를 1차 확인하시기를 권장드립니다. 피해 금액이 ⟪자기부담금 기준⟫을 넘을 것으로 예상되거나 판단이 어려운 경우 LM에게 전달하는 것이 좋습니다."
-        : "협력사에서 1차 확인한 규모를 검토합니다. 자기부담금 기준을 넘을 것으로 예상되거나 판단이 어려운 경우 LMD/설치품질팀으로 공유하시기를 권장드립니다.")});
+        ? "확인한 내용을 협력사 담당자(현장대리인/대표)에게 공유합니다. 피해 규모는 협력사에서 1차 확인합니다. 현장에서 금액을 가늠하지 않습니다."
+        : true ? "피해 규모를 1차 확인합니다. 피해 금액이 ⟪자기부담금 기준⟫을 넘을 것으로 예상되거나 판단이 어려운 경우 LM에게 전달합니다."
+        : "협력사에서 1차 확인한 규모를 검토합니다. 자기부담금 기준을 넘을 것으로 예상되거나 판단이 어려운 경우 LMD/설치품질팀으로 공유합니다.")});
   addInfoReport(B);
   B.alerts.push({t:"조치 전에 남길 것",
     steps:["밸브 잠금","조치 전 촬영","재현","원인 확인","조치","조치 후 확인"],
-    d:"조치 이후 당시 상태 확인 불가. 촬영 전 재체결 · 부품 교체 시 확인 근거 소실", hard:true});
+    d:"조치하고 나면 원래 상태는 다시 만들 수 없습니다. 촬영 전 재체결 · 부품 교체는 하지 않습니다.", hard:true});
   if(isWork && (S.ord==='n'||S.ord==='?'))
-    B.alerts.push({t:"처리 경로 확인 필요", d:"주문 연계가 확인되지 않는 단독 작업 건 — 처리 방향은 사고 내용 확인 후 정해지는 사항. 도급사 협의가 필요한 경우 담당 LM과 협의. 주문번호 · 작업 접수 경로 확인 대상"});
+    B.alerts.push({t:"처리 경로 확인 필요", d:"주문 연계가 확인되지 않는 단독 작업 건입니다. 처리 방향은 협력사와 도급사 · 보험사 확인 사항으로, 현장에서 처리 · 보상 관련 안내를 하지 않습니다. 주문번호 · 작업 접수 경로가 확인되면 함께 공유해주세요."});
   if(f.includes('done'))
-    B.alerts.push({t:"조치 완료 후 접수", d:"조치 전 사진 · 조치 내역 확인 대상. 미확보 시 그 사실이 기록으로 남습니다"});
+    B.alerts.push({t:"조치 완료 후 접수", d:"조치 전 사진 · 조치 내역이 남아 있는지 먼저 확인하고, 없으면 그 사실을 그대로 공유해주세요."});
 
   B.now=sub('확보')+box([
     row('1순위','제품 명판의 모델명 · 제조번호'),
@@ -1686,7 +1644,7 @@ function buildWater(){
     row('가능한 경우','설치 주문번호 · 작업일자','고객 보유 문자 · 영수증에서 확인되면 조회가 빠름'),
     ((S.elapsed==='y1'||S.elapsed==='y3'||S.elapsed==='y3p'||S.elapsed==='?')?row('경과 건','그 사이 다른 작업 · 사용 변경 유무','고객 진술 그대로 기록'):''),
     (isWork?row('작업 접수 경로','주문 연계 여부 · 접수 경로','제품 설치 주문에 포함된 작업인지, 작업만 단독으로 접수된 건인지'):''),
-    (sd==='hole'?row('타공 건','도면 확인 여부 · 관리사무소 담당자',(T_DRILL[S.drill]||'')+' · 성함과 연락처 확인 대상'):''),
+    (sd==='hole'?row('타공 건','도면 확인 여부 · 관리사무소 담당자',(T_DRILL[S.drill]||'')+' · 성함과 연락처를 확보해주세요'):''),
     (S.spread===3?row('고객 측 담보','일상생활배상책임 담보 가입 여부','화재보험 · 주택종합보험 특약으로 가입된 경우가 많음. 가입 여부만 확인'):''),
     row('확보 불가 시','해당 사실을 그대로 공유')]);
 
@@ -1704,7 +1662,7 @@ function buildWater(){
   } else {
     if(sd==='hole'){
       B.shots.push({g:'타공부', items:HOLE_SHOTS});
-      B.shotNotes.push('공용배관 손상은 관리사무소가 별도 권리로 복구 · 배상을 요구하는 것이 좋습니다. 복구 방법과 비용은 확인 후 정해지는 사항입니다.');
+      B.shotNotes.push('공용배관 손상은 관리사무소가 별도 권리로 복구 · 배상을 요구합니다. 복구 방법과 비용은 현장에서 약속하지 말아주세요.');
     }
     else if(sd==='seal') B.shots.push({g:'마감부', items:SEAL_SHOTS});
     else if(pr==='ac') B.shots.push({g:'배수부', n:'에어컨', items:AC_OUT});
@@ -1730,7 +1688,7 @@ function buildWater(){
     { t:"배수구 주변 오염 · 이물", d:"슬러지 · 침전물" },
     { t:"배관 내부", d:"내시경 확인이 가능한 경우. 어려우면 '장비 없음'으로 기록" },
   ]});
-  if(sd!=='hole'&&sd!=='seal') B.shotNotes.push('매립배수관에서 역류가 확인되면 배관 내부 상태도 확인 대상입니다. 배관 내부는 시공 범위 밖의 원인을 확인할 수 있는 유일한 자료입니다.');
+  if(sd!=='hole'&&sd!=='seal') B.shotNotes.push('매립배수관에서 역류가 확인되면 배관 내부 상태까지 확인해주세요. 배관 내부는 시공 범위 밖의 원인을 확인할 수 있는 유일한 자료입니다.');
 
   B.shots.push({g:'조치', items:[
     { t:"조치 내역 기록", d:"무엇을 어떻게 조치했는지. 교체 부품이 있으면 함께" },
@@ -1759,26 +1717,26 @@ function buildBreak(){
   const B={alerts:[], now:'', shots:[], shotNotes:[], says:[], report:[]};
 
   addInfoReport(B);
-  B.alerts.push({t:"금액은 이후 확인 과정에서 정해집니다", d:"피해 규모는 촬영본으로 확인됩니다. 전경 · 범위 · 근접 · 크기 비교물 — 근접만으로는 규모 확인 불가", hard:true});
+  B.alerts.push({t:"금액은 현장에서 판단하지 않습니다", d:"피해 규모는 촬영본을 확인해 판단합니다. 판단이 가능한 사진을 남기는 것이 현장의 역할입니다. 전경 · 범위 · 근접 · 크기 비교물을 모두 촬영해주세요.", hard:true});
   if((S.flags||[]).includes('voc') || (S.flags||[]).includes('third'))
     B.alerts.push({t:"대외 확산 예상 건",
-      d:"외부기관 접촉 또는 소비자원 · 법적 대응이 언급된 건입니다. 피해 금액이 ⟪자기부담금 기준⟫ 이하로 예상되더라도 공유하시기를 권장드립니다."});
+      d:"외부기관 접촉 또는 소비자원 · 법적 대응이 언급된 건입니다. 피해 금액이 ⟪자기부담금 기준⟫ 이하로 예상되더라도 자체 처리 대상이 아닙니다."});
   if(S.elapsed==='y1'||S.elapsed==='y3'||S.elapsed==='y3p'||S.elapsed==='?')
     B.alerts.push({t:"설치 후 시간이 지난 건",
-      d:"설치 시점과 누수 발생 사이에 간격이 있는 건 — 그 사이 다른 작업 · 사용 변경 여부 확인 대상. 설치 원인 여부는 단정하기보다 확인된 내용을 남기는 것이 좋습니다."});
+      d:"설치 시점과 누수 발생 사이에 간격이 있는 건입니다. 그 사이 다른 작업이나 사용 변경이 있었는지 확인해 함께 공유해주세요. 현장에서 설치 때문인지 아닌지를 단정하지 않습니다."});
   if(S.route==='svc')
     B.alerts.push({t:"서비스 통보 건",
-      d:"현장이 이미 정리되었을 수 있는 건 — 서비스 점검 결과 / 확인되지 않는 항목 기록 대상"});
+      d:"현장이 이미 정리되었을 수 있습니다. 서비스 점검 결과와 확인되지 않는 항목을 함께 공유해주세요."});
   if(S.route==='down')
     B.alerts.push({t:"아랫집 · 관리사무소 통보 건",
-      d:"알린 쪽과 설치 세대가 다른 건 — 설치 세대 방문 동의 확인 후 진행. 알린 쪽 담당자 성함 · 연락처 확인 대상"});
+      d:"알린 쪽과 설치 세대가 다릅니다. 설치 세대 방문 동의를 먼저 확인하고, 알린 쪽 담당자 성함 · 연락처를 확보해주세요."});
   if(!(S.flags||[]).includes('voc') && !(S.flags||[]).includes('third'))
     B.alerts.push({t: ROLE==="log" ? "규모 1차 확인" : false ? "규모 검토" : "규모 판단은 협력사에서",
       d: (false
-        ? "확인한 내용은 협력사 담당자(현장대리인/대표)에게 공유됩니다. 피해 규모는 협력사에서 1차 확인하며, 금액은 이후 확인 과정에서 정해집니다."
-        : true ? "피해 규모를 1차 확인하시기를 권장드립니다. 피해 금액이 ⟪자기부담금 기준⟫을 넘을 것으로 예상되거나 판단이 어려운 경우 LM에게 전달하는 것이 좋습니다."
-        : "협력사에서 1차 확인한 규모를 검토합니다. 자기부담금 기준을 넘을 것으로 예상되거나 판단이 어려운 경우 LMD/설치품질팀으로 공유하시기를 권장드립니다.")});
-  if(late) B.alerts.push({t:"퇴거 이후 발견된 건", d:"설치 과정(하차 · 설치 · 퇴거) 중 발생 여부가 쟁점입니다. 확인 대상 — 파손 부위의 진입 · 이동 경로 포함 여부 / 발견 시점과 그 사이 작업 / 설치 시점 품질사진 포함 여부(설치 주문번호 필요)"});
+        ? "확인한 내용을 협력사 담당자(현장대리인/대표)에게 공유합니다. 피해 규모는 협력사에서 1차 확인합니다. 현장에서 금액을 가늠하지 않습니다."
+        : true ? "피해 규모를 1차 확인합니다. 피해 금액이 ⟪자기부담금 기준⟫을 넘을 것으로 예상되거나 판단이 어려운 경우 LM에게 전달합니다."
+        : "협력사에서 1차 확인한 규모를 검토합니다. 자기부담금 기준을 넘을 것으로 예상되거나 판단이 어려운 경우 LMD/설치품질팀으로 공유합니다.")});
+  if(late) B.alerts.push({t:"퇴거 이후 발견된 건", d:"설치 과정(하차 → 설치 → 퇴거) 중 발생 여부가 쟁점입니다. 파손 부위가 진입 · 이동 경로상에 있는지, 발견 시점과 그 사이 다른 작업이 있었는지, 설치 시점 품질사진에 해당 부위가 포함되는지 확인이 필요하므로, 설치 주문번호를 함께 공유해주세요."});
 
   B.now=sub('확보')+box([
     row('1순위','제품 명판의 모델명 · 제조번호'),
@@ -1812,18 +1770,18 @@ function buildBody(){
   B.alerts.push({t:"치료가 먼저",
     steps:["상태 확인","병원 안내","유선 공유","사실 확인 · 촬영"],
     d:"사진과 경위 확인을 병원 안내보다 먼저 하지 않습니다.", hard:true});
-  B.alerts.push({t:"병원 안내 기준", d:"위급한 경우 119 신고, 무리하게 이동시키지 않는 것이 좋습니다.  그 외에는 병원 내방을 안내하고, 고객 요청이 있는 경우에만 이송하는 것이 좋습니다.  이송하지 않은 경우 진료 결과를 회신받아 공유하시기를 권장드립니다.  이송 여부와 무관하게 접수 · 비용 결제는 하지 않는 것이 좋습니다."});
+  B.alerts.push({t:"병원 안내 기준", d:"위급한 경우 119 신고, 무리하게 이동시키지 않습니다.  그 외에는 병원 내방을 안내하고, 고객 요청이 있는 경우에만 이송합니다.  이송하지 않은 경우 진료 결과를 회신받아 공유합니다.  이송 여부와 무관하게 접수 · 비용 결제는 대상이 아닙니다."});
 
   B.now=sub('유선으로 먼저 확인')+box([
     row('','부상자 인원 · 고객과의 관계'),
-    row('','부상 부위 · 병원 안내 여부 · 이송 여부 · 병원명','상해 정도는 단정하기보다 확인된 사실만 전달하는 것이 좋습니다'),
+    row('','부상 부위 · 병원 안내 여부 · 이송 여부 · 병원명','상해 정도는 판단 피해주세요. 사실만 전달'),
     row('','사고 경위','제품 걸림 · 낙하 · 전도 등 들은 그대로'),
     row('','고객 인적사항 · 모델명 · 제조번호')])+
     sub('확보')+box([
     row('부상자','성명 · 연락처','고객이 아닌 경우 특히 누락되기 쉬움'),
     row('목격자','성명 · 연락처','확보되지 않으면 그 사실을 기록'),
     row('제품','모델명 · 제조번호 · 설치 주문번호'),
-    row('진술','부상자 · 목격자 진술','진술 내용 그대로 — 요약 · 되물음 없이')]);
+    row('진술','부상자 · 목격자 진술','들은 그대로. 요약 · 유도는 하지 않는 것이 좋습니다')]);
 
   B.shots.push({g:'현장', n:'이송 후', items:[
     { t:"사고 발생 지점 전경", d:"어디에서 어떻게 났는지 확인되게. 여러 방향에서" },
@@ -1832,7 +1790,7 @@ function buildBody(){
     { t:"제품 적재 · 고정 상태", d:"작업 중이던 경우 당시 상태" },
     { t:"부상 부위", d:"본인 동의가 있는 경우에만. 동의가 없으면 촬영하지 않고 그 사실을 기록" },
   ]});
-  B.shotNotes.push('정리 이후에는 당시 상태 확인이 불가능합니다. 다만 부상자 이송과 추가 위험 제거가 우선입니다.');
+  B.shotNotes.push('현장을 정리하기 전에 촬영해주세요. 다만 부상자 이송과 추가 위험 제거가 우선입니다.');
 
   B.says=SAY_D.filter(s=>{ if(s.flag) return f.includes(s.flag); return true; });
   B.reportExtra=' · 진술 기록';
@@ -1840,26 +1798,24 @@ function buildBody(){
 }
 
 function denyRows(){
-  const base=[
-    ["원인 단정","원인은 확인 · 조사를 거쳐 정해지는 사항이라, 현장에서 단정해 말씀드리면 이후 사실과 다르게 인용될 수 있습니다."],
-    ["시공 방식 · 시공 기준 설명","시공 방식이나 기준에 대한 설명이 원인을 추정하는 근거로 인용될 수 있어, 구체적인 설명은 하지 않는 편이 좋습니다."],
-    [(false?"당사 설치 건 여부":"설치 이력 확인"),"설치 여부와 시기는 전산 조회로 확인되는 사항이라, 확인 후 안내드리겠다고 전달하는 것이 좋습니다."],
-    ["처리 방향 · 보상 · 기한","사고 내용을 확인한 뒤 보험 처리 여부를 포함해 정해지는 사항입니다. 도급사와 협의가 필요한 경우 담당 LM과 협의 후 안내하는 것이 좋습니다."],
-    ["확인서 · 각서 등 서면 서명","법적 검토를 거치지 않은 서면은 이후 불리하게 작용할 수 있습니다."]];
-  if(S.type==='fire'){
-    base[0]=["원인 추정","원인은 소방 · 경찰 등 관계기관 조사로 확인되는 사항이라, 현장에서 추정해 말씀드리면 이후 사실과 다르게 인용될 수 있습니다."];
-    base.splice(4,0,["보험료 할증 · 자기부담금","고객이 가입한 보험의 할증이나 자기부담금은 해당 보험사에서 확인해야 정확하므로, 가입 보험사에 문의하시도록 안내하는 것이 좋습니다."]); }
+  const base=[["원인 단정","확인 · 조사 결과에 따르는 사항"],
+    ["시공 방식 · 시공 기준 설명","원인 추정의 근거로 인용됨"],
+    [(false?"당사 설치 건 여부":"설치 이력 확인"),"전산 조회 사항"],
+    ["처리 방향 · 보상 · 기한","협력사와 도급사 · 보험사 확인 사항"],
+    ["확인서 · 각서 등 서면 서명","현장에서 서명할 권한이 없습니다"]];
+  if(S.type==='fire'){ base[0]=["원인 추정","소방 · 경찰 등 관계기관 조사 사항"];
+    base.splice(4,0,["보험료 할증 · 자기부담금","가입 보험사 확인 사항"]); }
   if(S.type==='water' && S.prod==='work' && (S.ord==='n'||S.ord==='?'))
-    base.splice(3,0,["보험 처리 가능 여부","담보 범위는 가입 보험의 약관에 따라 달라 현장에서 가능 여부를 말씀드리기 어렵습니다. 도급사와 협의가 필요한 경우 담당 LM과 협의 후 안내하는 것이 좋습니다."]);
+    base.splice(3,0,["보험 처리 가능 여부","담보 범위는 협력사와 도급사 · 보험사 확인 사항"]);
   if(S.type==='body'){
-    base[0]=["부상 원인 · 책임 단정","부상 원인과 책임은 확인 자료를 종합해 정해지는 사항이라, 현장에서 단정하지 않는 편이 좋습니다."];
-    base.splice(3,0,["치료비 부담 · 보상 약속","치료비와 보상은 치료 경과와 사고 내용을 확인한 뒤 정해지며, 초기에 한 말이 기준으로 남을 수 있습니다. 현장에서 대신 결제하지 않는 편이 좋습니다."],
-                    ["상해 정도 판단","상해 정도는 의료기관에서 확인되는 사항입니다."]);
+    base[0]=["부상 원인 · 책임 단정","확인 자료를 종합한 협력사와 도급사 · 보험사 확인 사항"];
+    base.splice(3,0,["치료비 부담 · 보상 약속","협력사와 도급사 · 보험사 확인 사항. 현장에서 대신 결제하지 않습니다"],
+                    ["상해 정도 판단","의료기관 확인 사항"]);
   }
   if(S.type==='break'){
-    base[0]=["설치 과정 중 발생 여부 단정","설치 중 발생 여부는 확인 자료를 종합해 정해지는 사항이라, 현장에서 단정하지 않는 편이 좋습니다."];
-    base.splice(3,0,["피해 금액 · 복구 범위","피해 금액과 복구 범위는 촬영본을 바탕으로 확인한 뒤 정해집니다. 도급사와 협의가 필요한 경우 담당 LM과 협의 후 안내하는 것이 좋습니다."],
-                    ["처리 방식(보험 · 자체) 언급","보험 처리 여부를 포함한 처리 방식은 사고 내용을 확인한 뒤 정해지는 사항입니다. 도급사와 협의가 필요한 경우 담당 LM과 협의 후 안내하는 것이 좋습니다."]);
+    base[0]=["설치 과정 중 발생 여부 단정","확인 자료를 종합한 협력사와 도급사 · 보험사 확인 사항"];
+    base.splice(3,0,["피해 금액 · 복구 범위","촬영본을 근거로 협력사와 도급사 · 보험사 확인"],
+                    ["처리 방식(보험 · 자체) 언급","협력사와 도급사 · 보험사 확인 사항"]);
   }
   return base;
 }
@@ -1875,7 +1831,7 @@ function reportRows(lv, extra){
         : S.type==='break' ? '고객이 즉시 복구 · 금액을 요구하거나 확대 우려가 있는 경우'
         : '조치로 해소되지 않거나 시공 범위를 넘는 원인이 확인되는 경우'),
     (S.type==='water'&&S.prod==='work'&&(S.ord==='n'||S.ord==='?')
-      ? row('처리 구분','주문 미연계 단독 작업','보험 담보 범위 밖일 수 있는 건. 도급사 협의가 필요한 경우 담당 LM과 협의') : ''),
+      ? row('처리 구분','주문 미연계 단독 작업','보험 담보 범위 밖인 경우 협력사와 도급사 · 보험사 확인 사항') : ''),
     row('고객 회신','확인 후 현장 방문자가 재안내')]);
 }
 
@@ -1929,13 +1885,14 @@ function renderResult(){
           '<a class="tel" href="tel:'+esc(c.tel)+'"><b>'+esc(c.label)+'</b>'+
           (c.name?'<i>'+esc(c.name)+'</i>':'')+'<span>'+esc(c.tel)+'</span></a>').join('')+'</div>'
       : '')+
-    ((infoTarget() && true)?'<div class="cmpl">'+((S.type==='fire'||S.type==='body')?'화재 · 대인 사고는':'다친 분이 있는 건은')+' 인적 · 물적 피해 규모와 관계없이 예외 없이 공유하시기를 권장드립니다.</div>':'')+
     (infoTarget() && false
-      ? '<div class="irbox"><div class="irh"><b>정보보고 대상</b></div>'+
-        '<div class="irnote">절차는 Compliance팀 정보보고 가이드 참고</div></div>'
+      ? '<div class="irbox"><div class="irh"><b>정보보고</b><em>1시간 이내</em></div>'+
+        '<div class="irpills"><span>소속 팀장 · 담당 · 사업부장</span><span>안전보건팀</span>'+
+        '<span>LMD/설치 Compliance팀</span></div>'+
+        '<div class="irnote">유선 우선 · 연결이 안 되면 SMS · 메신저</div></div>'
       : '')+
-    '<div class="chips">'+chips().filter(([k,v])=>v&&v!=='없음'&&v!=='해당 없음')
-      .map(([k,v])=>'<span>'+esc(v)+'</span>').join('')+'</div>'+
+    ((infoTarget() && true)?'<div class="cmpl">'+((S.type==='fire'||S.type==='body')?'화재 · 대인 사고는':'다친 분이 있는 건은')+' 인적 · 물적 피해 규모와 관계없이 예외 없이 공유합니다.</div>':'')+
+    '<dl class="facts">'+chips().map(([k,v])=>'<div><dt>'+esc(k)+'</dt><dd>'+esc(v)+'</dd></div>').join('')+'</dl>'+
   '</div>';
 
   const nShot = BUILT.shots.reduce((a,g)=>a+g.items.length,0);
@@ -1952,30 +1909,30 @@ function renderResult(){
 }
 
 const ACT={
-  intro:"신분과 방문 사유 안내",
-  injury:"부상자 상태 확인",
-  p_inv:"방문 목적 설명",
-  p_self:"방문 목적 설명",
-  photo:"촬영 전 양해",
-  no:"제품 번호 · 주문번호 · 연락처 확보",
-  remain:"원인 확인용 증거물 소재 확인",
-  fhist:"설치 이후 이력 청취",
-  ins:"화재보험 청구 절차 안내",
-  end:"확인 내용 정리 및 마무리",
-  stop:"밸브 잠금 및 조치 전 상태 촬영",
-  repro:"누수 지점 확인",
-  fix:"응급 조치",
-  back:"배관 역류 확인 시 사실 전달",
-  down:"아랫집 피해 범위 확인",
-  late:"발견 시점과 그 사이 작업 이력 청취",
-  first:"상태 확인 및 병원 안내",
-  move:"이송 요청 시 동행",
-  info:"인적사항과 사고 경위 확인",
-  wit:"목격자 확보",
-  liab:"일상생활배상책임 담보 가입 여부 확인",
-  mgmt:"관리사무소 담당자 성함 · 연락처 확보",
-  hist:"설치 이후 이력 청취",
-  fix2:"공용부 조치 주체 확인"
+  intro:"도착해서 신분과 방문 사유를 밝힙니다",
+  injury:"부상자 상태부터 확인합니다",
+  p_inv:"방문 목적을 설명합니다",
+  p_self:"방문 목적을 설명합니다",
+  photo:"촬영 전 양해를 구합니다",
+  no:"제품 번호 · 주문번호 · 연락처를 확보합니다",
+  remain:"원인 확인용 증거물이 어디에 있는지 확인합니다",
+  fhist:"설치 이후 이력을 청취합니다",
+  ins:"화재보험 청구 절차를 안내합니다",
+  end:"확인한 내용을 정리하고 마무리합니다",
+  stop:"밸브를 잠그고 조치 전 상태를 촬영합니다",
+  repro:"물을 흘려 누수 지점을 확인합니다",
+  fix:"응급 조치를 합니다",
+  back:"배관 역류가 확인되면 사실만 전달합니다",
+  down:"아랫집 피해 범위를 확인합니다",
+  late:"발견 시점과 그 사이 작업 이력을 청취합니다",
+  first:"상태를 확인하고 병원을 안내합니다",
+  move:"이송 요청이 있으면 동행합니다",
+  info:"인적사항과 사고 경위를 확인합니다",
+  wit:"목격자를 확보합니다",
+  liab:"고객 측 일상생활배상책임 담보 가입 여부를 확인합니다",
+  mgmt:"관리사무소 담당자 성함 · 연락처를 확보합니다",
+  hist:"설치 이후 이력을 청취합니다",
+  fix2:"공용부 조치 주체를 확인합니다"
 };
 const SEQ={
   fire:["intro","injury","p_inv","p_self","photo","no","fhist","remain","ins","end"],
@@ -2032,7 +1989,7 @@ function panelBody(){
       h+=note('사진 촬영은 사고 조사 시 중요한 증거자료로 활용될 수 있습니다. 아래 사항은 필수 촬영사항은 아니며, 객관적 원인 파악을 위한 내용으로 확인해 주시기 바랍니다.');
       more.forEach(g=>{ h+=render1(g); });
     }
-    h+=note('목록에 없더라도 특이한 부분은 촬영본이 도움이 됩니다. 판단은 하지 않는 것이 좋습니다.');
+    h+=note('목록에 없더라도 특이한 부분은 모두 촬영해주세요. 판단은 하지 않습니다.');
     return h;
   }
   if(TAB==='say'){
@@ -2040,24 +1997,21 @@ function panelBody(){
     const seq=ord.map(id=>B.says.find(x=>x.id===id)).filter(Boolean);
     const qs=B.says.filter(x=>ord.indexOf(x.id)<0);
     const card=(s,i)=>'<div class="say">'+
-      (i!=null
-        ? (s.when?'<div class="eyebrow">'+esc(s.when)+'</div>':'')+
-          '<div class="stp"><b>'+esc(ACT[s.id]||s.when)+'</b></div>'
-        : '<div class="stp"><b>'+esc(s.when)+'</b></div>')+
+      (i!=null?'<div class="stp"><em>'+i+'</em>'+
+        '<b>'+esc(ACT[s.id]||s.when)+'</b></div>':'<div class="when">'+esc(s.when)+'</div>')+
+      (i!=null&&s.when?'<div class="when sm">'+esc(s.when)+'</div>':'')+
       s.lines.map(l=>'<div class="line">'+esc(l)+'</div>').join('')+
       (s.no?'<div class="no">'+lines(s.no)+'</div>':'')+'</div>';
-    let h='<div class="denywrap"><div class="dh">'+NUM+'답변 시 유의 사항</div>'+
-      '<p class="dlead">아래 사항은 현장에서 바로 답변하기보다 확인 후 안내드리는 것이 좋습니다.</p>'+
+    let h='<div class="denywrap"><div class="dh">'+NUM+'하면 안 되는 말</div>'+
       '<div class="deny">'+box(denyRows().map(([a,b])=>row('',a,b)))+'</div></div>';
-    h+=sub('상황별 참고')+'<div class="box flow">'+seq.map(x=>card(x,1)).join('')+'</div>';
+    h+=sub('순서대로')+'<div class="box flow">'+seq.map((x,i)=>card(x,i+1)).join('')+'</div>';
     if(qs.length) h+=sub('질문을 받으면')+'<div class="box">'+qs.map(x=>card(x)).join('')+'</div>';
     return h;
   }
   let h=sub('공유 절차')+reportRows(lv, B.reportExtra);
   h+='<div class="tools"><button class="primary" id="bShare">공유하기</button>'+
      '<button id="bPrint">인쇄 · PDF 저장</button></div>';
-  h+=
-    '<div class="foot"><span>초기 대응 기준. 개별 건의 처리 방향은 사고 내용 확인 후 정해지는 사항. 도급사 협의가 필요한 경우 담당 LM과 협의.</span>'+
+  h+='<div class="foot"><span>초기 대응 기준. 개별 건의 처리 방향은 협력사와 도급사 · 보험사 확인 사항.</span>'+
      '<span>'+(PARTNER?esc(PARTNER)+' 배포 · ':'')+'개정 '+REV+(false?'':' · LMD/설치품질팀')+'</span></div>';
   return h;
 }
@@ -2256,7 +2210,7 @@ function buildPrint(){
     '<div class="st">출력 '+stamp+'</div></div>'+
     '<table class="ft">'+facts+'</table>'+
     body+
-    '<div class="dfoot"><span>초기 대응 기준. 개별 건의 처리 방향은 사고 내용 확인 후 정해지는 사항. 도급사 협의가 필요한 경우 담당 LM과 협의.</span>'+
+    '<div class="dfoot"><span>초기 대응 기준. 개별 건의 처리 방향은 협력사와 도급사 · 보험사 확인 사항.</span>'+
     '<span>'+(PARTNER?esc(PARTNER)+' 배포 · ':'')+'개정 '+REV+(false?'':' · LMD/설치품질팀')+'</span></div>'+
     '</div>'+
     '<script>window.onload=function(){setTimeout(function(){window.print();},400);};<\/script>'+

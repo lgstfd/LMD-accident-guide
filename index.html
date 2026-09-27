@@ -561,9 +561,9 @@ button.comp-btn + button.role{margin-left:6px}
 
 <div id="gate" hidden>
     <div class="gate-in">
-      <div class="gate-t">소속 회사에서 받은<br>QR 코드로 열어주세요</div>
+      <div class="gate-t">안내받은<br>QR 코드로 열어주세요</div>
       <div class="gate-d">이 주소로는 이용하실 수 없습니다.<br>
-        소속 회사에서 배포한 QR 코드 또는 주소로 다시 열어주시기 바랍니다.</div>
+        안내받은 QR 코드 또는 주소로 다시 열어주시기 바랍니다.</div>
     </div>
   </div>
   <main id="app"></main>
@@ -579,7 +579,7 @@ const ROLE='pro';
 /* 배포 정보 — 주소의 c · t 값 */
 const QS=(()=>{ try{ return new URLSearchParams(location.search); }catch(e){ return new URLSearchParams(''); } })();
 const PARTNER=(QS.get('c')||'').slice(0,24);
-const PNAME=PARTNER||'소속 회사';
+const PNAME=PARTNER||'회사';
 const fillP=t=>String(t).split('@@P@@').join(PNAME);
 function fillNodes(){
   const w=document.createTreeWalker(document.documentElement, NodeFilter.SHOW_TEXT);

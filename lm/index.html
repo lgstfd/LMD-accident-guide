@@ -2086,7 +2086,7 @@ function panelBody(){
     const lrow=(k,v,u)=>'<div class="row"><div class="k">'+esc(k)+'</div>'+esc(v)+
       '<div class="own"><a class="lk" href="'+u+'" target="_blank" rel="noopener">'+esc(u)+'</a></div></div>';
     h+=sub('협력사 배포 안내')+box([
-      lrow('배포 준비','협력사가 회사명 · 연락처를 입력해 소속 설치프로용 QR을 만드는 화면',base+'setup/'),
+      lrow('배포 준비','협력사가 회사명 · 연락처를 입력해 설치프로용 QR을 만드는 화면',base+'setup/'),
       lrow('협력사 담당자용','협력사 담당자(현장대리인/대표)가 보는 화면',base+'mgr/')]);
   }
   h+='<div class="tools"><button class="primary" id="bShare">공유하기</button>'+
